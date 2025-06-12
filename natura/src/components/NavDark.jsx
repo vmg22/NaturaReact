@@ -1,8 +1,9 @@
 import React from "react";
+import './styles/nav.Dark.css';
 
 const NavDark = () => {
   return (
-    <div >
+    <div className="menu-horizontal">
       <ul>
         {" "}
         <button>sobre natura</button>
