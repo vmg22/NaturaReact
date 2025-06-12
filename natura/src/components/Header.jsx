@@ -1,8 +1,12 @@
-import React from 'react'
+
+import NavDark from './NavDark'
+import NavLight from './NavLight'
 
 const Header = () => {
   return (
     <div>
+      <NavDark/>
+      <NavLight/>
       
     </div>
   )
