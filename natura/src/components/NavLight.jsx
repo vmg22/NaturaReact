@@ -1,23 +1,28 @@
 import React from "react";
-import icono from "../img/icono.png";
-import "./styles/navLight.css";
 import { Link } from "react-router-dom";
+import logoNegro from "../assets/logo-natura-negro.png";
+import "./styles/navLight.css";
+import Form from 'react-bootstrap/Form';
 const NavLight = () => {
   return (
     <div>
-      <section className="menu-horizontal">
+      <section className="primerDiv">
         <div className="icono">
           <img
-            src={icono}
+            src={logoNegro}
             alt="Logo"
-            style={{ width: "40px", height: "40px" }}
+            className="imgLogoNatura"
           />
         </div>
 
-        <div className="barra-de-busqueda">
-          <input type="text" placeholder="que buscas hoy?" />
-          <button>lupa</button>
+        <div className="">
+          <Form.Control type="text" placeholder="¿qué buscás hoy?" className=""/>
+          <div>
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </div>
         </div>
+
+
         <div className="iconos-de-navegacion">
           <ul>
             <li>

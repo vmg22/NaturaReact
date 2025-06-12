@@ -17,17 +17,17 @@
   color: white;
 }
 
-/* Aplica el fondo de borde a borde */
+
 .dropdown-menu .dropdown-item.bg-dark {
-  background-color: #4e4e4e; /* o el color que estés usando */
+  background-color: #4e4e4e;
   color: white;
   margin: 0;
   padding-left: 1rem;
   padding-right: 1rem;
-  border-radius: 0; /* quita redondeado que puede causar "espacios" */
-  width: 100%; /* asegura que ocupe el 100% */
+  border-radius: 0;
+  width: 100%;
 }
 .dropdown-menu {
-  padding: 0; /* elimina padding interno del menú */
+  padding: 0; 
   border-radius: 0;
 }

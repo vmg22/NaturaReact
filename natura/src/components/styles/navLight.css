@@ -1,3 +1,12 @@
+
+.primerDiv{
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
 .menu-horizontal ul {
   display: flex;
   justify-content: center;
@@ -6,4 +15,13 @@
   padding: 0;
   margin: 0;
   list-style: none;
+}
+
+.imgLogoNatura{
+  height: 50px;
+  width: 185px;
+}
+
+.inputQueBuscas{
+  width: 150px;
 }
