@@ -1,0 +1,132 @@
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #fafafa;
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.login-card {
+  width: 350px;
+  padding: 30px;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  text-align: center;
+}
+
+.logo {
+  font-size: 24px;
+  color: #f97316;
+  margin-bottom: 10px;
+}
+
+.logo span {
+  font-weight: bold;
+  font-size: 24px;
+  vertical-align: middle;
+}
+
+.title {
+  font-size: 18px;
+  margin-bottom: 20px;
+  color: #333;
+  text-align: left;
+}
+
+label {
+  display: block;
+  text-align: left;
+  margin-top: 10px;
+  font-size: 14px;
+  color: #555;
+}
+
+input[type="email"],
+input[type="password"],
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin-top: 6px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.password-field {
+  position: relative;
+}
+
+.password-field .icon {
+  position: absolute;
+  right: 10px;
+  top: 35%;
+  cursor: pointer;
+  color: #777;
+}
+
+.login-btn {
+  background-color: #f97316;
+  color: white;
+  width: 100%;
+  border: none;
+  padding: 10px;
+  margin-top: 20px;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.login-btn:hover {
+  background-color: #fb7e2c;
+}
+
+.forgot {
+  display: block;
+  margin-top: 10px;
+  font-size: 12px;
+  color: #1565c0;
+  text-decoration: none;
+  text-align: center;
+}
+
+.outline-btn {
+  margin-top: 20px;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #f97316;
+  border-radius: 20px;
+  background-color: transparent;
+  color: #f97316;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.outline-btn:hover {
+  background-color: #fff5eb;
+}
+
+.google-btn {
+  margin-top: 10px;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.google-btn img {
+  width: 18px;
+}
