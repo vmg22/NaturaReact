@@ -1,14 +1,22 @@
+<<<<<<< HEAD
 .login-form {
   margin: 0;
   font-family: 'Arial', sans-serif;
+=======
+.main-login {
+>>>>>>> 3bda832e2a8bec1e6bc83de5e45b2016d227f102
   background-color: #fafafa;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Arial', sans-serif;
 }
 
 .login-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
 }
 
 .login-card {
@@ -39,7 +47,11 @@
   text-align: left;
 }
 
+<<<<<<< HEAD
 /* label {
+=======
+.login-label {
+>>>>>>> 3bda832e2a8bec1e6bc83de5e45b2016d227f102
   display: block;
   text-align: left;
   margin-top: 10px;
@@ -47,9 +59,13 @@
   color: #555;
 } */
 
+<<<<<<< HEAD
 /* input[type="email"],
 input[type="password"],
 input[type="text"] { */
+=======
+.login-input {
+>>>>>>> 3bda832e2a8bec1e6bc83de5e45b2016d227f102
   width: 100%;
   padding: 10px;
   margin-top: 6px;
