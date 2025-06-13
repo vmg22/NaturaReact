@@ -1,4 +1,3 @@
-
 .primerDiv{
   display: flex;
   justify-content: space-evenly;
@@ -7,11 +6,16 @@
   padding: 0;
   margin: 0;
   list-style: none;
+  font-family: "Roboto", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: weight;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
 }
 .menu-horizontal ul {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-around; 
+  width: 100%; 
   gap: 20px;
   padding: 0;
   margin: 0;
@@ -41,6 +45,7 @@
     
 }
 
+
 .inputBusqueda{
   height: 48px;
     display: flex;
@@ -54,9 +59,14 @@
     padding-right: 8px;
     padding-bottom: 8px;
     outline-color: transparent;
-    background-color: rgba(0, 0, 0, 0.04);
+    background-color: #76757542;
     color: rgb(255, 255, 255);
 }
+.btnBuscar{
+  padding: 0;
+}
+
+
 
 .inputBuscar{
   border: none;
@@ -64,16 +74,27 @@
   width: 45vw
 }
 
+.inputBuscar:focus {
+  outline: none;
+  box-shadow: none;
+  border: none;
+}
+
+
 .iconosNavegacion{
   display: flex;
   justify-content: space-between !important;
-  font-family: roboto;
+  font-family: "Roboto", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: weight;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
 }
 
 .btnIconosNavegacion{
   border: none;
   background-color: transparent;
-  margin-right: 30px;
+  margin-right: 50px;
   font-family: "Roboto", sans-serif;
   font-optical-sizing: auto;
   font-weight: weight;
@@ -85,24 +106,35 @@
 
 
 .menu-horizontal {
-  background-color: rgba(0, 0, 0, 0.5); /* Semitransparente oscuro */
+  display: flex;
+  justify-content: space-around;
+  background-color: rgba(0, 0, 0, 0.5);
   position: relative;
   z-index: 100;
-  font-family: sans-serif;
+  font-family: "Roboto", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: weight;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+  width: 100vw; 
+  margin: 0;
+  padding: 0;
+  height: 60px;
 }
 
-.menu-horizontal ul {
-  list-style: none;
-  display: flex;
-  padding: 0;
+body, section, ul {
   margin: 0;
-  justify-content: center;
+  padding: 0;
 }
+
+
+
 
 .menu-horizontal li {
   position: relative;
   padding: 1rem 1.2rem;
   cursor: pointer;
+
 }
 
 .menu-horizontal a,
@@ -118,13 +150,18 @@
   display: none;
   position: absolute;
   top: 100%;
-  left:-90%;
-  padding: 1rem 2rem;
+  left: 50%;                     
+  transform: translateX(-50%);    
+  width: max-content;
+  max-width: 100vw;                
   background-color: white;
-  width:100vw;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
   z-index: 1000;
+  padding: 1rem 2rem;
   border-radius: 0 0 10px 10px;
+  overflow-x: auto;
+  white-space: nowrap;            
+  flex-wrap: nowrap;
 }
 
 .menu-horizontal .has-megamenu:hover .megamenu {
