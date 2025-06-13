@@ -1,3 +1,13 @@
+
+.primerDiv{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 20px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
 .menu-horizontal ul {
   display: flex;
   justify-content: center;
@@ -6,4 +16,148 @@
   padding: 0;
   margin: 0;
   list-style: none;
+}
+
+.imgLogoNatura{
+  height: 50px;
+  width: 185px;
+}
+
+.btnSearch{
+    color: #111111;
+    border: none;
+    display: flex;
+    transition: none;
+    align-items: center;
+    padding-top: 4px;
+    padding-left: 24px;
+    border-radius: 96px;
+    padding-right: 24px;
+    padding-bottom: 4px;
+    text-transform: lowercase;
+    justify-content: center;
+    background-color: #f48646;
+    height: 35px;
+    
+}
+
+.inputBusqueda{
+  height: 48px;
+    display: flex;
+    outline: 1px solid transparent;
+    z-index: 1000;
+    position: relative;
+    align-items: center;
+    padding-top: 8px;
+    padding-left: 16px;
+    border-radius: 96px;
+    padding-right: 8px;
+    padding-bottom: 8px;
+    outline-color: transparent;
+    background-color: rgba(0, 0, 0, 0.04);
+    color: rgb(255, 255, 255);
+}
+
+.inputBuscar{
+  border: none;
+  background-color: transparent;
+  width: 45vw
+}
+
+.iconosNavegacion{
+  display: flex;
+  justify-content: space-between !important;
+  font-family: roboto;
+}
+
+.btnIconosNavegacion{
+  border: none;
+  background-color: transparent;
+  margin-right: 30px;
+  font-family: "Roboto", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: weight;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+  text-decoration: none;
+  color: black;
+}
+
+
+.menu-horizontal {
+  background-color: rgba(0, 0, 0, 0.5); /* Semitransparente oscuro */
+  position: relative;
+  z-index: 100;
+  font-family: sans-serif;
+}
+
+.menu-horizontal ul {
+  list-style: none;
+  display: flex;
+  padding: 0;
+  margin: 0;
+  justify-content: center;
+}
+
+.menu-horizontal li {
+  position: relative;
+  padding: 1rem 1.2rem;
+  cursor: pointer;
+}
+
+.menu-horizontal a,
+.menu-horizontal .text-nav-styles {
+  text-decoration: none;
+  color: white;
+  font-weight:600;
+  font-size: 0.9rem;
+  text-transform: capitalize;
+}
+
+.menu-horizontal .has-megamenu .megamenu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left:-90%;
+  padding: 1rem 2rem;
+  background-color: white;
+  width:100vw;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  border-radius: 0 0 10px 10px;
+}
+
+.menu-horizontal .has-megamenu:hover .megamenu {
+  display: flex;
+}
+
+.menu-horizontal .megamenu .column {
+  flex: 1;
+  padding: 0 1rem;
+}
+
+.menu-horizontal .megamenu {
+  display: none;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.menu-horizontal .megamenu strong {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: black;
+}
+
+.menu-horizontal .megamenu a {
+  display: block;
+  color: black;
+  font-weight: normal;
+  text-decoration: none;
+  padding: 0.2rem 0;
+  font-size: 0.9rem;
+}
+
+.menu-horizontal .megamenu a:hover {
+  text-decoration: underline;
 }
