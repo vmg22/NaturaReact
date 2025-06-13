@@ -2,43 +2,61 @@ import React from "react";
 import { Link } from "react-router-dom";
 import logoNegro from "../assets/logo-natura-negro.png";
 import "./styles/navLight.css";
-import Form from 'react-bootstrap/Form';
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+
 const NavLight = () => {
   return (
-    <div>
+    <div style={{ marginTop: "20px" }}>
       <section className="primerDiv">
         <div className="icono">
-          <img
-            src={logoNegro}
-            alt="Logo"
-            className="imgLogoNatura"
-          />
+          <Link to={"/"}>
+            <img src={logoNegro} alt="Logo" className="imgLogoNatura" />
+          </Link>
         </div>
 
-        <div className="">
-          <Form.Control type="text" placeholder="¿qué buscás hoy?" className=""/>
+        <div className="d-flex justify-content-center align-items-center inputBusqueda">
           <div>
-            <i class="fa-solid fa-magnifying-glass"></i>
+            <input
+              type="text"
+              placeholder="¿qué buscás hoy?"
+              className="inputBuscar"
+            />
           </div>
+
+          <button style={{ border: "none", backgroundColor: "transparent" }}>
+            <div className="btnSearch">
+              <i className="fa-solid fa-magnifying-glass"></i>
+            </div>
+          </button>
         </div>
 
-
-        <div className="iconos-de-navegacion">
-          <ul>
-            <li>
-              <button>favorito</button>
-            </li>
-            <li>
-              <button>ingresar</button>
-            </li>
-            <li>
-              <button>carrito</button>
-            </li>
-          </ul>
+        <div className="iconosNavegacion">
+          <div>
+            <Link to="/" className="btnIconosNavegacion">
+              <i className="fa-regular fa-heart"></i> favoritos
+            </Link>
+          </div>
+          <div>
+            <Link to="/" className="btnIconosNavegacion">
+              <i className="fa-solid fa-person"></i> ingresar
+            </Link>
+          </div>
+          <div>
+            <Link to="/" className="btnIconosNavegacion">
+              <i className="fa-solid fa-bag-shopping"></i>
+            </Link>
+          </div>
         </div>
       </section>
 
       <section className="menu-horizontal">
+        <Navbar>
+          <Nav.Link as={Link} to="/revista-natura" className="text-nav-styles">
+                revista natura
+              </Nav.Link>
         <ul>
           <li>
             <Link to="/click-sale">Click Sale</Link>
@@ -187,56 +205,42 @@ const NavLight = () => {
             </div>
           </li>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
           <li className="megamenu">
             <Link to="/regalo">Regalo</Link>
             <div className="megamenu">
               <div className="column">
                 <strong>precio</strong>
                 <Link to="/precio/hasta $15.000">hasta $15.000</Link>
-                <Link to="/precio/de $15.000 hasta $30.000">de $15.000 hasta $30.000</Link>
-                <Link to="/precio/de $30.000 hasta $45.000">de $30.000 hasta $45.000</Link>
-                <Link to="/precio/a partir de $45.000">a partir de $45.000</Link>
+                <Link to="/precio/de $15.000 hasta $30.000">
+                  de $15.000 hasta $30.000
+                </Link>
+                <Link to="/precio/de $30.000 hasta $45.000">
+                  de $30.000 hasta $45.000
+                </Link>
+                <Link to="/precio/a partir de $45.000">
+                  a partir de $45.000
+                </Link>
               </div>
               <div className="column">
                 <strong>para quien </strong>
-                <Link to="/para quien/regalos para todos">regalos para todos</Link>
-                <Link to="/para quien/regalo para hombre">regalo para hombre</Link>
-                <Link to="/para quien/regalo para mujer">regalo para mujer</Link>
-                <Link to="/para quien/regalo para niños">regalo para niños</Link>
+                <Link to="/para quien/regalos para todos">
+                  regalos para todos
+                </Link>
+                <Link to="/para quien/regalo para hombre">
+                  regalo para hombre
+                </Link>
+                <Link to="/para quien/regalo para mujer">
+                  regalo para mujer
+                </Link>
+                <Link to="/para quien/regalo para niños">
+                  regalo para niños
+                </Link>
               </div>
               <div className="column">
                 <strong>arma tu regalo</strong>
-
               </div>
             </div>
           </li>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
           <li className="megamenu">
             <Link to="/cabello">Cabello</Link>
@@ -251,30 +255,34 @@ const NavLight = () => {
               </div>
               <div className="column">
                 <strong>producto</strong>
-                <Link to="/productos/shampoo y acondicionador">shampoo y acondicionador</Link>
-                <Link to="/productos/máscara de hidratación">máscara de hidratación</Link>
+                <Link to="/productos/shampoo y acondicionador">
+                  shampoo y acondicionador
+                </Link>
+                <Link to="/productos/máscara de hidratación">
+                  máscara de hidratación
+                </Link>
                 <Link to="/productos/finalizador">finalizador</Link>
               </div>
               <div className="column">
                 <strong>tratamiento</strong>
-                <Link to="/tratamiento/reconstrucción capilar">reconstrucción capilar</Link>
-                <Link to="/tratamiento/nutrición capilar">nutrición capilar</Link>
+                <Link to="/tratamiento/reconstrucción capilar">
+                  reconstrucción capilar
+                </Link>
+                <Link to="/tratamiento/nutrición capilar">
+                  nutrición capilar
+                </Link>
                 <Link to="/tratamiento/anticaída">anticaída</Link>
-                <Link to="/tratamiento/protector de color">protector de color</Link>
+                <Link to="/tratamiento/protector de color">
+                  protector de color
+                </Link>
                 <Link to="/tratamiento/antioleosidad">antioleosidad</Link>
                 <Link to="/tratamiento/matizador">matizador</Link>
-                <Link to="/tratamiento/tratamiento anticaspa">tratamiento anticaspa</Link>
+                <Link to="/tratamiento/tratamiento anticaspa">
+                  tratamiento anticaspa
+                </Link>
               </div>
             </div>
           </li>
-
-
-
-
-
-
-
-
 
           <li className="megamenu">
             <Link to="/hombre">Hombre</Link>
@@ -286,12 +294,16 @@ const NavLight = () => {
                 <strong>cuidado diario</strong>
                 <Link to="/cuidado diario/jabón">jabón</Link>
                 <Link to="/cuidado diario/desodorante">desodorante</Link>
-                <Link to="/cuidado diario/hidratantes corporales">hidratantes corporales</Link>
+                <Link to="/cuidado diario/hidratantes corporales">
+                  hidratantes corporales
+                </Link>
               </div>
               <div className="column">
                 <strong>cabello</strong>
                 <Link to="/cabello/shampoo">shampoo</Link>
-                <Link to="/cabello/finalizador capilar">finalizador capilar</Link>
+                <Link to="/cabello/finalizador capilar">
+                  finalizador capilar
+                </Link>
               </div>
               <div className="column">
                 <strong>rostro</strong>
@@ -299,19 +311,20 @@ const NavLight = () => {
             </div>
           </li>
 
-
-
-
-
-
           <li className="megamenu">
             <Link to="/infantil">Infantil</Link>
             <div className="megamenu">
               <div className="column">
                 <strong>cuerpo y baño infantil</strong>
-                <Link to="/cuerpo y ba;o infantil/jabón infantil">jabón infantil</Link>
-                <Link to="/cuerpo y ba;o infantil/hidratante infantil">hidratante infantil</Link>
-                <Link to="/cuerpo y ba;o infantil/toallitas húmedas">toallitas húmedas</Link>
+                <Link to="/cuerpo y ba;o infantil/jabón infantil">
+                  jabón infantil
+                </Link>
+                <Link to="/cuerpo y ba;o infantil/hidratante infantil">
+                  hidratante infantil
+                </Link>
+                <Link to="/cuerpo y ba;o infantil/toallitas húmedas">
+                  toallitas húmedas
+                </Link>
               </div>
               <div className="column">
                 <strong>cabello infantil</strong>
@@ -376,6 +389,8 @@ const NavLight = () => {
             </div>
           </li>
         </ul>
+        </Navbar>
+        
       </section>
     </div>
   );
