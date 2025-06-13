@@ -1,5 +1,36 @@
 {
-    "productos":[
+    "users": [
+    {
+      "id": "1",
+      "name": "admin",
+      "password": "12345",
+      "rol": "admin"
+    },
+    {
+      "id": "2",
+      "name": "agustina",
+      "password": "pucha2025",
+      "rol": "user"
+    },
+    {
+      "id": "3",
+      "name": "matias",
+      "password": "123456",
+      "rol": "user"
+    },
+    {
+      "id": "0a55",
+      "name": "marcelo",
+      "password": "1234567"
+    },
+    {
+      "id": "a7d9",
+      "nombre": "denise",
+      "password": "123456",
+      "rol": "user"
+    }
+  ],
+   "productos":[
         {
             "id": 1,
             "marca": "Una",
@@ -90,8 +121,5 @@
             "precioSinImpuestos": 26490.08,
             "imagen": null
         }
-      
     ]
 }
-
-  

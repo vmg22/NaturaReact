@@ -57,7 +57,7 @@ const Footer = () => {
             <li>defensa de las y los consumidores, ingrese aquí</li>
             <li>alertas y retiro de productos</li>
           </ul>
-          <button className="footer-button">me arrepentí del pedido</button>
+          <button className="footer-button-footer">me arrepentí del pedido</button>
         </div>
 
         <div className="footer-column">

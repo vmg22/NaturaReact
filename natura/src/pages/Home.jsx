@@ -5,12 +5,14 @@ import Novedades from '../components/Novedades'
 
 
 const Home = () => {
-  return (
+return (
     <div>
+      
       <Header/>
       <CarrouselCard1/>
       <Novedades />
       <Footer/>
+
     </div>
   )
 }
