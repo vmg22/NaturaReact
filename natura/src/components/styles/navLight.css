@@ -84,3 +84,80 @@
 }
 
 
+.menu-horizontal {
+  background-color: rgba(0, 0, 0, 0.5); /* Semitransparente oscuro */
+  position: relative;
+  z-index: 100;
+  font-family: sans-serif;
+}
+
+.menu-horizontal ul {
+  list-style: none;
+  display: flex;
+  padding: 0;
+  margin: 0;
+  justify-content: center;
+}
+
+.menu-horizontal li {
+  position: relative;
+  padding: 1rem 1.2rem;
+  cursor: pointer;
+}
+
+.menu-horizontal a,
+.menu-horizontal .text-nav-styles {
+  text-decoration: none;
+  color: white;
+  font-weight:600;
+  font-size: 0.9rem;
+  text-transform: capitalize;
+}
+
+.menu-horizontal .has-megamenu .megamenu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left:-90%;
+  padding: 1rem 2rem;
+  background-color: white;
+  width:100vw;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  border-radius: 0 0 10px 10px;
+}
+
+.menu-horizontal .has-megamenu:hover .megamenu {
+  display: flex;
+}
+
+.menu-horizontal .megamenu .column {
+  flex: 1;
+  padding: 0 1rem;
+}
+
+.menu-horizontal .megamenu {
+  display: none;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.menu-horizontal .megamenu strong {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: black;
+}
+
+.menu-horizontal .megamenu a {
+  display: block;
+  color: black;
+  font-weight: normal;
+  text-decoration: none;
+  padding: 0.2rem 0;
+  font-size: 0.9rem;
+}
+
+.menu-horizontal .megamenu a:hover {
+  text-decoration: underline;
+}
