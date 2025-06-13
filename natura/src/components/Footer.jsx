@@ -45,9 +45,9 @@ const Footer = () => {
         <div className="footer-column">
           <h4>soporte</h4>
           <ul>
-            <li>términos y condiciones</li>
-            <li>políticas de privacidad</li>
-            <li>política de cookies</li>
+            <li>Términos y condiciones</li>
+            <li>Políticas de privacidad</li>
+            <li>Política de cookies</li>
           </ul>
         </div>
       </div>
