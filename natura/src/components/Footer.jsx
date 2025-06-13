@@ -1,4 +1,6 @@
 import React from 'react';
+// imagenes iconos
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faFacebookF,
@@ -9,12 +11,24 @@ import {
   faLinkedinIn
 } from '@fortawesome/free-brands-svg-icons';
 
+// imagenes pagos
+
 import visa from '../assets/visa.png';
 import mastercard from '../assets/mastercard.png';
 import amex from '../assets/amex.png';
 import cabal from '../assets/cabal.png';
 import naranja from '../assets/naranja.png';
 import diners from '../assets/diners.png';
+
+// imagenes apps
+import appstore from '../assets/appstore.png';
+import googleplay from '../assets/googleplay.png';
+
+// imagenes certificados empresa
+import datafiscal from '../assets/data-fiscal.png';
+import Bcorp from '../assets/Bcorp.png';
+import crueltyFree from '../assets/CrueltyFree.png';
+import uebt from '../assets/uebt-certified.png';
 
 import './styles/footer.css';
 
@@ -72,6 +86,19 @@ const Footer = () => {
           <FontAwesomeIcon icon={faTiktok} />
           <FontAwesomeIcon icon={faYoutube} />
           <FontAwesomeIcon icon={faLinkedinIn} />
+        </div>
+
+      </div>
+      <div className="footer-appscertificados">
+        <div className='footer-app'>
+          <img src={appstore} alt="appstore" />
+          <img src={googleplay} alt="googleplay" />
+        </div>
+        <div className='footer-certificados'>
+          <img src={datafiscal} alt="datafiscal" />
+          <img src={Bcorp} alt="Bcorp" />
+          <img src={crueltyFree} alt="crueltyFree" />
+          <img src={uebt} alt="uebt" />
         </div>
       </div>
     </footer>

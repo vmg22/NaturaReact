@@ -78,3 +78,32 @@
   color: #000;
   cursor: pointer;
 }
+
+
+
+
+
+
+
+.footer-appscertificados {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e0e0e0;
+}
+
+.footer-app img {
+  height: 45px;
+  margin-right: 1rem;
+  cursor: pointer;
+}
+
+.footer-certificados img {
+  height: 50px;
+  margin-left: 1rem;
+  filter: grayscale(100%);
+  opacity: 0.8;
+}
