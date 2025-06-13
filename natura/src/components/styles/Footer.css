@@ -35,7 +35,7 @@
   cursor: pointer;
 }
 
-.footer-button {
+.footer-button-footer {
   margin-top: 1rem;
   padding: 0.5rem 1rem;
   background: transparent;
@@ -46,7 +46,7 @@
   font-size: 13px;
 }
 
-.footer-button:hover {
+.footer-button-footer:hover {
   background-color: #f2741f;
   color: white;
 }

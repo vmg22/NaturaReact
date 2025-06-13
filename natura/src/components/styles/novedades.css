@@ -44,7 +44,7 @@
   margin-top: 1.5rem;
 }
 
-button {
+.footer-button {
   padding: 10px 270px;
   border: 1px solid #e05c00;
   background-color: white;
@@ -55,7 +55,7 @@ button {
   transition: 0.3s ease;
 }
 
-button:hover {
+.footer-button:hover {
   background-color: #e05c00;
   color: white;
 }
