@@ -9,7 +9,7 @@
 .footer-top {
   display: flex;
   justify-content: space-between;
-  gap: 2rem;
+  gap: 9rem;
   flex-wrap: wrap;
   margin-bottom: 2rem;
 }

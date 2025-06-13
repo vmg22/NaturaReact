@@ -1,4 +1,8 @@
 import React from 'react';
+import { Link } from "react-router-dom";
+
+
+
 // imagenes iconos
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -80,25 +84,69 @@ const Footer = () => {
         </div>
 
         <div className="footer-social">
-          <FontAwesomeIcon icon={faFacebookF} />
-          <FontAwesomeIcon icon={faInstagram} />
-          <FontAwesomeIcon icon={faXTwitter} />
-          <FontAwesomeIcon icon={faTiktok} />
-          <FontAwesomeIcon icon={faYoutube} />
-          <FontAwesomeIcon icon={faLinkedinIn} />
+
+          <a
+            href="https://www.facebook.com/Natura.Argentina/?locale=es_LA/"
+            target="_blank"
+            rel="noopener noreferrer"
+          ><FontAwesomeIcon icon={faFacebookF} /></a>
+
+          <a
+            href="https://www.instagram.com/natura.argentina"
+            target="_blank"
+            rel="noopener noreferrer"
+          ><FontAwesomeIcon icon={faInstagram} /></a>
+
+          <a
+            href="https://x.com/naturaargentina?lang=es"
+            target="_blank"
+            rel="noopener noreferrer"
+          ><FontAwesomeIcon icon={faXTwitter} /></a>
+
+          <a
+            href="https://www.tiktok.com/@natura.argentina?lang=en"
+            target="_blank"
+            rel="noopener noreferrer"
+          ><FontAwesomeIcon icon={faTiktok} /></a>
+
+          <a
+            href="https://www.youtube.com/user/naturaarg"
+            target="_blank"
+            rel="noopener noreferrer"
+          ><FontAwesomeIcon icon={faYoutube} /></a>
+
+          <a
+            href="https://www.linkedin.com/company/natura"
+            target="_blank"
+            rel="noopener noreferrer"
+          ><FontAwesomeIcon icon={faLinkedinIn} /></a>
         </div>
 
       </div>
       <div className="footer-appscertificados">
         <div className='footer-app'>
-          <img src={appstore} alt="appstore" />
-          <img src={googleplay} alt="googleplay" />
+          <a
+            href="https://itunes.apple.com/app/apple-store/id1061637276?pt=1379476&ct=rede_natura_mobile_botao_appstore&mt=8"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src={appstore} alt="appstore" />
+          </a>
+          <a
+            href="https://play.google.com/store/apps/details?id=net.natura.semprepresente&referrer=utm_source%3Drede_natura_mobile%26utm_medium%3Dbotao_google_play"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src={googleplay} alt="googleplay" />
+          </a>
         </div>
         <div className='footer-certificados'>
-          <img src={datafiscal} alt="datafiscal" />
-          <img src={Bcorp} alt="Bcorp" />
-          <img src={crueltyFree} alt="crueltyFree" />
-          <img src={uebt} alt="uebt" />
+          <a href="https://servicioscf.afip.gob.ar/publico/denuncias/denunciaCD.aspx">
+            <img src={datafiscal} alt="datafiscal" />
+          </a>
+            <img src={Bcorp} alt="Bcorp" />
+            <img src={crueltyFree} alt="crueltyFree" />
+            <img src={uebt} alt="uebt" />
         </div>
       </div>
     </footer>
