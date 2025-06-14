@@ -12,7 +12,7 @@ return (
       
       <Header/>
       <CarrouselCard1/>
-      
+      <Perfumeria/> 
       <Novedades />
       <Footer/>
 
