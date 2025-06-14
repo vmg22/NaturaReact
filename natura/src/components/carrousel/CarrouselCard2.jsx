@@ -1,19 +1,30 @@
 import React from "react";
 import { Carousel, Card, Button, Row, Col, Container } from "react-bootstrap";
+import Banner_3_DESK from "../../assets/ARTICULOS-IMG/Banner_3_DESK.jpg";
+import PERFUME12 from "../../assets/ARTICULOS-IMG/PERFUME12.jpg";
+import CREMA1 from "../../assets/ARTICULOS-IMG/CREMA1.jpg";
+import PERFUME1 from "../../assets/ARTICULOS-IMG/PERFUME1.jpg";
+import PERFUME11 from "../../assets/ARTICULOS-IMG/PERFUME11.jpg";
+import PERFUME9 from "../../assets/ARTICULOS-IMG/PERFUME9.jpg";
+import PERFUME3 from "../../assets/ARTICULOS-IMG/PERFUME3.jpg";
+import PERFUME4 from "../../assets/ARTICULOS-IMG/PERFUME4.jpg";
+
+
 
 
 
 const CardCarousel = () => {
   // Datos simulados para las cards
   const cardsData = [
-    { title: "Producto 1", text: "Descripción 1", img: "https://via.placeholder.com/150" },
-    { title: "Producto 2", text: "Descripción 2", img: "https://via.placeholder.com/150" },
-    { title: "Producto 3", text: "Descripción 3", img: "https://via.placeholder.com/150" },
-    { title: "Producto 4", text: "Descripción 4", img: "https://via.placeholder.com/150" },
-    { title: "Producto 5", text: "Descripción 5", img: "https://via.placeholder.com/150" },
-    { title: "Producto 6", text: "Descripción 6", img: "https://via.placeholder.com/150" },
-    { title: "Producto 7", text: "Descripción 7", img: "https://via.placeholder.com/150" },
-    { title: "Producto 8", text: "Descripción 8", img: "https://via.placeholder.com/150" },
+    { title: "crema", text: "perfume", img: Banner_3_DESK },
+    { title: "crema", text: "perfume", img: PERFUME12 },
+    { title: "crema", text: "perfume", img: CREMA1 },
+    { title: "crema", text: "perfume", img: PERFUME1 },
+    { title: "crema", text: "perfume", img: PERFUME9 },
+    { title: "crema", text: "perfume", img: PERFUME11 },
+    { title: "crema", text: "perfume", img: PERFUME3 },
+    { title: "crema", text: "perfume", img: PERFUME4 },
+  
   ];
 
   // Dividir los datos en grupos de 4 cards por slide
@@ -36,7 +47,7 @@ const CardCarousel = () => {
                     <Card.Body>
                       <Card.Title>{card.title}</Card.Title>
                       <Card.Text>{card.text}</Card.Text>
-                      <Button variant="primary">Ver más</Button>
+                      <Button variant="primary">COMPRAR</Button>
                     </Card.Body>
                   </Card>
                 </Col>
