@@ -1,6 +1,10 @@
+<<<<<<< HEAD
 .login-form {
   margin: 0;
   font-family: 'Arial', sans-serif;
+=======
+.main-login {
+>>>>>>> 2466864e185480c7fbac5e7d3b30e1f24fe0848e
   background-color: #fafafa;
   min-height: 100vh;
   display: flex;
