@@ -1,10 +1,10 @@
 import React from 'react'
 import CarrouselCard1 from '../components/carrousel/CarrouselCard1'
 import { Link } from 'react-router-dom'
-import '../components/styles/Perfumeria.css'
+import '../styles/Perfumeria.css'
 
 
-const perfumeria = () => {
+const Perfumeria = () => {
   return (
     <div>
         <div className='Contenido-perfumeria'>
@@ -22,4 +22,4 @@ const perfumeria = () => {
   )
 }
 
-export default perfumeria
+export default Perfumeria
