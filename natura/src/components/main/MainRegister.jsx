@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import "../styles/MainRegister.css";
+import "../../styles/MainRegister.css";
 
 function MainRegister() {
   const [showPass, setShowPass] = useState(false);

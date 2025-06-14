@@ -34,7 +34,7 @@ import Bcorp from '../assets/Bcorp.png';
 import crueltyFree from '../assets/CrueltyFree.png';
 import uebt from '../assets/uebt-certified.png';
 
-import './styles/footer.css';
+import "../styles/Footer.css";
 
 const Footer = () => {
   return (
@@ -52,7 +52,7 @@ const Footer = () => {
           <h4>ayuda</h4>
           <ul>
             <li>encontrá natura</li>
-            <li>ayuda y contacto</li>
+            <li><Link to="/ayuda">ayuda y contacto</Link></li>
             <li>defensa de las y los consumidores, para reclamos ingrese aquí</li>
             <li>defensa de las y los consumidores, ingrese aquí</li>
             <li>alertas y retiro de productos</li>

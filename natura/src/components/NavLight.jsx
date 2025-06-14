@@ -1,17 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import logoNegro from "../assets/logo-natura-negro.png";
-import "./styles/navLight.css";
-
-
+import "../styles/navLight.css";
 import Navbar from 'react-bootstrap/Navbar';
-
-
-
 
 const NavLight = () => {
   return (
-    <div style={{ marginTop: "20px" }}>
+    <div style={{ marginTop: "20px"}}>
       <section className="primerDiv">
         <div className="icono">
           <Link to={"/"}>
@@ -59,9 +54,7 @@ const NavLight = () => {
   
             <ul>
 
-              <li>
-                  <Link to="/revista-natura">perfumeria</Link>
-                </li>
+            
 
                 <li>
                   <Link to="/click-sale">click sale</Link>
@@ -193,26 +186,11 @@ const NavLight = () => {
                       <Link to="/hidratante/para el cuerpo">para el cuerpo</Link>
                       <Link to="/hidratante/para manos y pie">para manos y pie</Link>
                     </div>
-                    <div className="column">
-                      <strong> desodorante</strong>
-                      <Link to="/desodorante/desodorante en spray">
-                        desodorante en spray
-                      </Link>
-                      <Link to="/desodorante/ desodorante roll on">
-                        {" "}
-                        desodorante roll on
-                      </Link>
-                      <Link to="/desodorante/desodorante en crema">
-                        desodorante en crema
-                      </Link>
-                    </div>
-                    <div className="column">
-                      <strong> protector solar</strong>
-                    </div>
+                    
                   </div>
                 </li>
 
-                <li className="megamenu">
+                <li className="has-megamenu">
                   <Link to="/regalo">Regalo</Link>
                   <div className="megamenu">
                     <div className="column">
@@ -249,12 +227,9 @@ const NavLight = () => {
                   </div>
                 </li>
 
-                <li className="megamenu">
+                <li className="has-megamenu">
                   <Link to="/cabello">Cabello</Link>
                   <div className="megamenu">
-                    <div className="column">
-                      <strong>descubri tu tipo de cabello</strong>
-                    </div>
                     <div className="column">
                       <strong>tipo de cabello</strong>
                       <Link to="/tipo de cabello/cabello dañado">cabello dañado</Link>
@@ -291,7 +266,7 @@ const NavLight = () => {
                   </div>
                 </li>
 
-                <li className="megamenu">
+                <li className="has-megamenu">
                   <Link to="/hombre">Hombre</Link>
                   <div className="megamenu">
                     <div className="column">
@@ -318,7 +293,7 @@ const NavLight = () => {
                   </div>
                 </li>
 
-                <li className="megamenu">
+                <li className="has-megamenu">
                   <Link to="/infantil">Infantil</Link>
                   <div className="megamenu">
                     <div className="column">
@@ -339,62 +314,7 @@ const NavLight = () => {
                   </div>
                 </li>
 
-                <li className="megamenu">
-                  <Link to="/marca">Marca</Link>
-                  <div className="megamenu">
-                    <div className="column">
-                      <strong>biome</strong>
-                    </div>
-                    <div className="column">
-                      <strong>chronos derma</strong>
-                    </div>
-                    <div className="column">
-                      <strong>creer para ver</strong>
-                    </div>
-                    <div className="column">
-                      <strong>ekos</strong>
-                    </div>
-                    <div className="column">
-                      <strong>essencial</strong>
-                    </div>
-                    <div className="column">
-                      <strong>kaiak</strong>
-                    </div>
-                    <div className="column">
-                      <strong>lumina</strong>
-                    </div>
-                    <div className="column">
-                      <strong>luna</strong>
-                    </div>
-                    <div className="column">
-                      <strong>mamá y bebé</strong>
-                    </div>
-                    <div className="column">
-                      <strong>tododia</strong>
-                    </div>
-                    <div className="column">
-                      <strong>una</strong>
-                    </div>
-                    <div className="column">
-                      <strong>faces</strong>
-                    </div>
-                    <div className="column">
-                      <strong>humor</strong>
-                    </div>
-                    <div className="column">
-                      <strong>tododia cabellos</strong>
-                    </div>
-                  </div>
-                </li>
-
-                <li className="megamenu">
-                  <Link to="/repuesto">Repuesto</Link>
-                  <div className="megamenu">
-                    <div className="column">
-                      <strong>repuestos</strong>
-                    </div>
-                  </div>
-                </li>
+                
             </ul>
     
         
