@@ -116,7 +116,7 @@
     font-weight: weight;
     font-style: normal;
     font-variation-settings: "wdth" 100;
-  width: 100vw; 
+  width: 100%; 
   margin: 0;
   padding: 0;
   height: 60px;
@@ -126,8 +126,6 @@ body, section, ul {
   margin: 0;
   padding: 0;
 }
-
-
 
 
 .menu-horizontal li {

@@ -34,7 +34,7 @@ import Bcorp from '../assets/Bcorp.png';
 import crueltyFree from '../assets/CrueltyFree.png';
 import uebt from '../assets/uebt-certified.png';
 
-import './styles/footer.css';
+import "../styles/Footer.css";
 
 const Footer = () => {
   return (
