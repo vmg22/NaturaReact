@@ -31,7 +31,7 @@ const Novedades = () => {
         </div>
 
         <div className="boton-container">
-          <button type="submit">enviar</button>
+          <button className='footer-button' type="submit">enviar</button>
         </div>
 
         <p className="nota">

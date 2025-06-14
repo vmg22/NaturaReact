@@ -52,12 +52,12 @@ const Footer = () => {
           <h4>ayuda</h4>
           <ul>
             <li>encontrá natura</li>
-            <li>ayuda y contacto</li>
+            <li><Link to="/ayuda">ayuda y contacto</Link></li>
             <li>defensa de las y los consumidores, para reclamos ingrese aquí</li>
             <li>defensa de las y los consumidores, ingrese aquí</li>
             <li>alertas y retiro de productos</li>
           </ul>
-          <button className="footer-button">me arrepentí del pedido</button>
+          <button className="footer-button-footer">me arrepentí del pedido</button>
         </div>
 
         <div className="footer-column">

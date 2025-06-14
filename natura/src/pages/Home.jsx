@@ -9,6 +9,7 @@ const Home = () => {
     <div>
       <Header/>
       <CarrouselCard1/>
+      
       <Novedades />
       <Footer/>
     </div>
