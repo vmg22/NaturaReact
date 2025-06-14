@@ -4,9 +4,6 @@ import logoNegro from "../assets/logo-natura-negro.png";
 import "../styles/navLight.css";
 import Navbar from 'react-bootstrap/Navbar';
 
-
-
-
 const NavLight = () => {
   return (
     <div style={{ marginTop: "20px"}}>
