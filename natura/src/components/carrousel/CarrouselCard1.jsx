@@ -4,6 +4,10 @@ import Banner_3_DESK from "../../assets/ARTICULOS-IMG/Banner_3_DESK.jpg";
 import EKOSACAI1_Banner_2_Desk_1920x832_THUMB from "../../assets/ARTICULOS-IMG/EKOSACAI1_Banner_2_Desk_1920x832_THUMB.jpg";
 import "../styles/carrouseleCard1.css";
 
+
+
+ 
+
 const CarrouselCard1 = () => {
   return (
     <div>

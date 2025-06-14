@@ -1,5 +1,5 @@
 import React from "react";
-import { Carousel, Card, Button, Row, Col, Container } from "react-bootstrap";
+import { Carousel, Card, Button, Row, Col, Container, Badge } from "react-bootstrap";
 import Banner_3_DESK from "../../assets/ARTICULOS-IMG/Banner_3_DESK.jpg";
 import PERFUME12 from "../../assets/ARTICULOS-IMG/PERFUME12.jpg";
 import CREMA1 from "../../assets/ARTICULOS-IMG/CREMA1.jpg";
@@ -9,25 +9,27 @@ import PERFUME9 from "../../assets/ARTICULOS-IMG/PERFUME9.jpg";
 import PERFUME3 from "../../assets/ARTICULOS-IMG/PERFUME3.jpg";
 import PERFUME4 from "../../assets/ARTICULOS-IMG/PERFUME4.jpg";
 
-
-
-
-
 const CardCarousel = () => {
-  // Datos simulados para las cards
   const cardsData = [
-    { title: "crema", text: "perfume", img: Banner_3_DESK },
-    { title: "crema", text: "perfume", img: PERFUME12 },
-    { title: "crema", text: "perfume", img: CREMA1 },
-    { title: "crema", text: "perfume", img: PERFUME1 },
-    { title: "crema", text: "perfume", img: PERFUME9 },
-    { title: "crema", text: "perfume", img: PERFUME11 },
-    { title: "crema", text: "perfume", img: PERFUME3 },
-    { title: "crema", text: "perfume", img: PERFUME4 },
-  
+    {
+      title: "Kaiak Sonar EDT Femenino 100 ml",
+      brand: "Kaiak",
+      img: PERFUME12,
+      priceOld: 54230,
+      priceNew: 37961,
+      priceNoTax: 31372.73,
+      discount: "-30%",
+    },
+    // Repetir con más productos
+    { title: "Perfume 2", brand: "Kaiak", img: PERFUME1, priceOld: 45000, priceNew: 31500, priceNoTax: 26000, discount: "-30%" },
+    { title: "Crema 3", brand: "Chronos", img: CREMA1, priceOld: 30000, priceNew: 21000, priceNoTax: 18000, discount: "-30%" },
+    { title: "Perfume 4", brand: "Kaiak", img: PERFUME4, priceOld: 60000, priceNew: 42000, priceNoTax: 37000, discount: "-30%" },
+    { title: "Perfume 5", brand: "Kaiak", img: PERFUME3, priceOld: 48000, priceNew: 33600, priceNoTax: 28000, discount: "-30%" },
+    { title: "Perfume 6", brand: "Kaiak", img: PERFUME9, priceOld: 52000, priceNew: 36400, priceNoTax: 29000, discount: "-30%" },
+    { title: "Perfume 7", brand: "Kaiak", img: PERFUME11, priceOld: 50000, priceNew: 35000, priceNoTax: 27500, discount: "-30%" },
+    { title: "Promo", brand: "Promo Natura", img: Banner_3_DESK, priceOld: 65000, priceNew: 45500, priceNoTax: 39000, discount: "-30%" },
   ];
 
-  // Dividir los datos en grupos de 4 cards por slide
   const groupSize = 4;
   const groupedCards = [];
   for (let i = 0; i < cardsData.length; i += groupSize) {
@@ -35,19 +37,44 @@ const CardCarousel = () => {
   }
 
   return (
-    <Container className="my-4">
-      <Carousel>
+    <Container className="my-5">
+      <Carousel indicators={false} interval={null}>
         {groupedCards.map((group, index) => (
           <Carousel.Item key={index}>
             <Row className="justify-content-center">
               {group.map((card, idx) => (
-                <Col md={3} key={idx}>
-                  <Card className="mb-3">
-                    <Card.Img variant="top" src={card.img} />
-                    <Card.Body>
-                      <Card.Title>{card.title}</Card.Title>
-                      <Card.Text>{card.text}</Card.Text>
-                      <Button variant="primary">COMPRAR</Button>
+                <Col md={3} sm={6} xs={12} key={idx}>
+                  <Card className="mb-4 shadow-sm border-0">
+                    <div style={{ padding: '1rem' }}>
+                      <div className="text-end pe-1">
+                        <span role="img" aria-label="favorite">♡</span>
+                      </div>
+                      <Card.Img variant="top" src={card.img} style={{ objectFit: "contain", height: "250px" }} />
+                    </div>
+                    <Card.Body className="pt-0">
+                      <Card.Text className="text-muted mb-1" style={{ fontSize: "0.85rem" }}>{card.brand}</Card.Text>
+                      <Card.Title style={{ fontSize: "1rem" }}>{card.title}</Card.Title>
+                      <div>
+                        <s style={{ color: "#999", fontSize: "0.9rem" }}>${card.priceOld.toLocaleString()}</s>
+                      </div>
+                      <div className="d-flex align-items-center">
+                        <span style={{ fontWeight: "bold", fontSize: "1.1rem", marginRight: "0.5rem" }}>
+                          ${card.priceNew.toLocaleString()}
+                        </span>
+                        <Badge bg="danger">{card.discount}</Badge>
+                      </div>
+                      <p className="text-muted mb-1" style={{ fontSize: "0.85rem" }}>
+                        precio sin impuestos nacionales
+                      </p>
+                      <p className="text-muted" style={{ fontSize: "0.9rem" }}>
+                        ${card.priceNoTax.toLocaleString()}
+                      </p>
+                      <Button
+                        variant="outline-danger"
+                        style={{ borderRadius: "2rem", width: "100%", fontWeight: "bold" }}
+                      >
+                        agregar a mi bolsa
+                      </Button>
                     </Card.Body>
                   </Card>
                 </Col>
@@ -61,4 +88,3 @@ const CardCarousel = () => {
 };
 
 export default CardCarousel;
-
