@@ -1,5 +1,5 @@
 import React from 'react';
-import '../components/styles/novedades.css';
+import '../styles/novedades.css';
 
 
 

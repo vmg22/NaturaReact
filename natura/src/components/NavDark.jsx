@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./styles/nav.Dark.css";
+import "../styles/nav.Dark.css";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -9,9 +9,9 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 const NavDark = () => {
   return (
     <>
-      <Navbar expand="lg" className="menu-dark">
-        <Container>
-          <Navbar.Collapse id="basic-navbar-nav">
+      <Navbar expand="lg" className="menu-dark contenedor">
+        <Container className="">
+          <Navbar.Collapse id="basic-navbar-nav" >
             <Nav className="me-auto">
               <NavDropdown title={<span className="text-nav-styles">sobre natura</span>}id="sobre-natura">
                 <NavDropdown.Item as={Link} to="/sobre-natura" style={{color:"white", backgroundColor:"#4e4e4e"}}>sobre natura</NavDropdown.Item>
