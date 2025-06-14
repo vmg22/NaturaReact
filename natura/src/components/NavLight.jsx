@@ -2,10 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import logoNegro from "../assets/logo-natura-negro.png";
 import "../styles/navLight.css";
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
+
+
+
 
 const NavLight = () => {
   return (
@@ -40,7 +40,7 @@ const NavLight = () => {
             </Link>
           </div>
           <div>
-            <Link to="/" className="btnIconosNavegacion">
+            <Link to="/Login" className="btnIconosNavegacion">
               <i className="fa-solid fa-person"></i> ingresar
             </Link>
           </div>
