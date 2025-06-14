@@ -9,3 +9,6 @@ npm install --save @emailjs/browser
 npm install emailjs-com
 npm install json-server  -- cd natura      cd src/data        json-server -w db.json -p 3000
 npm install axios
+
+dependecias para conectar bdmysql 
+npm install express mysql2 cors
