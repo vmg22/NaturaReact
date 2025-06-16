@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import logoNegro from "../assets/logo-natura-negro.png";
 import "../styles/navLight.css";
 import Navbar from 'react-bootstrap/Navbar';
 
 const NavLight = () => {
+
+  const [categoria, setCategoria] = useState("")
+
+    const handleClick = (nombreCategoria) => {
+    setCategoria(nombreCategoria);
+    // console.log(categoria);
+  };
   return (
     <div style={{ marginTop: "20px"}}>
       <section className="primerDiv">
@@ -81,6 +88,7 @@ const NavLight = () => {
 
                 <li className="has-megamenu">
                   <Link to="/perfumeria">perfumeria</Link>
+                  
                   <div className="megamenu">
                     <div className="column">
                       <strong>para quien</strong>

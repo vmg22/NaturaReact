@@ -4,9 +4,7 @@ import CarrouselCard1 from '../components/carrousel/CarrouselCard1'
 import Novedades from '../components/Novedades'
 import Perfumeria from './perfumeria'
 
-
-
-const Home = () => {
+const Home = () => { 
 return (
     <div>
       

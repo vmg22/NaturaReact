@@ -21,6 +21,8 @@ import PorRevista from "./pages/PorRevista"
 import Ayuda from "./pages/Ayuda"
 import InfoProductos from "./pages/InfoProductos"
 import Blog from "./pages/Blog"
+import Maquillaje from './pages/Maquillaje'
+import Rostro from './pages/Rostro'
 
 
 function App() {
@@ -49,6 +51,11 @@ function App() {
         <Route path='/info-productos' element={<InfoProductos/>}></Route>
         <Route path='/ayuda' element={<Ayuda/>}></Route>
         <Route path='/blog' element={<Blog/>}></Route>
+        <Route path='/maquillaje' element={<Maquillaje/>}></Route>
+        <Route path='/rostro' element={<Rostro/>}></Route>
+
+    
+
 
         <Route path='*' element={<Error404/>}></Route>
       </Routes>
