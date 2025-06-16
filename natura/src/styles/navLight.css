@@ -196,3 +196,8 @@ body, section, ul {
 .menu-horizontal .megamenu a:hover {
   text-decoration: underline;
 }
+
+.btnNav{
+  border: none !important;
+  background-color: transparent !important;
+}

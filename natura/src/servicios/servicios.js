@@ -9,7 +9,7 @@ app.use(express.json());
 const db = mysql.createConnection({
 host: '127.0.0.1',
 user: 'root',
-password: 'ndt782a2',
+password: '213026',
 database: 'natura_react'
 });
 
@@ -30,12 +30,24 @@ res.json(results);
 });
 });
 
+// Ruta con parámetro PRIMERO
+app.get('/api/categorias/:categoria', (req, res) => {
+  const categoria = req.params.categoria;
+  db.query('SELECT * FROM categorias WHERE nombre = ?', [categoria], (err, results) => {
+    if (err) return res.status(500).json({ error: err });
+    res.json(results);
+  });
+});
+
+// Ruta general DESPUÉS
 app.get('/api/categorias', (req, res) => {
-db.query('SELECT * FROM categorias', (err, results) => {
-if (err) return res.status(500).json({ error: err });
-res.json(results);
+  db.query('SELECT * FROM categorias', (err, results) => {
+    if (err) return res.status(500).json({ error: err });
+    res.json(results);
+  });
 });
-});
+
+
 
 app.get('/api/marcas', (req, res) => {
 db.query('SELECT * FROM marcas', (err, results) => {

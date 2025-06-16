@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import logoNegro from "../assets/logo-natura-negro.png";
 import "../styles/navLight.css";
@@ -8,6 +8,13 @@ import Navbar from 'react-bootstrap/Navbar';
 
 
 const NavLight = () => {
+
+  const [categoria, setCategoria] = useState("")
+
+    const handleClick = (nombreCategoria) => {
+    setCategoria(nombreCategoria);
+    // console.log(categoria);
+  };
   return (
     <div style={{ marginTop: "20px"}}>
       <section className="primerDiv">
@@ -41,7 +48,7 @@ const NavLight = () => {
           </div>
           <div>
             <Link to="/Login" className="btnIconosNavegacion">
-              <i className="fa-solid fa-person"></i> ingresar
+              <i className="fa-solid fa-user"></i> ingresar
             </Link>
           </div>
           <div>
@@ -83,18 +90,19 @@ const NavLight = () => {
                 </li>
 
                 <li className="has-megamenu">
-                  <Link to="/Perfumeria">perfumeria</Link>
+                  <Link to="/perfumeria">perfumeria</Link>
+                  
                   <div className="megamenu">
                     <div className="column">
                       <strong>para quien</strong>
-                      <Link to="/para quien /para todos">para todos</Link>
-                      <Link to="/para quien /perfumeria femenina">
+                      <Link to="/para-quien/para todos">para todos</Link>
+                      <Link to="/para-quien/perfumeria-femenina">
                         perfumeria femenina
                       </Link>
-                      <Link to="/para quien /perfumeria masculina">
+                      <Link to="/para-quien/perfumeria-masculina">
                         perfumeria masculina
                       </Link>
-                      <Link to="/para quien /perfumeria infantil">
+                      <Link to="/para-quien/perfumeria-infantil">
                         perfumeria infantil
                       </Link>
                     </div>
@@ -115,35 +123,35 @@ const NavLight = () => {
                     </div>
                     <div className="column">
                       <strong>para el rostro</strong>
-                      <Link to="/para el rostro/primer facial ">primer facial</Link>
-                      <Link to="/para el rostro/base ">base</Link>
-                      <Link to="/para el rostro/ corrector">corrector</Link>
-                      <Link to="/para el rostro/rubor ">rubor</Link>
-                      <Link to="/para el rostro/iluminador ">iluminador</Link>
-                      <Link to="/para el rostro/ polvo compacto">polvo compacto</Link>
-                      <Link to="/para el rostro/bruma fijadora ">bruma fijadora</Link>
+                      <Link to="/para-el-rostro/primer-facial ">primer facial</Link>
+                      <Link to="/para-el-rostro/base ">base</Link>
+                      <Link to="/para-el-rostro/corrector">corrector</Link>
+                      <Link to="/para-el-rostro/rubor">rubor</Link>
+                      <Link to="/para-el-rostro/iluminador">iluminador</Link>
+                      <Link to="/para-el-rostro/polvo-compacto">polvo compacto</Link>
+                      <Link to="/para-el-rostro/bruma-fijadora">bruma fijadora</Link>
                     </div>
                     <div className="column">
                       <strong>para los ojos</strong>
-                      <Link to="/para los ojos/sombra ">sombra </Link>
-                      <Link to="/para los ojos/delineador "> delineador</Link>
-                      <Link to="/para los ojos/lapiz ">lapiz </Link>
-                      <Link to="/para los ojos/mascara para pestanas ">
+                      <Link to="/para-los-ojos/sombra ">sombra </Link>
+                      <Link to="/para-los-ojos/delineador "> delineador</Link>
+                      <Link to="/para-los-ojos/lapiz ">lapiz </Link>
+                      <Link to="/para-los-ojos/mascara-para-pestanas ">
                         mascara para pestanas{" "}
                       </Link>
-                      <Link to="/para los ojos/cejas ">cejas </Link>
+                      <Link to="/para-los-ojos/cejas ">cejas </Link>
                     </div>
                     <div className="column">
                       <strong>para labios</strong>
-                      <Link to="/para labios/labial">labial</Link>
-                      <Link to="/para labios/lapiz">lapiz</Link>
-                      <Link to="/para labios/gloss">gloss</Link>
+                      <Link to="/para-labios/labial">labial</Link>
+                      <Link to="/para-labios/lapiz">lapiz</Link>
+                      <Link to="/para-labios/gloss">gloss</Link>
                     </div>
                     <div className="column">
                       <strong>para uñas</strong>
-                      <Link to="/para uñas/base de uñas">base de uñas</Link>
-                      <Link to="/para uñas/esmalte">esmalte</Link>
-                      <Link to="/para uñas/top coat">top coat</Link>
+                      <Link to="/para-uñas/base-de-uñas">base de uñas</Link>
+                      <Link to="/para-uñas/esmalte">esmalte</Link>
+                      <Link to="/para-uñas/top-coat">top coat</Link>
                     </div>
                     <div className="column">
                       <strong>pinceles y accesorios</strong>
@@ -159,24 +167,23 @@ const NavLight = () => {
                     </div>
                     <div className="column">
                       <strong>para el rostro</strong>
-                      <Link to="/para el rostro/primer facial ">primer facial</Link>
-                      <Link to="/para el rostro/base ">base</Link>
-                      <Link to="/para el rostro/ corrector">corrector</Link>
-                      <Link to="/para el rostro/rubor ">rubor</Link>
-                      <Link to="/para el rostro/iluminador ">iluminador</Link>
-                      <Link to="/para el rostro/ polvo compacto">polvo compacto</Link>
-                      <Link to="/para el rostro/bruma fijadora ">bruma fijadora</Link>
+                      <Link to="/para-el-rostro/primer-facial ">primer facial</Link>
+                      <Link to="/para-el-rostro/base ">base</Link>
+                      <Link to="/para-el-rostro/corrector">corrector</Link>
+                      <Link to="/para-el-rostro/rubor">rubor</Link>
+                      <Link to="/para-el-rostro/iluminador">iluminador</Link>
+                      <Link to="/para-el-rostro/polvo-compacto">polvo compacto</Link>
+                      <Link to="/para-el-rostro/bruma-fijadora">bruma fijadora</Link>
                     </div>{" "}
                   </div>
                 </li>
-
                 <li className="has-megamenu">
                   <Link to="/cuidado-diario">Cuidado Diario</Link>
                   <div className="megamenu">
                     <div className="column">
                       <strong> jabon</strong>
-                      <Link to="/jabon/jabon en barra">jabon en barra</Link>
-                      <Link to="/jabon/jabon liquido">jabon liquido</Link>
+                      <Link to="/jabon/jabon-en-barra">jabon en barra</Link>
+                      <Link to="/jabon/jabon-liquido">jabon liquido</Link>
                     </div>
                     <div className="column">
                       <strong>jabon exfoliante </strong>
@@ -211,16 +218,16 @@ const NavLight = () => {
                     </div>
                     <div className="column">
                       <strong>para quien </strong>
-                      <Link to="/para quien/regalos para todos">
+                      <Link to="/para-quien/regalos-para-todos">
                         regalos para todos
                       </Link>
-                      <Link to="/para quien/regalo para hombre">
+                      <Link to="/para-quien/regalo-para-hombre">
                         regalo para hombre
                       </Link>
-                      <Link to="/para quien/regalo para mujer">
+                      <Link to="/para-quien/regalo-para-mujer">
                         regalo para mujer
                       </Link>
-                      <Link to="/para quien/regalo para niños">
+                      <Link to="/para-quien/regalo-para-niños">
                         regalo para niños
                       </Link>
                     </div>
@@ -235,8 +242,8 @@ const NavLight = () => {
                   <div className="megamenu">
                     <div className="column">
                       <strong>tipo de cabello</strong>
-                      <Link to="/tipo de cabello/cabello dañado">cabello dañado</Link>
-                      <Link to="/tipo de cabello/cabello rizado">cabello rizado</Link>
+                      <Link to="/tipo-de-cabello/cabello-dañado">cabello dañado</Link>
+                      <Link to="/tipo-de-cabello/cabello-rizado">cabello rizado</Link>
                     </div>
                     <div className="column">
                       <strong>producto</strong>
@@ -277,9 +284,9 @@ const NavLight = () => {
                     </div>
                     <div className="column">
                       <strong>cuidado diario</strong>
-                      <Link to="/cuidado diario/jabón">jabón</Link>
-                      <Link to="/cuidado diario/desodorante">desodorante</Link>
-                      <Link to="/cuidado diario/hidratantes corporales">
+                      <Link to="/cuidado-diario/jabón">jabón</Link>
+                      <Link to="/cuidado-diario/desodorante">desodorante</Link>
+                      <Link to="/cuidado-diario/hidratantes corporales">
                         hidratantes corporales
                       </Link>
                     </div>
@@ -301,13 +308,13 @@ const NavLight = () => {
                   <div className="megamenu">
                     <div className="column">
                       <strong>cuerpo y baño infantil</strong>
-                      <Link to="/cuerpo y ba;o infantil/jabón infantil">
+                      <Link to="/cuerpo-y-baño-infantil/jabón infantil">
                         jabón infantil
                       </Link>
-                      <Link to="/cuerpo y ba;o infantil/hidratante infantil">
+                      <Link to="/cuerpo-y-baño-infantil/hidratante infantil">
                         hidratante infantil
                       </Link>
-                      <Link to="/cuerpo y ba;o infantil/toallitas húmedas">
+                      <Link to="/cuerpo-y-baño-infantil/toallitas húmedas">
                         toallitas húmedas
                       </Link>
                     </div>
