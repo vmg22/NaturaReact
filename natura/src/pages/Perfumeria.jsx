@@ -3,12 +3,14 @@ import { Link } from "react-router-dom";
 import Header from "../components/Header";
 import CategoriaGeneral from "../components/CategoriaGeneral";
 import Footer from "../components/Footer";
+import CarrouselPerfumeria from "../components/carrousel/CarrouselPerfumeria";
 
 const Perfumeria = () => {
   let categoria = "perfumeria";
   return (
     <div>
       <Header />
+      <CarrouselPerfumeria/>
       <CategoriaGeneral categoria={categoria} />
       <div className="d-flex justify-content-center">
         <div>
