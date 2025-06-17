@@ -12,3 +12,6 @@ npm install axios
 
 dependecias para conectar bdmysql 
 npm install express mysql2 cors
+
+cd natura/src/servicios
+node servicios.js
