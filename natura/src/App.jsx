@@ -23,6 +23,9 @@ import InfoProductos from "./pages/InfoProductos"
 import Blog from "./pages/Blog"
 import Maquillaje from './pages/Maquillaje'
 import Rostro from './pages/Rostro'
+import Perfumeria from './pages/perfumeria'
+import CuidadosDiarios from './pages/CuidadosDiarios'
+import Cabello from './pages/Cabello'
 
 
 function App() {
@@ -53,6 +56,10 @@ function App() {
         <Route path='/blog' element={<Blog/>}></Route>
         <Route path='/maquillaje' element={<Maquillaje/>}></Route>
         <Route path='/rostro' element={<Rostro/>}></Route>
+        <Route path='/perfumeria' element={<Perfumeria/>}></Route>
+        <Route path='/cuidados-diarios' element={<CuidadosDiarios/>}></Route>
+        <Route path='/cabello' element={<Cabello/>}></Route>
+
 
     
 

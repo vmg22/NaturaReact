@@ -178,7 +178,7 @@ const NavLight = () => {
                   </div>
                 </li>
                 <li className="has-megamenu">
-                  <Link to="/cuidado-diario">Cuidado Diario</Link>
+                  <Link to="/cuidados-diarios">Cuidado Diario</Link>
                   <div className="megamenu">
                     <div className="column">
                       <strong> jabon</strong>
@@ -277,7 +277,7 @@ const NavLight = () => {
                 </li>
 
                 <li className="has-megamenu">
-                  <Link to="/hombre">Hombre</Link>
+                  <Link to="/categoria-hombre">Hombres</Link>
                   <div className="megamenu">
                     <div className="column">
                       <strong>barba</strong>
@@ -304,7 +304,7 @@ const NavLight = () => {
                 </li>
 
                 <li className="has-megamenu">
-                  <Link to="/infantil">Infantil</Link>
+                  <Link to="/categoria-infantil">Infantil</Link>
                   <div className="megamenu">
                     <div className="column">
                       <strong>cuerpo y baño infantil</strong>
