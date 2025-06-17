@@ -27,6 +27,18 @@ import Perfumeria from './pages/perfumeria'
 import CuidadosDiarios from './pages/CuidadosDiarios'
 import Cabello from './pages/Cabello'
 import Promociones from './pages/Promociones'
+import PerfumeriaMasculina from './pages/PerfumeriaMasculina'
+import PerfumeriaFemenina from './pages/PerfumeriaFemenina'
+import PerfumeriaUnisex from './pages/PerfumeriaUnisex'
+import PerfumeriaInfantil from './pages/PerfumeriaInfantil'
+import ProDescuentos from './pages/ProDescuentos'
+import ProKitsNatura from './pages/ProKitsNatura'
+import ProPrimeraCompra from './pages/ProPrimeraCompra'
+import ProLanzamientos from './pages/ProLanzamientos'
+import RPielOleosa from './pages/RPielOleosa'
+import RPielSeca from './pages/RPielSeca'
+import RPielMixta from './pages/RPielMixta'
+import RTodoTipoPiel from './pages/RTodoTipoPiel'
 
 
 function App() {
@@ -36,6 +48,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Home/>}></Route>
+        <Route path='/404' element={<Error404/>}></Route>
         <Route path='/login' element={<Login/>}></Route>
         <Route path='/register' element={<Register/>}></Route>
         <Route path='/carrito' element={<Carrito/>}></Route>
@@ -61,6 +74,19 @@ function App() {
         <Route path='/cuidados-diarios' element={<CuidadosDiarios/>}></Route>
         <Route path='/cabello' element={<Cabello/>}></Route>
         <Route path='/promociones' element={<Promociones/>}></Route>
+        <Route path='/p-hombre' element={<PerfumeriaMasculina/>}></Route>
+        <Route path='/p-fem' element={<PerfumeriaFemenina/>}></Route>
+        <Route path='/p-unisex' element={<PerfumeriaUnisex/>}></Route>
+        <Route path='/p-infantil' element={<PerfumeriaInfantil/>}></Route>
+        <Route path='/pro-descuentos' element={<ProDescuentos/>}></Route>
+        <Route path='/pro-kits-natura' element={<ProKitsNatura/>}></Route>
+        <Route path='/pro-primera-compra' element={<ProPrimeraCompra/>}></Route>
+        <Route path='/pro-lanzamientos' element={<ProLanzamientos/>}></Route>
+        <Route path='/r-piel-oleosa' element={<RPielOleosa/>}></Route>
+        <Route path='/r-piel-seca' element={<RPielSeca/>}></Route>
+        <Route path='/r-piel-mixta' element={<RPielMixta/>}></Route>
+        <Route path='/r-todo-tipo-piel' element={<RTodoTipoPiel/>}></Route>
+        
 
 
     

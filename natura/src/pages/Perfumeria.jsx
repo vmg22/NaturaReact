@@ -1,17 +1,41 @@
-import React from 'react'
-import Header from '../components/Header'
-import CategoriaGeneral from '../components/CategoriaGeneral'
-import Footer from '../components/Footer'
+import React from "react";
+import { Link } from "react-router-dom";
+import Header from "../components/Header";
+import CategoriaGeneral from "../components/CategoriaGeneral";
+import Footer from "../components/Footer";
 
 const Perfumeria = () => {
-  let categoria = "perfumeria"
+  let categoria = "perfumeria";
   return (
     <div>
-      <Header/>
+      <Header />
       <CategoriaGeneral categoria={categoria} />
-      <Footer/>
-    </div>
-  )
-}
+      <div className="d-flex justify-content-center">
+        <div>
+          <Link to="/p-fem">
+            <button className="btn btn-light mx-2">femenina</button>
+          </Link>
+        </div>
+        <div>
+          <Link to="/p-infantil">
+            <button className="btn btn-light mx-2">infantil</button>
+          </Link>
+        </div>
+        <div>
+          <Link to="/p-hombre">
+            <button className="btn btn-light mx-2">masculina</button>
+          </Link>
+        </div>
+        <div>
+          <Link to="/p-unisex">
+            <button className="btn btn-light mx-2">unisex</button>
+          </Link>
+        </div>
+      </div>
 
-export default Perfumeria
+      <Footer />
+    </div>
+  );
+};
+
+export default Perfumeria;

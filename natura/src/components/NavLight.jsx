@@ -4,19 +4,10 @@ import logoNegro from "../assets/logo-natura-negro.png";
 import "../styles/navLight.css";
 import Navbar from 'react-bootstrap/Navbar';
  
-
-
-
 const NavLight = () => {
 
-  const [categoria, setCategoria] = useState("")
-
-    const handleClick = (nombreCategoria) => {
-    setCategoria(nombreCategoria);
-    // console.log(categoria);
-  };
   return (
-    <div style={{ marginTop: "20px"}}>
+    <div style={{ paddingTop: "20px"}} className="divNavLightGeneral">
       <section className="primerDiv">
         <div className="icono">
           <Link to={"/"}>
@@ -74,17 +65,17 @@ const NavLight = () => {
                   <Link to="/promociones">promociones</Link>
                   <div className="megamenu">
                     <div className="column">
-                      <strong>Descuentos</strong>
+                      <Link to={"/pro-descuentos"}><strong>Descuentos</strong></Link>
                       <Link to="/promociones/10-15">10-15%</Link>
                       <Link to="/promociones/20-25">20-25%</Link>
                       <Link to="/promociones/30-35">30-35%</Link>
                       <Link to="/promociones/40plus">40%+</Link>
                     </div>
                     <div className="column">
-                      <strong>Kits Natura</strong>
+                      <Link to={"/pro-kits-natura"}><strong>Kits Natura</strong></Link>
                     </div>
                     <div className="column">
-                      <strong>Lanzamientos</strong>
+                      <Link to={"/pro-lanzamientos"}><strong>Lanzamientos</strong></Link>
                     </div>
                   </div>
                 </li>
@@ -95,14 +86,14 @@ const NavLight = () => {
                   <div className="megamenu">
                     <div className="column">
                       <strong>para quien</strong>
-                      <Link to="/para-quien/para todos">para todos</Link>
-                      <Link to="/para-quien/perfumeria-femenina">
+                      <Link to="/p-unisex">para todos</Link>
+                      <Link to="/p-fem">
                         perfumeria femenina
                       </Link>
-                      <Link to="/para-quien/perfumeria-masculina">
+                      <Link to="/p-hombre">
                         perfumeria masculina
                       </Link>
-                      <Link to="/para-quien/perfumeria-infantil">
+                      <Link to="/p-infantil">
                         perfumeria infantil
                       </Link>
                     </div>
