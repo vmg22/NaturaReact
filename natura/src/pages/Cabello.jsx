@@ -1,10 +1,9 @@
 import React from 'react'
-import Header from '../components/Header'
 import CategoriaGeneral from '../components/CategoriaGeneral'
-import Footer from '../components/Footer'
-
-const Perfumeria = () => {
-  let categoria = "perfumeria"
+import Header from "../components/Header"
+import Footer from "../components/Footer"
+const Cabello = () => {
+    let categoria = "cabello"
   return (
     <div>
       <Header/>
@@ -14,4 +13,4 @@ const Perfumeria = () => {
   )
 }
 
-export default Perfumeria
+export default Cabello

@@ -5,6 +5,7 @@ import axios from 'axios';
 const CategoriaGeneral = (props) => {
   const catGeneral = props.categoria;
   const [cat, setCat] = useState(null);
+  const [tipo, setTipo] = useState([]);
 
   useEffect(() => {
     // Si no hay una categoría para buscar, no hacemos la llamada.
@@ -15,6 +16,11 @@ const CategoriaGeneral = (props) => {
         const respuesta = await axios.get(`http://localhost:3001/api/categorias/${catGeneral}`);
         const responseData = respuesta.data[0]; 
         setCat(responseData);
+      
+        const respuesta2 = await axios.get(`http://localhost:3001/api/categoria_tipo/${responseData.id}`);
+        setTipo(respuesta2.data)
+        console.log(respuesta2.data)
+        
       } catch (error) {
         console.error("Error al obtener las categorías:", error);
       }
@@ -41,6 +47,13 @@ const CategoriaGeneral = (props) => {
           </h1>
           <div className="text-dark mt-2" >
             {cat.descripcion}
+          </div>
+          <h2 className=" text-dark fw-semibold lh-normal mt-md-4 text-center" >
+            {cat.pregunta}
+          </h2>
+          <div className='d-flex justify-content-center mt-4'>
+            {tipo.map((tip,index) => <button key={index} className='btn btn-light mx-2'>{tip.tipo_nombre}</button>
+            )}
           </div>
         </main>
       </div>

@@ -2,8 +2,8 @@ import Header from '../components/Header'
 import Footer from "../components/Footer"
 import CategoriaGeneral from '../components/CategoriaGeneral'
 
-const CategoriaHombre = () => {
-  let categoria = "hombres"
+const CuidadosDiarios = () => {
+  let categoria = "cuidados diarios"
   return (
     <div>
       <Header/>
@@ -13,4 +13,4 @@ const CategoriaHombre = () => {
   )
 }
 
-export default CategoriaHombre
+export default CuidadosDiarios
