@@ -30,6 +30,22 @@ res.json(results);
 });
 });
 
+app.get('/api/categoria_tipo/:id', (req, res) => {
+    const categoriaId = req.params.id;
+  db.query('SELECT * FROM categoria_tipo ct JOIN categorias c on c.id = ct.id_categoria JOIN tipos t on t.id_tipo = ct.id_tipo WHERE c.id = ? ',[categoriaId], (err, results) => {
+    if (err) return res.status(500).json({ error: err });
+    res.json(results);
+  });
+});
+
+app.get('/api/categoria_tipo', (req, res) => {
+
+  db.query('SELECT * FROM categoria_tipo ', (err, results) => {
+    if (err) return res.status(500).json({ error: err });
+    res.json(results);
+  });
+});
+
 // Ruta con parámetro PRIMERO
 app.get('/api/categorias/:categoria', (req, res) => {
   const categoria = req.params.categoria;
@@ -46,6 +62,8 @@ app.get('/api/categorias', (req, res) => {
     res.json(results);
   });
 });
+
+
 
 
 
