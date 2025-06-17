@@ -1,0 +1,29 @@
+.Contenido-CategoriaGeneral {
+      text-align: center;
+  padding: 2rem 1rem;
+  font-family: 'Arial', sans-serif;
+  background-color: #fefefe;
+}
+
+.Contenido-CategoriaGeneral h1 {
+    font-size: 36px;
+  font-weight: bold;
+  color: #111;
+  margin-bottom: 0.5rem;
+  text-transform: lowercase;
+}
+.CategoriaGralDescripcion {
+      font-size: 16px;
+  color: #000000;
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  line-height: 1.5;
+
+}
+
+.Contenido-CategoriaGeneral h2 {
+      font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  color: #000;
+}
