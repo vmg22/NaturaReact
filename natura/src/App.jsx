@@ -26,6 +26,7 @@ import Rostro from './pages/Rostro'
 import Perfumeria from './pages/perfumeria'
 import CuidadosDiarios from './pages/CuidadosDiarios'
 import Cabello from './pages/Cabello'
+import Promociones from './pages/Promociones'
 
 
 function App() {
@@ -59,6 +60,7 @@ function App() {
         <Route path='/perfumeria' element={<Perfumeria/>}></Route>
         <Route path='/cuidados-diarios' element={<CuidadosDiarios/>}></Route>
         <Route path='/cabello' element={<Cabello/>}></Route>
+        <Route path='/promociones' element={<Promociones/>}></Route>
 
 
     

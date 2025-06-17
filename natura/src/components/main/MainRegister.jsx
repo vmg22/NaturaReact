@@ -43,7 +43,7 @@ function MainRegister() {
 
   return (
     <div className="register-container">
-      <h2>Crear cuenta</h2>
+      <h4>Crear cuenta</h4>
       <p>
         ¿Nuevo por acá? Completá tu registro y descubrí ofertas especiales para
         vos

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import "../../styles/MainLogin.css";
+import "../../styles/MainLogin.css"
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useNavigate } from "react-router-dom";
 
@@ -10,7 +10,7 @@ const MainLogin = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="main-login">
+    <div className="main-login2">
       <div className="login-container">
         <div className="login-card">
           <div className="logo">🧡 <span>natura</span></div>

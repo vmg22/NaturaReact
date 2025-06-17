@@ -1,4 +1,4 @@
-.login-form {
+.main-login {
   margin: 0;
   font-family: 'Arial', sans-serif;
   background-color: #fafafa;
@@ -6,7 +6,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: 'Arial', sans-serif;
 }
 
 .login-container {
@@ -43,10 +42,6 @@
   text-align: left;
 }
 
-
-
-
-
 .password-field {
   position: relative;
 }
@@ -54,9 +49,35 @@
 .password-field .icon {
   position: absolute;
   right: 10px;
-  top: 35%;
+  top: 10%;
   cursor: pointer;
   color: #777;
+  
+}
+.login-label {
+  display: block;
+  margin-bottom: 8px;
+  color: #666;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: left;
+}
+
+.login-input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #333;
+  transition: all 0.3s ease;
+  margin-bottom: 20px;
+}
+
+.login-input:focus {
+  outline: none;
+  border: 1px solid #f97316;
+  box-shadow: 0 0 5px 1px #f97316;
 }
 
 .login-btn {
@@ -119,3 +140,4 @@
 .google-btn img {
   width: 18px;
 }
+
