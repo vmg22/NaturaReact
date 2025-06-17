@@ -51,10 +51,10 @@ const CategoriaGeneral = (props) => {
           <h2 className=" text-dark fw-semibold lh-normal mt-md-4 text-center" >
             {cat.pregunta}
           </h2>
-          <div className='d-flex justify-content-center mt-4'>
+          {/* <div className='d-flex justify-content-center mt-4'>
             {tipo.map((tip,index) => <button key={index} className='btn btn-light mx-2'>{tip.nombre}</button>
             )}
-          </div>
+          </div> */}
         </main>
       </div>
       
