@@ -4,6 +4,7 @@ import Header from '../components/Header'
 import CategoriaGeneral from '../components/CategoriaGeneral'
 import Footer from '../components/Footer'
 import '../styles/Rostro.css'
+import CarrouselRostro from '../components/carrousel/CarrouselRostro'
 
 const Rostro = () => {
   let categoria = "rostro"
@@ -11,6 +12,7 @@ const Rostro = () => {
   return (
     <div>
       <Header />
+      <CarrouselRostro />
       <CategoriaGeneral categoria={categoria} />  
       <div className="tipos-piel-container">
         <Link to="/r-piel-oleosa" className="tipo-piel-btn">
