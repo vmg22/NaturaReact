@@ -9,7 +9,7 @@ app.use(express.json());
 const db = mysql.createConnection({
 host: '127.0.0.1',
 user: 'root',
-password: '213026',
+password: 'ndt782a2',
 database: 'natura_react'
 });
 
