@@ -1,4 +1,4 @@
-.tipos-perfume-container {
+.tipos-promocion-container {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -7,7 +7,7 @@
   padding: 0 16px;
 }
 
-.tipo-perfume-btn {
+.tipo-promocion-btn {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -24,13 +24,13 @@
   justify-content: center;
 }
 
-.tipo-perfume-btn:hover {
+.tipo-promocion-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
 }
 
-.icono-img-perfumeria {
-  width: 28px;
-  height: 28px;
+.icono-img-promociones {
+  width: 24px;
+  height: 24px;
   object-fit: contain;
 }
