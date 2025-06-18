@@ -1,4 +1,4 @@
-.carousel-caption h3 {
+ .carousel-caption h3 {
   font-size: 2.2rem;
   font-weight: 700;
   color: white;
@@ -12,15 +12,15 @@
 }
 
 .carouselMaquillaje .carousel-indicators {
-  bottom: -200px; /* sube los indicadores */
+  bottom: -200px; 
 }
 
 .carousel-caption{
     margin-left: 60px;
-}
+} 
 
 
-@media (max-width: 768px) {
+ @media (max-width: 768px) {
   .carousel-item img {
     height: 300px;
   }
@@ -37,5 +37,5 @@
 
   .carousel-caption p {
     font-size: 1rem;
-  }
-}
+  } 
+ } 
