@@ -54,9 +54,6 @@ const NavLight = () => {
         <Navbar >
   
             <ul>
-
-            
-
                 <li>
                   <Link to="/click-sale">click sale</Link>
                 </li>
