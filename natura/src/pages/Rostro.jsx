@@ -3,38 +3,38 @@ import { Link } from 'react-router-dom'
 import Header from '../components/Header'
 import CategoriaGeneral from '../components/CategoriaGeneral'
 import Footer from '../components/Footer'
+import '../styles/Rostro.css'
 import CarrouselRostro from '../components/carrousel/CarrouselRostro'
 
 const Rostro = () => {
-    let categoria = "rostro"
+  let categoria = "rostro"
+
   return (
     <div>
-      <Header/>
-      <CarrouselRostro/>
-      <CategoriaGeneral categoria={categoria}/>
-      <div className="d-flex justify-content-center">
-        <div>
-          <Link to="/r-piel-oleosa">
-            <button className="btn btn-light mx-2">piel oleosa</button>
-          </Link>
-        </div>
-        <div>
-          <Link to="/r-piel-seca">
-            <button className="btn btn-light mx-2">piel seca</button>
-          </Link>
-        </div>
-        <div>
-          <Link to="/r-piel-mixta">
-            <button className="btn btn-light mx-2">piel mixta</button>
-          </Link>
-        </div>
-        <div>
-          <Link to="/r-todo-tipo-piel">
-            <button className="btn btn-light mx-2">todo tipo de piel</button>
-          </Link>
-        </div>
+      <Header />
+      <CarrouselRostro />
+      <CategoriaGeneral categoria={categoria} />  
+      <div className="tipos-piel-container">
+        <Link to="/r-piel-oleosa" className="tipo-piel-btn">
+          <img src="https://production.na01.natura.com/on/demandware.static/-/Sites-NatArgentina-Library/default/dwce1a5e1c/NE%20Rostro/Pele%20Oleosa.png" alt="Piel Oleosa" className="icono-img" />
+          <span>piel oleosa</span>
+        </Link>
+        <Link to="/r-piel-seca" className="tipo-piel-btn">
+          <img src="https://production.na01.natura.com/on/demandware.static/-/Sites-NatArgentina-Library/default/dw43d48bf0/NE%20Rostro/Pele%20Seca.png" alt="Piel Seca" className="icono-img" />
+          <span>piel seca</span>
+        </Link>
+        <Link to="/r-piel-mixta" className="tipo-piel-btn">
+          <img src="https://production.na01.natura.com/on/demandware.static/-/Sites-NatArgentina-Library/default/dw5e0cfeee/NE%20Rostro/Pele%20Mista.png" alt="Piel Mixta" className="icono-img" />
+          <span>piel mixta</span>
+        </Link>
+        <Link to="/r-todo-tipo-piel" className="tipo-piel-btn">
+          <img src="https://production.na01.natura.com/on/demandware.static/-/Sites-NatArgentina-Library/default/dw29d76b86/NE%20Rostro/Todos%20os%20tipos.png" alt="Todo Tipo de Piel" className="icono-img" />
+          <span>todo tipo de piel</span>
+        </Link>
       </div>
-      <Footer/>
+
+
+      <Footer />
     </div>
   )
 }

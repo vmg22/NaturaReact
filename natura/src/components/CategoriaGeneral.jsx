@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import '../styles/CategoriaGeneral.css'
 
 const CategoriaGeneral = (props) => {
   const catGeneral = props.categoria;
@@ -40,15 +41,15 @@ const CategoriaGeneral = (props) => {
   return (
     <div>
     
-      <div className='d-flex align-items-center justify-content-start justify-content-md-center'>
-        <main className='text-start mx-5 mb-4'>
-          <h1 className=" text-dark fw-semibold lh-normal mt-md-4 text-center" >
+      <div>
+        <main className="Contenido-CategoriaGeneral">
+          <h1>
             {cat.nombre}
           </h1>
-          <div className="text-dark mt-2" >
+          <div className="CategoriaGralDescripcion">
             {cat.descripcion}
           </div>
-          <h2 className=" text-dark fw-semibold lh-normal mt-md-4 text-center" >
+          <h2>
             {cat.pregunta}
           </h2>
           {/* <div className='d-flex justify-content-center mt-4'>
