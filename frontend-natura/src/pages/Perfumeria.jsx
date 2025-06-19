@@ -20,7 +20,7 @@ const Perfumeria = () => {
           <img
             src="https://production.na01.natura.com/on/demandware.static/-/Sites-NatArgentina-Library/default/dw77063608/NE%20Perfumeria/Perfumaria%20Feminina.png"
             alt="Femenina"
-            className="icono-img"
+            className="icono-img-perfumeria"
           />
           <span>femenina</span>
         </Link>
@@ -28,7 +28,7 @@ const Perfumeria = () => {
           <img
             src="https://production.na01.natura.com/on/demandware.static/-/Sites-natura-ar-storefront-catalog/default/dw0f683430/icon/categorias%20busqueda/outlined-product-childish.png"
             alt="Infantil"
-            className="icono-img"
+            className="icono-img-perfumeria"
           />
           <span>infantil</span>
         </Link>
@@ -36,7 +36,7 @@ const Perfumeria = () => {
           <img
             src="https://production.na01.natura.com/on/demandware.static/-/Sites-NatArgentina-Library/default/dw9bb15a33/NE%20Perfumeria/Perfumaria%20Masculina.png"
             alt="Masculina"
-            className="icono-img"
+            className="icono-img-perfumeria"
           />
           <span>masculina</span>
         </Link>
@@ -44,7 +44,7 @@ const Perfumeria = () => {
           <img
             src="https://production.na01.natura.com/on/demandware.static/-/Sites-NatArgentina-Library/default/dw2034851b/NE%20Perfumeria/Perfumaria%20para%20todos.png"
             alt="Unisex"
-            className="icono-img"
+            className="icono-img-perfumeria"
           />
           <span>unisex</span>
         </Link>
