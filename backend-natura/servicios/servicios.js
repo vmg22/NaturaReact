@@ -145,7 +145,7 @@ app.delete('/api/marcas/:id', (req, res) => {
     res.json({ mensaje: 'Marca eliminada' });
   });
 });
-
+//listo hasta aqui
 
 //-- USUARIOS --//
 // LEE USUARIOS --------------//

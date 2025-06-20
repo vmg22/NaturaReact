@@ -5,7 +5,7 @@ const routesCategorias = require("./routes/categorias")
 // const routesCarrito = require("./routes/carrito")
 // const routesDescuentos = require("./routes/descuentos")
 // const routesImagenes = require("./routes/imagenes")
-// const routesMarcas = require("./routes/marcas")
+const routesMarcas = require("./routes/marcas")
 // const routesOrdenes = require("./routes/ordenes")
 // const routesRoles = require("./routes/roles")
 // const routesUsuarios = require("./routes/usuarios")
@@ -18,11 +18,12 @@ const app = express()
 app.use(express.json());
 app.use("/" , routesProductos)
 app.use("/" , routesCategorias)
+app.use("/" , routesMarcas)
 app.use(cors());
 
 
 
-// app.use("/marcas" , routesMarcas)
+
 
 // app.use("/usuarios" , routesUsuarios)
 // app.use("/roles" , routesRoles)
