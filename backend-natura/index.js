@@ -17,6 +17,7 @@ const app = express()
 //instanciar funciones de la biblioteca 
 app.use(express.json());
 app.use("/" , routesProductos)
+
 app.use(cors());
 
 
