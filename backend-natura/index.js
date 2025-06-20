@@ -1,7 +1,7 @@
 const express = require ("express")
 const {conection} = require("../backend-natura/config/db")
 const routesProductos = require("./routes/productos")
-// const routesCategorias = require("./routes/categorias")
+const routesCategorias = require("./routes/categorias")
 // const routesCarrito = require("./routes/carrito")
 // const routesDescuentos = require("./routes/descuentos")
 // const routesImagenes = require("./routes/imagenes")
@@ -17,13 +17,13 @@ const app = express()
 //instanciar funciones de la biblioteca 
 app.use(express.json());
 app.use("/" , routesProductos)
-
+app.use("/" , routesCategorias)
 app.use(cors());
 
 
 
 // app.use("/marcas" , routesMarcas)
-// app.use("/categorias" , routesCategorias)
+
 // app.use("/usuarios" , routesUsuarios)
 // app.use("/roles" , routesRoles)
 // app.use("/imagenes" , routesImagenes)
