@@ -8,7 +8,7 @@ const routesCategorias = require("./routes/categorias")
 const routesMarcas = require("./routes/marcas")
 // const routesOrdenes = require("./routes/ordenes")
 // const routesRoles = require("./routes/roles")
-// const routesUsuarios = require("./routes/usuarios")
+const routesUsuarios = require("./routes/usuarios")
 
 
 const cors = require("cors")
@@ -19,13 +19,14 @@ app.use(express.json());
 app.use("/" , routesProductos)
 app.use("/" , routesCategorias)
 app.use("/" , routesMarcas)
+app.use("/" , routesUsuarios)
 app.use(cors());
 
 
 
 
 
-// app.use("/usuarios" , routesUsuarios)
+
 // app.use("/roles" , routesRoles)
 // app.use("/imagenes" , routesImagenes)
 // app.use("/ordenes" , routesOrdenes)
