@@ -7,7 +7,7 @@ npm install zustand
 npm install react-icons --save
 npm install --save @emailjs/browser
 npm install emailjs-com
-npm install json-server  -- cd natura      cd src/data        json-server -w db.json -p 3000
+npm install json-server  -- cd natura      cd src/data        json-server -w db.json -p 3001
 npm install axios
 
 dependecias para conectar bdmysql 
