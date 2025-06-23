@@ -3,10 +3,10 @@ const {getAllImagenes,getEspecifiedImagenId,createImagen,updateImagen,deleteImag
 
 const router = express.Router();
 
-router.get("/imagenes", getAllImagenes);
-router.get("/imagenes/:id", getEspecifiedImagenId);
-router.post("/imagenes", createImagen);
-router.put("/imagenes/:id", updateImagen);
-router.delete("/imagenes/:id", deleteImagen);
+router.get("/imagenes_productos", getAllImagenes);
+router.get("/imagenes_productos/:id", getEspecifiedImagenId);
+router.post("/imagenes_productos", createImagen);
+router.put("/imagenes_productos/:id", updateImagen);
+router.delete("/imagenes_productos/:id", deleteImagen);
 
 module.exports = router;
