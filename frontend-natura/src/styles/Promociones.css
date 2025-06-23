@@ -1,0 +1,33 @@
+.tipos-promocion-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin: 40px auto;
+}
+
+.tipo-promocion-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #ffffff;
+  padding: 12px 24px;
+  border-radius: 999px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+  text-decoration: none;
+  color: #000000;
+  font-size: 16px;
+  font-weight: 600;
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.tipo-promocion-btn:hover {
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.icono-img-promociones {
+  width: 25px;
+  height: 25px;
+  object-fit: contain;
+}
