@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import logoNegro from "../assets/logo-natura-negro.png";
 import "../styles/navLight.css";
@@ -43,7 +43,7 @@ const NavLight = () => {
             </Link>
           </div>
           <div>
-            <Link to="/" className="btnIconosNavegacion">
+            <Link to="/carrito" className="btnIconosNavegacion">
               <i className="fa-solid fa-bag-shopping"></i>
             </Link>
           </div>

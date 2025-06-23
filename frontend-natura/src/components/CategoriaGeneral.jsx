@@ -6,7 +6,7 @@ import '../styles/CategoriaGeneral.css'
 const CategoriaGeneral = (props) => {
   const catGeneral = props.categoria;
   const [cat, setCat] = useState(null);
-  const [tipo, setTipo] = useState([]);
+ 
 
   useEffect(() => {
     // Si no hay una categoría para buscar, no hacemos la llamada.
