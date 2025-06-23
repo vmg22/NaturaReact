@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import CategoriaGeneral from '../components/CategoriaGeneral'
 import Header from "../components/Header"
 import Footer from "../components/Footer"
-import "../styles/Promociones.css" 
 
 const Promociones = () => {
   let categoria = "promociones"
