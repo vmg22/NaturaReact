@@ -21,9 +21,9 @@ const getEspecifiedCarritoId = (req, res) => {
 
 // Crear un nuevo elemento en el carrito
 const createCarrito = (req, res) => {
-  const { id_usuario, id_producto, cantidad } = req.body;
-  const consulta = "INSERT INTO carrito (id_usuario, id_producto, cantidad) VALUES (?, ?, ?);";
-  conection.query(consulta, [id_usuario, id_producto, cantidad], (err, result) => {
+  const { usuario_id, producto_id, cantidad, fecha_agregado } = req.body;
+  const consulta = "INSERT INTO carrito (usuario_id, producto_id, cantidad, fecha_agregado) VALUES (?, ?, ?, ?);";
+  conection.query(consulta, [usuario_id, producto_id, cantidad, fecha_agregado], (err, result) => {
     if (err) return res.status(500).json({ error: err.message });
     res.status(201).json({ id: result.insertId, mensaje: "Elemento agregado al carrito" });
   });
