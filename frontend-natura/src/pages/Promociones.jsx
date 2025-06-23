@@ -4,7 +4,6 @@ import CategoriaGeneral from '../components/CategoriaGeneral'
 import Header from "../components/Header"
 import Footer from "../components/Footer"
 
-
 const Promociones = () => {
   let categoria = "promociones"
 
