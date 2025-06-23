@@ -6,7 +6,7 @@ import '../styles/CategoriaGeneral.css'
 const CategoriaGeneral = (props) => {
   const catGeneral = props.categoria;
   const [cat, setCat] = useState(null);
-
+ 
 
   useEffect(() => {
     // Si no hay una categoría para buscar, no hacemos la llamada.
@@ -15,6 +15,7 @@ const CategoriaGeneral = (props) => {
     const getCategorias = async () => {
       try {
         const respuesta = await axios.get(`http://localhost:3001/categorias/${catGeneral}`);
+        console.log(respuesta)
         const responseData = respuesta.data[0]; 
         setCat(responseData);
       
