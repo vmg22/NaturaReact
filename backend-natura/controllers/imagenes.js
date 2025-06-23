@@ -21,9 +21,9 @@ const getEspecifiedImagenId = (req, res) => {
 
 // Crear una nueva imagen
 const createImagen = (req, res) => {
-  const { id_producto, url } = req.body;
-  const consulta = "INSERT INTO imagenes_productos (id_producto, url) VALUES (?, ?);";
-  conection.query(consulta, [id_producto, url], (err, result) => {
+  const {producto_id, url_imagen} = req.body;
+  const consulta = "INSERT INTO imagenes_productos (producto_id, url_imagen) VALUES (?, ?);";
+  conection.query(consulta, [producto_id, url_imagen], (err, result) => {
     if (err) return res.status(500).json({ error: err.message });
     res.status(201).json({ id: result.insertId, mensaje: "Imagen creada" });
   });
@@ -32,9 +32,9 @@ const createImagen = (req, res) => {
 // Actualizar imagen
 const updateImagen = (req, res) => {
   const { id } = req.params;
-  const { url } = req.body;
-  const consulta = "UPDATE imagenes_productos SET url = ? WHERE id = ?;";
-  conection.query(consulta, [url, id], (err) => {
+  const { url_imagen } = req.body;
+  const consulta = "UPDATE imagenes_productos SET url_imagen = ? WHERE id = ?;";
+  conection.query(consulta, [url_imagen, id], (err) => {
     if (err) return res.status(500).json({ error: err.message });
     res.json({ mensaje: "Imagen actualizada" });
   });
