@@ -14,8 +14,12 @@ const routesUsuarios = require("./routes/usuarios")
 const cors = require("cors")
 
 const app = express()
-//instanciar funciones de la biblioteca 
+// 🟢 Aplicar CORS ANTES de cualquier ruta
+app.use(cors());
+
+// 🟢 Middleware para parsear JSON
 app.use(express.json());
+//instanciar funciones de la biblioteca 
 app.use("/" , routesProductos)
 app.use("/" , routesCategorias)
 app.use("/" , routesMarcas)
@@ -25,7 +29,7 @@ app.use("/" , routesImagenes)
 app.use("/" , routesOrdenes)
 app.use("/" , routesCarrito)
 app.use("/" , routesDescuentos)
-app.use(cors());
+
 
 app.get("/",(req,res)=>{
     res.send("Bienvenido a mi DB")
