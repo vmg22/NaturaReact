@@ -1,0 +1,9 @@
+.mi-tabla {
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.mi-tabla th, .mi-tabla td {
+  border: 1px solid black;
+  padding: 8px;
+}

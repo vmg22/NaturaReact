@@ -39,6 +39,7 @@ import RPielOleosa from './pages/RPielOleosa'
 import RPielSeca from './pages/RPielSeca'
 import RPielMixta from './pages/RPielMixta'
 import RTodoTipoPiel from './pages/RTodoTipoPiel'
+import VerTabla from "./pages/VerTabla"
 
 
 function App() {
@@ -86,6 +87,7 @@ function App() {
         <Route path='/r-piel-seca' element={<RPielSeca/>}></Route>
         <Route path='/r-piel-mixta' element={<RPielMixta/>}></Route>
         <Route path='/r-todo-tipo-piel' element={<RTodoTipoPiel/>}></Route>
+        <Route path='/verTabla' element={<VerTabla/>}></Route>
         
 
 

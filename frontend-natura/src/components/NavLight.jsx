@@ -43,7 +43,7 @@ const NavLight = () => {
             </Link>
           </div>
           <div>
-            <Link to="/" className="btnIconosNavegacion">
+            <Link to="/carrito" className="btnIconosNavegacion">
               <i className="fa-solid fa-bag-shopping"></i>
             </Link>
           </div>
