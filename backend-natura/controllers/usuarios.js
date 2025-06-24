@@ -2,12 +2,24 @@ const {conection} = require ("../config/db")
 
 //Obtener todos los usuarios
 const getAllUsuarios = (req,res) =>{
-    const consulta = "SELECT * FROM usuarios;"
+ // Primero obtenemos las columnas con SHOW COLUMNS
+  const columnasQuery = "SHOW COLUMNS FROM usuarios;";
+  const consulta = "SELECT * FROM usuarios;";
+  conection.query(columnasQuery, (err, columnasResultado) => {
+    if (err) return res.status(500).json({ error: err.message });
 
-    conection.query(consulta, (err, results) => {
-    if (err) return res.status(500).json({ error: err });
-    res.json(results);
-    })
+    // extraemos solo el nombre de las columnas
+    const columnas = columnasResultado.map(col => col.Field);
+
+    conection.query(consulta, (err2, datosResultado) => {
+      if (err2) return res.status(500).json({ error: err2.message });
+
+      res.json({
+        columnas,
+        datos: datosResultado,
+      });
+    });
+  });
 }
 
 // Obtener usuario por id

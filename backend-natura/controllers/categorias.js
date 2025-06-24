@@ -2,14 +2,28 @@ const {conection} = require ("../config/db")
 
 
 //Obtener todos las categorias
-const getAllCategorias = (req,res) =>{
-    const consulta = "select * from categorias;"
+const getAllCategorias = (req, res) => {
+  // Primero obtenemos las columnas con SHOW COLUMNS
 
-    conection.query(consulta, (err, results) => {
-    if (err) throw err
-    res.json(results)
-    })
-}
+  const columnasQuery = "SHOW COLUMNS FROM categorias;";
+  const consulta = "SELECT * FROM categorias;";
+
+  conection.query(columnasQuery, (err, columnasResultado) => {
+    if (err) return res.status(500).json({ error: err.message });
+
+    // extraemos solo el nombre de las columnas
+    const columnas = columnasResultado.map(col => col.Field);
+
+    conection.query(consulta, (err2, datosResultado) => {
+      if (err2) return res.status(500).json({ error: err2.message });
+
+      res.json({
+        columnas,
+        datos: datosResultado,
+      });
+    });
+  });
+};
 
 // Obtener categoria especifica por nombre
 const getEspecifiedCategorias = (req,res) =>{
