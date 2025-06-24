@@ -5,11 +5,13 @@ import CarrouselCard2 from '../components/carrousel/CarrouselCard2'
 import Novedades from '../components/Novedades'
 
 
+
 const Home = () => { 
 return (
     <div>
       
       <Header/>
+     
       <CarrouselCard1/>
       <CarrouselCard2/>
       <Novedades />
