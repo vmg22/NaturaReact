@@ -7,6 +7,7 @@ import Footer from "../components/Footer";
 import { Link } from "react-router-dom";
 
 const Carrito = () => {
+  const { carrito, quitarDelCarrito, incrementarCantidad, disminuirCantidad } = useCarritoStore();
   return (
     <>
       <Header />
