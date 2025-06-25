@@ -40,6 +40,7 @@ import RPielSeca from './pages/RPielSeca'
 import RPielMixta from './pages/RPielMixta'
 import RTodoTipoPiel from './pages/RTodoTipoPiel'
 import VerTabla from "./pages/VerTabla"
+import AgregarTabla from './pages/AgregarTabla'
 
 
 function App() {
@@ -87,7 +88,10 @@ function App() {
         <Route path='/r-piel-seca' element={<RPielSeca/>}></Route>
         <Route path='/r-piel-mixta' element={<RPielMixta/>}></Route>
         <Route path='/r-todo-tipo-piel' element={<RTodoTipoPiel/>}></Route>
-        <Route path='/verTabla' element={<VerTabla/>}></Route>
+
+        {/* estas deberian ser privadas */}
+        <Route path='/verTabla/:tabla' element={<VerTabla/>}></Route>
+        <Route path='/agregarTabla/:tabla' element={<AgregarTabla/>}></Route>
         
 
 

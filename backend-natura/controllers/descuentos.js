@@ -9,7 +9,11 @@ const getAllDescuentos = (req, res) => {
     if (err) return res.status(500).json({ error: err.message });
 
     // extraemos solo el nombre de las columnas
-    const columnas = columnasResultado.map(col => col.Field);
+    const columnas = columnasResultado.map((col) => ({
+     nombre: col.Field,
+    tipo: col.Type,
+    extra: col.Extra, // para saber si es auto_increment
+    }));
 
     conection.query(consulta, (err2, datosResultado) => {
       if (err2) return res.status(500).json({ error: err2.message });

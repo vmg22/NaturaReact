@@ -24,9 +24,15 @@ const MainAdmin = () => {
 
   const verTabla = (i) =>{
     console.log("me llega", tables[i] )
-    navigate("/verTabla", { state: { tabla: tables[i] } });
+    const tabla = tables[i]
+    navigate(`/verTabla/${tabla}`);
   }
-
+  
+  const agregarTabla = (i) =>{
+    console.log("me llega", tables[i])
+    const tabla = tables[i]
+    navigate(`/agregarTabla/${tabla}`);
+  }
   return (
     <div>
       <div className="d-flex justify-content-center">
@@ -45,7 +51,7 @@ const MainAdmin = () => {
               <Button variant="primary" style={{ marginRight: "10px" }} onClick={()=> verTabla(index)}>
                 Ver tabla
               </Button>
-              <Button variant="success" style={{ marginRight: "10px" }}>
+              <Button variant="success" style={{ marginRight: "10px" }} onClick={()=> agregarTabla(index)}>
                 Agregar
               </Button>
               <Button variant="warning" style={{ marginRight: "10px" }}>

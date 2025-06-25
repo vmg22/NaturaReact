@@ -1,12 +1,10 @@
-import { useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { useParams } from "react-router-dom";
 import axios from "axios";
 
 const VerTabla = () => {
-  const location = useLocation();
 
-  // ✅ Tomamos el nombre de la tabla desde la navegación
-  const { tabla: tablaRecibida } = location.state || {};
+  const { tabla } = useParams();
 
   const [filas, setFilas] = useState([]);
   const [columnas, setColumnas] = useState([]);
@@ -14,11 +12,10 @@ const VerTabla = () => {
 
   useEffect(() => {
     const getTabla = async () => {
-      if (!tablaRecibida) return;
+      if (!tabla) return;
 
       try {
-        // ✅ IMPORTANTE: usá comillas invertidas (backticks) y corregí la URL
-        const respuesta = await axios.get(`http://localhost:3001/${tablaRecibida}`);
+        const respuesta = await axios.get(`http://localhost:3001/${tabla}`);
 
         // La API debe devolver { columnas: [], datos: [] }
         setColumnas(respuesta.data.columnas);
@@ -31,19 +28,19 @@ const VerTabla = () => {
     };
 
     getTabla();
-  }, [tablaRecibida]);
+  }, [tabla]);
 
-  if (!tablaRecibida) return <div>⚠️ No se especificó la tabla.</div>;
+  if (!tabla) return <div>⚠️ No se especificó la tabla.</div>;
   if (cargando) return <div>🔄 Cargando datos...</div>;
 
   return (
     <div>
-      <h2>Tabla: {tablaRecibida}</h2>
+      <h2>Tabla: {tabla}</h2>
       <table border="1" cellPadding="10" style={{ borderCollapse: "collapse", margin: "1rem auto" }}>
         <thead style={{ backgroundColor: "#f0f0f0" }}>
           <tr>
             {columnas.map((col, i) => (
-              <th key={i}>{col}</th>
+              <th key={i}>{col.nombre}</th>
             ))}
           </tr>
         </thead>
@@ -51,7 +48,7 @@ const VerTabla = () => {
           {filas.map((fila, i) => (
             <tr key={i}>
               {columnas.map((col, j) => (
-                <td key={j}>{fila[col]}</td>
+                <td key={j}>{fila[col.nombre]}</td>
               ))}
             </tr>
           ))}
