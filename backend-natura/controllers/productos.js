@@ -2,12 +2,28 @@ const {conection} = require ("../config/db")
 
 //Obtener todos los productos
 const getAllProductos = (req,res) =>{
-    const consulta = "select * from productos;"
+    // Primero obtenemos las columnas con SHOW COLUMNS
+  const columnasQuery = "SHOW COLUMNS FROM productos;";
+  const consulta = "SELECT * FROM productos;";
+  conection.query(columnasQuery, (err, columnasResultado) => {
+    if (err) return res.status(500).json({ error: err.message });
 
-    conection.query(consulta, (err, results) => {
-    if (err) throw err
-    res.json(results)
-    })
+    // extraemos solo el nombre,tipo, y si es auto_increment de las columnas
+    const columnas = columnasResultado.map((col) => ({
+     nombre: col.Field,
+    tipo: col.Type,
+    extra: col.Extra, // para saber si es auto_increment
+    }));
+
+    conection.query(consulta, (err2, datosResultado) => {
+      if (err2) return res.status(500).json({ error: err2.message });
+
+      res.json({
+        columnas,
+        datos: datosResultado,
+      });
+    });
+  });
 
 }
 

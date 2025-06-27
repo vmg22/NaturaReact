@@ -2,12 +2,28 @@ const {conection} = require ("../config/db")
 
 //Obtener todos las marcas
 const getAllMarcas = (req,res) =>{
-    const consulta = "SELECT * FROM marcas;"
+    // Primero obtenemos las columnas con SHOW COLUMNS
+  const columnasQuery = "SHOW COLUMNS FROM marcas;";
+  const consulta = "SELECT * FROM marcas;";
+  conection.query(columnasQuery, (err, columnasResultado) => {
+    if (err) return res.status(500).json({ error: err.message });
 
-    conection.query(consulta, (err, results) => {
-    if (err) return res.status(500).json({ error: err });
-    res.json(results);
-    })
+    // extraemos solo el nombre de las columnas
+    const columnas = columnasResultado.map((col) => ({
+     nombre: col.Field,
+    tipo: col.Type,
+    extra: col.Extra, // para saber si es auto_increment
+    }));
+
+    conection.query(consulta, (err2, datosResultado) => {
+      if (err2) return res.status(500).json({ error: err2.message });
+
+      res.json({
+        columnas,
+        datos: datosResultado,
+      });
+    });
+  });
 }
 
 // Obtener marca por id

@@ -40,6 +40,17 @@ const CardCarousel = () => {
     groupedCards.push(cardsData.slice(i, i + groupSize));
   }
 
+  const agregarCarrito = (producto) => {
+    agregarAlCarrito({
+      id: producto.id,
+      nombre: producto.title,
+      precio: producto.priceNew,
+      precioOld: producto.priceOld,
+      descuento: producto.discount,
+      cantidad: 1
+    });
+  };
+
   return (
     <Container className="my-5">
       <Carousel indicators={false} interval={null}>
@@ -76,11 +87,7 @@ const CardCarousel = () => {
                       <Button
                         variant="outline-danger"
                         style={{ borderRadius: "2rem", width: "100%", fontWeight: "bold" }}
-                        onClick={() => agregarAlCarrito({
-                          id: card.id,
-                          nombre: card.title,
-                          precio: card.priceNew,
-                        })}
+                        onClick={() => agregarCarrito(card)}
                       >
                         agregar a mi bolsa
                       </Button>

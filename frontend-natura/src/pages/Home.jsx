@@ -13,6 +13,7 @@ return (
       <Header/>
       <CarrouselCard1/>
       <CarrouselCard2 />
+      
       <Novedades />
       <Footer/>
 

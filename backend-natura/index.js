@@ -9,6 +9,8 @@ const routesMarcas = require("./routes/marcas")
 const routesOrdenes = require("./routes/ordenes")
 const routesRoles = require("./routes/roles")
 const routesUsuarios = require("./routes/usuarios")
+const routesTablas = require ("./routes/tablas")
+const routesTablasVer = require ("./routes/verTablas")
 
 
 const cors = require("cors")
@@ -29,6 +31,8 @@ app.use("/" , routesImagenes)
 app.use("/" , routesOrdenes)
 app.use("/" , routesCarrito)
 app.use("/" , routesDescuentos)
+app.use("/" , routesTablas)
+app.use("/" , routesTablasVer)
 
 
 app.get("/",(req,res)=>{
@@ -43,7 +47,6 @@ console.error('❌ Error al conectar a la base de datos:', err.message);
 console.log('✅ Conexión exitosa a la base de datos natura_react');
 }
 });
-
 
 
 
