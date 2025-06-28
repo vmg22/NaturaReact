@@ -52,12 +52,12 @@ const createUsuario = (req,res)=>{
 // Actualizar usuario
     const updateUsuario = (req,res) =>{
         const {id} = req.params;
-        const { nombre, email, password,direccion,telefono, rol_id } = req.body;
+        const { nombre, email, password,direccion,telefono, rol_id, fecha_registro } = req.body;
 
-        const consulta = "UPDATE usuarios SET nombre=?, email=?, password=?, direccion=?, telefono=?, rol_id=? WHERE id=?;"
+        const consulta = "UPDATE usuarios SET nombre=?, email=?, password=?, direccion=?, telefono=?, rol_id=?, fecha_registro=? WHERE id=?;"
         
 
-        conection.query(consulta,[nombre, email, password,direccion,telefono, rol_id, id],(err)=>{
+        conection.query(consulta,[nombre, email, password,direccion,telefono, rol_id,fecha_registro, id],(err)=>{
             if (err) return res.status(500).json({ error: err.message });
             res.json({ mensaje: 'Usuario actualizado' });
         })

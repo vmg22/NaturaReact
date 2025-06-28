@@ -4,7 +4,9 @@ import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
+import {Form,Toast, ToastContainer} from "react-bootstrap";
+import ToastExito from "../components/toast/ToastExito";
+import ToastError from "../components/toast/ToastError";
 
 const AgregarTabla = () => {
 
@@ -14,6 +16,8 @@ const AgregarTabla = () => {
   const [columnas, setColumnas] = useState([]);
   const [cargando, setCargando] = useState(true);
   const [formData, setFormData] = useState({});
+  const [toastVisible, setToastVisible] = useState(false);
+  const [toastError, setToastError] = useState(false);
 
   console.log(tabla);
 
@@ -86,10 +90,11 @@ const AgregarTabla = () => {
     e.preventDefault()
     try {
         let response = await axios.post(`http://localhost:3001/${tabla}`, formData);
-        alert(`¡${tabla} agregado exitosamente!`)
-         console.log("Navegando a:", `/verTabla/${tabla}`); 
+        setToastVisible(true)
     // console.log("El valor de tabla es:", tabla);
-        navigate(`/verTabla/${tabla}`); // redirigir
+        setTimeout(() => {
+        navigate(`/verTabla/${tabla}`);
+      }, 1500); // espera 2 segundos antes de navegar
     } catch (error) {
         console.error(error)
     }
@@ -146,6 +151,25 @@ const AgregarTabla = () => {
           </Button>
         </Form>
       </div>
+
+
+
+
+       <ToastExito
+      visible={toastVisible}
+      onClose={() => setToastVisible(false)}
+      tipo="success"
+      titulo="Éxito"
+      mensaje={`¡Agregado con éxito!`}
+    />
+
+    <ToastError
+      visible={toastError}
+      onClose={() => setToastError(false)}
+      tipo="danger"
+      titulo="Error"
+      mensaje="No se pudieron guardar los cambios"
+    />
     </div>
   );
 };
