@@ -2,12 +2,15 @@ import React from "react";
 import { Link } from "react-router-dom";
 import logoNegro from "../assets/logo-natura-negro.png";
 import "../styles/navLight.css";
-import Navbar from 'react-bootstrap/Navbar';
- 
+import Navbar from "react-bootstrap/Navbar";
+import useCarritoStore from "../store/useCarritoStore"; 
+
 const NavLight = () => {
+  const { carrito } = useCarritoStore();
+  const cantidadTotal = carrito.reduce((acc, item) => acc + item.cantidad, 0); 
 
   return (
-    <div style={{ paddingTop: "20px"}} className="divNavLightGeneral">
+    <div style={{ paddingTop: "20px" }} className="divNavLightGeneral">
       <section className="primerDiv">
         <div className="icono">
           <Link to={"/"}>
@@ -23,13 +26,15 @@ const NavLight = () => {
               className="inputBuscar"
             />
           </div>
-          <button style={{ border: "none", backgroundColor: "transparent" }} className="btnBuscar">
+          <button
+            style={{ border: "none", backgroundColor: "transparent" }}
+            className="btnBuscar"
+          >
             <div className="btnSearch">
               <i className="fa-solid fa-magnifying-glass"></i>
             </div>
           </button>
         </div>
-        
 
         <div className="iconosNavegacion">
           <div>
@@ -42,11 +47,36 @@ const NavLight = () => {
               <i className="fa-solid fa-user"></i> ingresar
             </Link>
           </div>
-          <div>
-            <Link to="/carrito" className="btnIconosNavegacion">
-              <i className="fa-solid fa-bag-shopping"></i>
-            </Link>
-          </div>
+          {/* ✅ Ícono del carrito con badge */}
+          <div style={{ position: "relative" }}>
+  <Link to="/carrito" className="btnIconosNavegacion" style={{ position: "relative", display: "inline-block" }}>
+    <i className="fa-solid fa-bag-shopping" style={{ fontSize: "20px" }}></i>
+    {cantidadTotal > 0 && (
+      <span
+        style={{
+          position: "absolute",
+          top: "-5px",
+          right: "-8px",
+          background: "red",
+          color: "white",
+          borderRadius: "50%",
+          fontSize: "11px",
+          minWidth: "18px",
+          height: "18px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          padding: "0 5px",
+          fontWeight: "bold",
+          zIndex: 10,
+        }}
+      >
+        {cantidadTotal}
+      </span>
+    )}
+  </Link>
+</div>
+
         </div>
       </section>
 
