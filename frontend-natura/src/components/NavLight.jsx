@@ -62,13 +62,13 @@ const NavLight = () => {
                     marginLeft: "10px",
                     background: "none",
                     border: "none",
-                    color: "#007BFF",
+                    color: "#f48646",
                     cursor: "pointer",
                     fontWeight: "bold",
                     fontSize: "0.9rem"
                   }}
                 >
-                  cerrar sesión
+                  Cerrar Sesión
                 </button>
               </div>
             ) : (
