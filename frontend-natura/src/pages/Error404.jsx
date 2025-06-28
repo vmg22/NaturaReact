@@ -14,7 +14,7 @@ const Error404 = () => {
     <p style={{textAlign:"center" , marginTop:"20px"}}>¡Pero no te desanimes! Tenemos muchos productos y novedades para vos.</p>
     <div className='d-flex align-items-center justify-content-between'>
       <div>
-        <Link to={"/"}><p>Ir a home <i class="fa-solid fa-arrow-right"></i></p></Link>
+        <Link to={"/"}><p>Ir a home <i className="fa-solid fa-arrow-right"></i></p></Link>
       </div>
       <div>
         <Link to={"/"}><p>Ver lanzamientos <i class="fa-solid fa-arrow-right"></i></p></Link>
