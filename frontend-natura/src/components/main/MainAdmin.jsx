@@ -34,13 +34,13 @@ const MainAdmin = () => {
     navigate(`/agregarTabla/${tabla}`);
   }
   return (
-    <div>
-      <div className="d-flex justify-content-center">
+    <div >
+      <div className="d-flex justify-content-center mt-2">
         <table className="mi-tabla">
           <thead className="table-light text-center">
             <tr>
-              <th>Tablas</th>
-              <th>Acciones</th>
+              <th className="tituloMainAdmin" style={{backgroundColor:"rgb(32, 32, 32)", color:"white"}}>TABLAS</th>
+              <th className="tituloMainAdmin" style={{backgroundColor:"rgb(32, 32, 32)", color:"white"}}>ACCIONES</th>
             </tr>
           </thead>
           <tbody>
