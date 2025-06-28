@@ -3,73 +3,50 @@ import "../../styles/MainLogin.css";
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
-import UsuarioStore from '../../store/UsuarioStore'; 
+import UsuarioStore from '../../store/UsuarioStore';
 
 const MainLogin = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [user, setUser] = useState("");
   const [pass, setPass] = useState("");
-  const navigate = useNavigate();
 
-  const { iniciarSesion } = UsuarioStore(); 
+  const navigate = useNavigate();
+  const { iniciarSesion } = UsuarioStore();
 
   const togglePassword = () => setShowPassword(!showPassword);
 
   const ingresarCuenta = async () => {
-    if (!user || !pass) {
-      alert("Por favor completá todos los campos");
-      return;
-    }
-  const navigate = useNavigate();
-const ingresarCuenta = async () => {
   if (!user || !pass) {
     alert("Por favor completá todos los campos");
     return;
   }
 
-    try {
-      const response = await axios.get('http://localhost:3001/login', {
-        email: user,
-        password: pass
-      });
+  try {
+    // Armamos la URL incluyendo los datos como parámetros
+    const response = await axios.get(`http://localhost:3001/login?email=${encodeURIComponent(user)}&password=${encodeURIComponent(pass)}`);
 
     if (response.data.success) {
-       localStorage.setItem("usuarioLogueado", JSON.stringify(response.data.user));
+      iniciarSesion({ email: user }); 
+      localStorage.setItem("usuarioLogueado", JSON.stringify(response.data.user));
+
       alert("¡Bienvenido!");
       setUser("");
       setPass("");
 
-      // Verificamos si el usuario es admin
       if (user === "admin@natura.com") {
-        navigate("/Admin");
+        navigate("/MainAdmin");
       } else {
-        navigate("/Home");
+        navigate("/MainCarrito");
       }
     } else {
       alert("Usuario o contraseña incorrectos");
     }
   } catch (error) {
-    console.error("Error al conectar con el servidor:", error); 
+    console.error("Error al conectar con el servidor:", error);
     alert("Error al conectar con el servidor");
   }
-
-  setUser("");
-  setPass("");
 };
-      if (response.data.success) {
-        iniciarSesion({ email: user }); // ✅ Guardar el usuario en el store
-        alert("¡Bienvenido!");
-        setUser("");
-        setPass("");
-        navigate("/Admin");
-      } else {
-        alert("Usuario o contraseña incorrectos");
-      }
-    } catch (error) {
-      console.error("Error al conectar con el servidor:", error);
-      alert("Error al conectar con el servidor");
-    }
-  };
+
 
   return (
     <div className="main-login2">
