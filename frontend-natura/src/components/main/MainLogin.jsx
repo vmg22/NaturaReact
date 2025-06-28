@@ -43,7 +43,7 @@ const MainLogin = () => {
         if (usuario.rol_id === 1) {
           navigate("/Admin");
         } else if (usuario.rol_id === 2) {
-          navigate("/Cliente");
+          navigate("/");
         } else {
           alert("Rol no reconocido");
         }
