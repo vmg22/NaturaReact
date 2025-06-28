@@ -41,7 +41,7 @@ function MainRegister() {
       return;
     }
 
-    if (!nombre || !email || !telefono || direccion) {
+    if (!nombre || !email || !telefono || !direccion) {
       setError("Por favor completá todos los campos obligatorios");
       return;
     }
@@ -53,7 +53,7 @@ function MainRegister() {
         nombre: fullName,
         email,
         password,
-        direccion: "", // si no se usa
+        direccion, // si no se usa
         telefono,
         rol_id
       });
