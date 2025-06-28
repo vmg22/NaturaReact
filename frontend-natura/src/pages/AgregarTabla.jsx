@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -111,7 +111,11 @@ const AgregarTabla = () => {
 
   return (
     <div>
-      <h1>Agregar a la tabla {tabla}</h1>
+      <Link to={"/admin"}><p className=""><i className="fa-solid fa-arrow-left"></i>  Volver a Admin</p></Link>
+
+        <h2 className="text-center">Agregar a la tabla {tabla}</h2>
+
+
       <div className="d-flex justify-content-center">
         <Form onSubmit={handleSubmit}>
           {columnas

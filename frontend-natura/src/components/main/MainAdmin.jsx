@@ -54,12 +54,6 @@ const MainAdmin = () => {
               <Button variant="success" style={{ marginRight: "10px" }} onClick={()=> agregarTabla(index)}>
                 Agregar
               </Button>
-              <Button variant="warning" style={{ marginRight: "10px" }}>
-                Editar
-              </Button>
-              <Button variant="danger">
-                Eliminar
-              </Button>
             </td>
           </tr>
         ))}
