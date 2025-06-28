@@ -3,6 +3,7 @@ import "../../styles/MainLogin.css";
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
+import UsuarioStore from '../../store/UsuarioStore'; // 
 import UsuarioStore from '../../store/UsuarioStore';
 
 const MainLogin = () => {
@@ -11,6 +12,8 @@ const MainLogin = () => {
   const [pass, setPass] = useState("");
 
   const navigate = useNavigate();
+
+  const iniciarSesion = UsuarioStore((state) => state.iniciarSesion); //  usar acción de Zustand
   const { iniciarSesion } = UsuarioStore();
 
   const togglePassword = () => setShowPassword(!showPassword);
@@ -24,6 +27,27 @@ const MainLogin = () => {
   try {
     // Armamos la URL incluyendo los datos como parámetros
     const response = await axios.get(`http://localhost:3001/login?email=${encodeURIComponent(user)}&password=${encodeURIComponent(pass)}`);
+
+      const data = response.data;
+
+      if (data.success) {
+        const usuario = data.usuario;
+        iniciarSesion(usuario); //  Guardar en Zustand
+
+        alert(`¡Bienvenido, ${usuario.nombre}!`);
+
+        // Limpiar campos
+        setUser("");
+        setPass("");
+
+        // Redirección por rol
+        if (usuario.rol_id === 1) {
+          navigate("/Admin");
+        } else if (usuario.rol_id === 2) {
+          navigate("/Cliente");
+        } else {
+          alert("Rol no reconocido");
+        }
 
     if (response.data.success) {
       iniciarSesion({ email: user }); 
@@ -47,6 +71,14 @@ const MainLogin = () => {
   }
 };
 
+        alert(data.message || "Usuario o contraseña incorrectos");
+      }
+
+    } catch (error) {
+      console.error("Error en login:", error);
+      alert("Error al conectar con el servidor");
+    }
+  };
 
   return (
     <div className="main-login2">
@@ -70,8 +102,8 @@ const MainLogin = () => {
               type={showPassword ? "text" : "password"}
               className="login-input"
               placeholder="ej.: ............."
-              onChange={(e) => setPass(e.target.value)}
               value={pass}
+              onChange={(e) => setPass(e.target.value)}
             />
             <span className="icon" onClick={togglePassword}>
               {showPassword ? <FaEyeSlash /> : <FaEye />}
@@ -94,6 +126,6 @@ const MainLogin = () => {
       </div>
     </div>
   );
-};
+
 
 export default MainLogin;

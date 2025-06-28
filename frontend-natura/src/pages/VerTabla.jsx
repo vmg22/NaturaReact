@@ -19,6 +19,25 @@ const VerTabla = () => {
   const [toastVisible, setToastVisible] = useState(false);
   const [toastError, setToastError] = useState(false);
 
+  const MAPEO_MYSQL_HTML = {
+  number: ["int", "decimal", "float", "double"],
+  date: ["date"],
+  time: ["time"],
+  "datetime-local": ["datetime", "timestamp"],
+  text: ["varchar", "text"],
+};
+
+const mapTipoMySQLaHTML_alternativa = (tipo) => {
+  if (!tipo) return "text";
+  const tipoLower = tipo.toLowerCase();
+  for (const [tipoHTML, prefijosMySQL] of Object.entries(MAPEO_MYSQL_HTML)) {
+    if (prefijosMySQL.some((prefijo) => tipoLower.startsWith(prefijo))) {
+      return tipoHTML;
+    }
+  }
+  return "text";
+};
+
    const getTabla = async () => {
       if (!tabla) return;
 
@@ -42,13 +61,15 @@ const VerTabla = () => {
   if (!tabla) return <div>⚠️ No se especificó la tabla.</div>;
   if (cargando) return <div>🔄 Cargando datos...</div>;
 
+  //agregar a la base navega a otra pagina
   const handleAgregar = () =>{
     navigate(`/agregarTabla/${tabla}`);
   }
 
+  //eliminar de la base
   const handleEliminar = async (id)=>{
     try {
-    let respuestaAlert = confirm("¿Estas seguro que quieres eliminar el producto?")
+    let respuestaAlert = confirm("¿Estas seguro que quieres eliminar?")
     // console.log(respuestaAlert)
     // console.log(id)
     if(respuestaAlert ){
@@ -63,6 +84,7 @@ const VerTabla = () => {
     }
   }
 
+  //muestra el modal con el boton de editar
   const handleEditar = async (id) =>{
     const filaSeleccionada = filas.find((fila) => fila.id === id); // busca la fila que coincida con el id que recibe por parametr
 
@@ -76,14 +98,14 @@ const VerTabla = () => {
 
   }
 
-// guardar los cambios del boton en el modal
+// actualizar los cambios de la fila con el boton del modal
   const handleGuardarCambios = async () => {  
   //para que se oculte el modal una vez que se presiona el boton
     setMostrarModal(false);
   //destructurando datosEditar para que no pase el id en la consulta
   const { id, ...resto } = datosEditar;
 
-  // Usamos el método funcional y robusto para transformar los datos
+  // aqui recorre los datos que guarde en resto para poder cambiar el tipo de fecha q nos deja el campo de bootstrap y que mysql no permite
   const datosListos = Object.fromEntries(
     Object.entries(resto).map(([clave, valor]) => {
       if (clave.startsWith("fecha") && valor) {
@@ -92,33 +114,28 @@ const VerTabla = () => {
         if (!isNaN(fecha.getTime())) {
           // convertir la fecha a formato MySQL xq bootstrap manda en otro formato
           const valorFormateado = fecha.toISOString().slice(0, 19).replace("T", " ");
+          //se devuelve con fecha 
           return [clave, valorFormateado];
         }
       }
-      // Para todos los demás casos, devolvemos el par [clave, valor] original
+      // para todos los demás casos que no tienen fecha en su tabla como atributo
       return [clave, valor];
     })
   );
  
   try {
-    
     await axios.put(`http://localhost:3001/${tabla}/${id}`, datosListos);
     
      //para que se oculte el modal una vez que se presiona el boton y si se haya actualizado
     setMostrarModal(false);
     setToastVisible(true)
-   
-
   } catch (error) {
     // en caso de error el modal se mantiene abierto
     console.error("Error al actualizar:", error);
     setToastError(true)
-
   }
-
     //llamo a gettabla para que llame de nuevo con un get a la base de datos
     getTabla()
-
   };
 
   const handleCerrar = () => {
@@ -141,7 +158,6 @@ const VerTabla = () => {
           Agregar
         </Button>
 
-        
         </div>
         
       </div>
@@ -187,7 +203,10 @@ const VerTabla = () => {
           <Modal.Title>Editar</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-         <Form > 
+         <Form onSubmit={(e) => {
+            e.preventDefault();
+            handleGuardarCambios(); 
+          }}> 
           {columnas
             .filter((col) => col.extra !== "auto_increment") // Primero filtra q no sea id autoincrement para no mostrarlo
             .map(
@@ -201,18 +220,22 @@ const VerTabla = () => {
                 >
                   <Form.Label>{col.nombre}</Form.Label>
                   <Form.Control
-                  name={col.nombre}
-                  value={datosEditar[col.nombre] || ""} //le pone a los input el valor cargado de la fila seleccionada
-                  onChange={(e)=>{setDatosEditar({
-                  ...datosEditar,
-                  [col.nombre]: e.target.value,
-                })}}
+                    type={mapTipoMySQLaHTML_alternativa(col.tipo)}
+                    name={col.nombre}
+                    value={datosEditar[col.nombre] || ""}
+                    onChange={(e) => {
+                      setDatosEditar({
+                        ...datosEditar,
+                        [col.nombre]: e.target.value,
+                      });
+                    }}
+                    required
                   />
                 </Form.Group>
               )
             )}
           <div className="d-flex justify-content-center">
-          <Button variant="warning" onClick={handleGuardarCambios} >
+          <Button type="submit" variant="warning" >
             Actualizar
           </Button>
           </div>
@@ -221,22 +244,7 @@ const VerTabla = () => {
         </Modal.Body>
       </Modal>
 
-       {/* Toast de error */}
-          <ToastContainer position="top-end" className="p-3">
-            <Toast
-              show={toastError}
-              onClose={() => setToastError(false)}
-              bg="danger"
-              delay={1500}
-              autohide
-            >
-              <Toast.Header>
-                <strong className="me-auto">Error</strong>
-              </Toast.Header>
-              <Toast.Body className="text-white">No se pudieron guardar los cambios</Toast.Body>
-            </Toast>
-          </ToastContainer>
-
+{/* llamada al componente toast  */}
       <ToastExito
       visible={toastVisible}
       onClose={() => setToastVisible(false)}

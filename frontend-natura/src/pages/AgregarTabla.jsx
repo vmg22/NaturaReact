@@ -43,8 +43,7 @@ const AgregarTabla = () => {
   if (!tabla) return <div>⚠️ No se especificó la tabla.</div>;
   if (cargando) return <div>🔄 Cargando datos...</div>;
 
-  // 1. Definimos el mapa de tipos fuera de la función.
-  // Es más fácil de leer y modificar.
+
   const MAPEO_MYSQL_HTML = {
     // Clave: tipo de input HTML
     // Valor: array de prefijos de MySQL que corresponden a esa clave
@@ -55,23 +54,16 @@ const AgregarTabla = () => {
       "double"
     ],
     date: ["date"],
-    checkbox: ["tinyint(1)"], // Mantenemos este caso específico
     time: ["time"],
     "datetime-local": ["datetime", "timestamp"],
-    // 'text' es nuestro comodín, pero podemos ser explícitos también
-    text: ["varchar", "text", "char", "mediumtext", "longtext", "enum", "set"],
+    text: ["varchar", "text"],
   };
 
   const mapTipoMySQLaHTML_alternativa = (tipo) => {
-    // Misma guarda para nulos/undefined
+    //si es null o undefiend lo pone como tipo texto
     if (!tipo) return "text";
-
+    //pone todo en minusculo
     const tipoLower = tipo.toLowerCase();
-
-    // Caso especial para tinyint(1) porque startsWith no funcionaría igual
-    if (tipoLower === "tinyint(1)") {
-      return "checkbox";
-    }
 
     // Iteramos sobre nuestro mapa de configuración
     // Object.entries(MAPEO_MYSQL_HTML) -> [ ['number', ['int', 'decimal', ...]], ['date', ['date']], ... ]
@@ -141,6 +133,7 @@ const AgregarTabla = () => {
                     name={col.nombre}
                     value={formData[col.nombre] || ""}
                     onChange={handleChange}
+                    required
                   />
                 </Form.Group>
               )
