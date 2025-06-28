@@ -3,6 +3,7 @@ import "../../styles/MainLogin.css"
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useNavigate } from "react-router-dom";
 import Admin from '../../pages/Admin';
+import axios from 'axios';
 
 const MainLogin = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -11,18 +12,35 @@ const MainLogin = () => {
 
   const togglePassword = () => setShowPassword(!showPassword);
   const navigate = useNavigate();
-
-  const ingresarCuenta = () =>{
-    if (user === "Admin Natura" && pass === "adminpass") {
-    alert("¡Bienvenido Admin!");
-    navigate("/Admin");
-  } else {
-    alert("Usuario incorrecto");
+const ingresarCuenta = async () => {
+  // Validación antes de enviar
+  if (!user || !pass) {
+    alert("Por favor completá todos los campos");
+    return;
   }
 
-    setUser("")
-    setPass("")
+  try {
+    const response = await axios.post('http://localhost:3001/login', {
+      email: user,
+      password: pass
+    });
+
+    if (response.data.success) {
+      alert("¡Bienvenido!");
+      setUser("");
+      setPass("");
+      navigate("/Admin");
+    } else {
+      alert("Usuario o contraseña incorrectos");
+    }
+  } catch (error) {
+    console.error("Error al conectar con el servidor:", error); 
+    alert("Error al conectar con el servidor");
   }
+
+  setUser("");
+  setPass("");
+};
 
   return (
     <div className="main-login2">
