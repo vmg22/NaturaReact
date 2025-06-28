@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+// src/components/CardCarousel.js
+
+import React, { useState, useEffect } from "react";
 import {
   Carousel,
   Card,
@@ -9,108 +11,58 @@ import {
   Badge,
   Toast,
   ToastContainer,
+  Spinner, // Importamos Spinner para el estado de carga
 } from "react-bootstrap";
 import useCarritoStore from "../../store/useCarritoStore";
-import Banner_3_DESK from "../../assets/ARTICULOS-IMG/Banner_3_DESK.jpg";
-import PERFUME12 from "../../assets/ARTICULOS-IMG/PERFUME12.jpg";
-import CREMA1 from "../../assets/ARTICULOS-IMG/CREMA1.jpg";
-import PERFUME1 from "../../assets/ARTICULOS-IMG/PERFUME1.jpg";
-import PERFUME11 from "../../assets/ARTICULOS-IMG/PERFUME11.jpg";
-import PERFUME9 from "../../assets/ARTICULOS-IMG/PERFUME9.jpg";
-import PERFUME3 from "../../assets/ARTICULOS-IMG/PERFUME3.jpg";
-import PERFUME4 from "../../assets/ARTICULOS-IMG/PERFUME4.jpg";
 
 const CardCarousel = () => {
   const agregarAlCarrito = useCarritoStore((state) => state.agregarAlCarrito);
+
+  // 1. ESTADOS PARA MANEJAR LOS DATOS DE LA API
+  const [productos, setProductos] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [showToast, setShowToast] = useState(false);
 
-  const cardsData = [
-    {
-      id: 1,
-      title: "Kaiak Sonar EDT Femenino 100 ml",
-      brand: "Kaiak",
-      img: PERFUME12,
-      priceOld: 54230,
-      priceNew: 37961,
-      priceNoTax: 31372.73,
-      discount: "-30%",
-    },
-    {
-      id: 2,
-      title: "Perfume 2",
-      brand: "Kaiak",
-      img: PERFUME1,
-      priceOld: 45000,
-      priceNew: 31500,
-      priceNoTax: 26000,
-      discount: "-30%",
-    },
-    {
-      id: 3,
-      title: "Crema 3",
-      brand: "Chronos",
-      img: CREMA1,
-      priceOld: 30000,
-      priceNew: 21000,
-      priceNoTax: 18000,
-      discount: "-30%",
-    },
-    {
-      id: 4,
-      title: "Perfume 4",
-      brand: "Kaiak",
-      img: PERFUME4,
-      priceOld: 60000,
-      priceNew: 42000,
-      priceNoTax: 37000,
-      discount: "-30%",
-    },
-    {
-      id: 5,
-      title: "Perfume 5",
-      brand: "Kaiak",
-      img: PERFUME3,
-      priceOld: 48000,
-      priceNew: 33600,
-      priceNoTax: 28000,
-      discount: "-30%",
-    },
-    {
-      id: 6,
-      title: "Perfume 6",
-      brand: "Kaiak",
-      img: PERFUME9,
-      priceOld: 52000,
-      priceNew: 36400,
-      priceNoTax: 29000,
-      discount: "-30%",
-    },
-    {
-      id: 7,
-      title: "Perfume 7",
-      brand: "Kaiak",
-      img: PERFUME11,
-      priceOld: 50000,
-      priceNew: 35000,
-      priceNoTax: 27500,
-      discount: "-30%",
-    },
-    {
-      id: 8,
-      title: "Promo",
-      brand: "Promo Natura",
-      img: Banner_3_DESK,
-      priceOld: 65000,
-      priceNew: 45500,
-      priceNoTax: 39000,
-      discount: "-30%",
-    },
-  ];
+  // 2. useEffect PARA LLAMAR A LA API AL MONTAR EL COMPONENTE
+  useEffect(() => {
+    const fetchProductos = async () => {
+      try {
+        const response = await fetch("http://localhost:3001/productos");
+        if (!response.ok) {
+          throw new Error("Error al obtener los datos");
+        }
+        const data = await response.json();
+
+        //  API devuelve campos como 'titulo', 'precio_original', etc.
+        //  espera 'title', 'priceOld', etc.
+        // Hacemos un "mapeo" para que coincidan.
+        const productosAdaptados = data.datos.map((p) => ({
+          id: p.id,
+          title: p.titulo,
+          brand: `Marca ID: ${p.marca_id}`, // Placeholder, ver nota abajo
+          img: `https://placehold.co/300x200?text=${p.titulo}`, // Placeholder para la imagen
+          priceOld: p.precio_original,
+          priceNew: p.precio_descuento,
+          priceNoTax: p.precio_sin_iva,
+          discount: p.descuento,
+        }));
+
+        setProductos(productosAdaptados);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProductos();
+  }, []); // El array vacío asegura que se ejecute solo una vez
 
   const groupSize = 4;
   const groupedCards = [];
-  for (let i = 0; i < cardsData.length; i += groupSize) {
-    groupedCards.push(cardsData.slice(i, i + groupSize));
+  for (let i = 0; i < productos.length; i += groupSize) {
+    groupedCards.push(productos.slice(i, i + groupSize));
   }
 
   const agregarCarrito = (producto) => {
@@ -124,9 +76,27 @@ const CardCarousel = () => {
     });
 
     setShowToast(true);
-    setTimeout(() => setShowToast(false), 1500);
   };
 
+  // RENDERIZADO CONDICIONAL PARA CARGA Y ERRORES
+  if (loading) {
+    return (
+      <Container className="text-center my-5">
+        <Spinner animation="border" variant="danger" />
+        <p className="mt-2">Cargando productos...</p>
+      </Container>
+    );
+  }
+
+  if (error) {
+    return (
+      <Container className="text-center my-5">
+        <p className="text-danger">Error al cargar los productos: {error}</p>
+      </Container>
+    );
+  }
+
+  //  RENDERIZADO DEL COMPONENTE CON LOS DATOS DE LA API
   return (
     <>
       <Container className="my-5">
@@ -134,8 +104,8 @@ const CardCarousel = () => {
           {groupedCards.map((group, index) => (
             <Carousel.Item key={index}>
               <Row className="justify-content-center">
-                {group.map((card, idx) => (
-                  <Col md={3} sm={6} xs={12} key={idx}>
+                {group.map((card) => (
+                  <Col md={3} sm={6} xs={12} key={card.id}>
                     <Card
                       className="mb-4 border-0"
                       style={{
@@ -156,7 +126,7 @@ const CardCarousel = () => {
                       <div style={{ padding: "1rem" }}>
                         <Card.Img
                           variant="top"
-                          src={card.img}
+                          src={card.img} // Ahora usa la URL del placeholder
                           style={{ objectFit: "contain", height: "250px" }}
                         />
                       </div>
@@ -165,14 +135,15 @@ const CardCarousel = () => {
                           className="text-muted mb-1"
                           style={{ fontSize: "0.85rem" }}
                         >
-                          {card.brand}
+                          {card.brand} {/* Mostrará "Marca ID: 1", etc. */}
                         </Card.Text>
                         <Card.Title style={{ fontSize: "1rem" }}>
                           {card.title}
                         </Card.Title>
                         <div>
                           <s style={{ color: "#999", fontSize: "0.9rem" }}>
-                            ${card.priceOld.toLocaleString()}
+                            {/* Usamos toLocaleString para formatear el número */}
+                            ${Number(card.priceOld).toLocaleString("es-AR")}
                           </s>
                         </div>
                         <div className="d-flex align-items-center">
@@ -183,7 +154,7 @@ const CardCarousel = () => {
                               marginRight: "0.5rem",
                             }}
                           >
-                            ${card.priceNew.toLocaleString()}
+                            ${Number(card.priceNew).toLocaleString("es-AR")}
                           </span>
                           <Badge bg="danger">{card.discount}</Badge>
                         </div>
@@ -197,7 +168,7 @@ const CardCarousel = () => {
                           className="text-muted"
                           style={{ fontSize: "0.9rem" }}
                         >
-                          ${card.priceNoTax.toLocaleString()}
+                          ${Number(card.priceNoTax).toLocaleString("es-AR")}
                         </p>
                         <Button
                           variant="outline-danger"
