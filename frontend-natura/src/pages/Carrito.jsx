@@ -199,7 +199,7 @@ const Carrito = () => {
           bg="danger"
         >
           <Toast.Body style={{ color: "white", fontWeight: "bold" }}>
-            ❌ Producto eliminado del carrito
+            ❌ Producto eliminado de mi bolsa de compras!!
           </Toast.Body>
         </Toast>
       </ToastContainer>
