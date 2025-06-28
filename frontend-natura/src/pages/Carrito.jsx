@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
+import Toast from "react-bootstrap/Toast";
+import ToastContainer from "react-bootstrap/ToastContainer";
 import useCarritoStore from "../store/useCarritoStore";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -8,6 +10,15 @@ import { Link } from "react-router-dom";
 
 const Carrito = () => {
   const { carrito, quitarDelCarrito, incrementarCantidad, disminuirCantidad } = useCarritoStore();
+
+  // Estado para el toast
+  const [showToast, setShowToast] = useState(false);
+
+  const handleQuitar = (id) => {
+    quitarDelCarrito(id);
+    setShowToast(true);
+  };
+
   return (
     <>
       <Header />
@@ -86,7 +97,7 @@ const Carrito = () => {
                       <Button
                         variant="danger"
                         size="sm"
-                        onClick={() => quitarDelCarrito(item.id)}
+                        onClick={() => handleQuitar(item.id)}
                       >
                         Quitar
                       </Button>
@@ -175,6 +186,23 @@ const Carrito = () => {
           </div>
         </div>
       </main>
+
+      <ToastContainer
+        className="position-fixed top-50 start-50 translate-middle"
+        style={{ zIndex: 9999 }}
+      >
+        <Toast
+          show={showToast}
+          onClose={() => setShowToast(false)}
+          delay={1500}
+          autohide
+          bg="danger"
+        >
+          <Toast.Body style={{ color: "white", fontWeight: "bold" }}>
+            ❌ Producto eliminado del carrito
+          </Toast.Body>
+        </Toast>
+      </ToastContainer>
 
       <Footer />
     </>
