@@ -13,23 +13,29 @@ const MainLogin = () => {
   const togglePassword = () => setShowPassword(!showPassword);
   const navigate = useNavigate();
 const ingresarCuenta = async () => {
-  // Validación antes de enviar
   if (!user || !pass) {
     alert("Por favor completá todos los campos");
     return;
   }
 
   try {
-    const response = await axios.post('http://localhost:3001/login', {
+    const response = await axios.get('http://localhost:3001/login', {
       email: user,
       password: pass
     });
 
     if (response.data.success) {
+       localStorage.setItem("usuarioLogueado", JSON.stringify(response.data.user));
       alert("¡Bienvenido!");
       setUser("");
       setPass("");
-      navigate("/Admin");
+
+      // Verificamos si el usuario es admin
+      if (user === "admin@natura.com") {
+        navigate("/Admin");
+      } else {
+        navigate("/Home");
+      }
     } else {
       alert("Usuario o contraseña incorrectos");
     }
