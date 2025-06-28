@@ -1,6 +1,8 @@
-  import React, { useState } from "react";
+import React, { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import "../../styles/MainRegister.css";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function MainRegister() {
   const [showPass, setShowPass] = useState(false);
@@ -8,16 +10,16 @@ function MainRegister() {
   const [password, setPassword] = useState("");
   const [repeatPass, setRepeatPass] = useState("");
   const [error, setError] = useState("");
-  const [promos, setPromos] = useState(true); // estado para promociones
+  const [promos, setPromos] = useState(true);
+  const navigate = useNavigate();
 
-  // Función de validaciones
+  // Nuevos campos
+  const [nombre, setNombre] = useState("");
+  const [direccion, setDireccion] = useState("");
+  const [email, setEmail] = useState("");
+  const [telefono, setTelefono] = useState(""); // 
+  const [rol_id] = useState(2); // correcto
   const validatePass = (pass) => {
-    // password tiene:
-    // - al menos 8 caracteres
-    // - 1 mayúscula
-    // - 1 minúscula
-    // - 1 número
-    // - 1 carácter especial
     const minLength = pass.length >= 8;
     const upper = /[A-Z]/.test(pass);
     const lower = /[a-z]/.test(pass);
@@ -26,19 +28,46 @@ function MainRegister() {
     return minLength && upper && lower && number && special;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!validatePass(password)) {
-      setError("La password no cumple con los requisitos de seguridad");
+      setError("La contraseña no cumple con los requisitos");
       return;
     }
+
     if (password !== repeatPass) {
       setError("Las contraseñas no coinciden");
       return;
     }
-    setError("");
-    console.log("Registro exitoso");
+
+    if (!nombre || !email || !telefono || direccion) {
+      setError("Por favor completá todos los campos obligatorios");
+      return;
+    }
+
+    try {
+      const fullName = `${nombre}`;
+
+      const response = await axios.post("http://localhost:3001/usuarios", {
+        nombre: fullName,
+        email,
+        password,
+        direccion: "", // si no se usa
+        telefono,
+        rol_id
+      });
+
+      if (response.status === 201) {
+        alert("Cuenta creada con éxito");
+        navigate("/login");
+      } else {
+        setError("No se pudo crear el usuario");
+      }
+    } catch (err) {
+      console.error(err);
+      setError("Error al conectarse al servidor");
+    }
   };
 
   return (
@@ -50,24 +79,32 @@ function MainRegister() {
       </p>
 
       <button className="google-btn">
-        <img src="https://developers.google.com/identity/images/g-logo.png"  alt="Google" style={{ width: "20px" }} />
+        <img
+          src="https://developers.google.com/identity/images/g-logo.png"
+          alt="Google"
+        />
         Registrarme con Google
       </button>
-<br />
-      {/* nombre, apellido, email */}
+
+      <br />
+
       <div className="input-icon">
-        <input placeholder="Ingresá tu nombre" />
+        <input
+          placeholder="Ingresá tu nombre y apellido"
+          value={nombre}
+          onChange={(e) => setNombre(e.target.value)}
+        />
       </div>
 
       <div className="input-icon">
-        <input placeholder="Ingresá tu apellido" />
+        <input
+          placeholder="Ingresá tu e-mail"
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
       </div>
 
-      <div className="input-icon">
-        <input placeholder="Ingresá tu e-mail" type="email" />
-      </div>
-
-      {/* casilla de promociones */}
       <label>
         <input
           type="checkbox"
@@ -77,7 +114,6 @@ function MainRegister() {
         Deseo recibir promociones y noticias de Natura por e-mail
       </label>
 
-      {/* password */}
       <div className="input-icon">
         <input
           placeholder="Creá una password"
@@ -90,17 +126,14 @@ function MainRegister() {
         </span>
       </div>
 
-      {/* tips de password */}
       <ul className="password-tips">
-        <li>✔ como mínimo un carácter especial (ex.: "@", "#", "!", "%")</li>
-        <li>✔ un número como mínimo (0 a 9)</li>
-        <li>✔ como mínimo una letra mayúscula</li>
-        <li>✔ como mínimo una letra minúscula</li>
-        <li>✔ como mínimo 8 caracteres</li>
-        <li>✔ password segura (evitar términos comunes)</li>
+        <li>✔ mínimo un carácter especial</li>
+        <li>✔ un número</li>
+        <li>✔ una letra mayúscula</li>
+        <li>✔ una letra minúscula</li>
+        <li>✔ al menos 8 caracteres</li>
       </ul>
 
-      {/* repetir password */}
       <div className="input-icon">
         <input
           placeholder="Repetí tu password"
@@ -112,31 +145,19 @@ function MainRegister() {
           {showRepeatPass ? <FaEyeSlash /> : <FaEye />}
         </span>
       </div>
-
-      {/* género en línea antes de dni y fecha de nacimiento */}
-      <div className="gender-row">
-        <label>Género (opcional)</label>
-        <input id="femenino" name="genero" type="radio" value="femenino" />
-        <label htmlFor="femenino">Femenino</label>
-
-        <input id="masculino" name="genero" type="radio" value="masculino" />
-        <label htmlFor="masculino">Masculino</label>
-
-        <input id="otro" name="genero" type="radio" value="otro" />
-        <label htmlFor="otro">No especificar</label>
-      </div>
-
-      {/* resto de inputs con estilo consistente */}
       <div className="input-icon">
-        <input placeholder="DNI" />
+        <input
+          placeholder="Direccion"
+          value={direccion}
+          onChange={(e) => setDireccion(e.target.value)}
+        />
       </div>
-
       <div className="input-icon">
-        <input type="date" />
-      </div>
-
-      <div className="input-icon">
-        <input placeholder="Teléfono" />
+        <input
+          placeholder="Teléfono"
+          value={telefono}
+          onChange={(e) => setTelefono(e.target.value)}
+        />
       </div>
 
       {error && <p className="error-message">{error}</p>}
