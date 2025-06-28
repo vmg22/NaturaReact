@@ -4,29 +4,28 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import UsuarioStore from '../../store/UsuarioStore'; // 
-import UsuarioStore from '../../store/UsuarioStore';
 
 const MainLogin = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [user, setUser] = useState("");
   const [pass, setPass] = useState("");
-
   const navigate = useNavigate();
 
   const iniciarSesion = UsuarioStore((state) => state.iniciarSesion); //  usar acción de Zustand
-  const { iniciarSesion } = UsuarioStore();
 
   const togglePassword = () => setShowPassword(!showPassword);
 
   const ingresarCuenta = async () => {
-  if (!user || !pass) {
-    alert("Por favor completá todos los campos");
-    return;
-  }
+    if (!user || !pass) {
+      alert("Por favor completá todos los campos");
+      return;
+    }
 
-  try {
-    // Armamos la URL incluyendo los datos como parámetros
-    const response = await axios.get(`http://localhost:3001/login?email=${encodeURIComponent(user)}&password=${encodeURIComponent(pass)}`);
+    try {
+      const response = await axios.post('http://localhost:3001/login', {
+        email: user,
+        password: pass
+      });
 
       const data = response.data;
 
@@ -49,28 +48,7 @@ const MainLogin = () => {
           alert("Rol no reconocido");
         }
 
-    if (response.data.success) {
-      iniciarSesion({ email: user }); 
-      localStorage.setItem("usuarioLogueado", JSON.stringify(response.data.user));
-
-      alert("¡Bienvenido!");
-      setUser("");
-      setPass("");
-
-      if (user === "admin@natura.com") {
-        navigate("/MainAdmin");
       } else {
-        navigate("/MainCarrito");
-      }
-    } else {
-      alert("Usuario o contraseña incorrectos");
-    }
-  } catch (error) {
-    console.error("Error al conectar con el servidor:", error);
-    alert("Error al conectar con el servidor");
-  }
-};
-
         alert(data.message || "Usuario o contraseña incorrectos");
       }
 
@@ -126,6 +104,6 @@ const MainLogin = () => {
       </div>
     </div>
   );
-
+};
 
 export default MainLogin;

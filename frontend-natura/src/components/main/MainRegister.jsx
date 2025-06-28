@@ -41,7 +41,7 @@ function MainRegister() {
       return;
     }
 
-    if (!nombre || !email || !telefono) {
+    if (!nombre || !email || !telefono || direccion) {
       setError("Por favor completá todos los campos obligatorios");
       return;
     }
@@ -147,7 +147,7 @@ function MainRegister() {
       </div>
       <div className="input-icon">
         <input
-          placeholder="Domicilio"
+          placeholder="Direccion"
           value={direccion}
           onChange={(e) => setDireccion(e.target.value)}
         />
