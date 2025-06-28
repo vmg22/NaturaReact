@@ -37,17 +37,17 @@ const NavLight = () => {
         </div>
 
         <div className="iconosNavegacion">
-          <div>
+          {/* <div>
             <Link to="/" className="btnIconosNavegacion">
               <i className="fa-regular fa-heart"></i> favoritos
             </Link>
-          </div>
+          </div> */}
           <div>
             <Link to="/Login" className="btnIconosNavegacion">
               <i className="fa-solid fa-user"></i> ingresar
             </Link>
           </div>
-          {/* ✅ Ícono del carrito con badge */}
+          
           <div style={{ position: "relative" }}>
   <Link to="/carrito" className="btnIconosNavegacion" style={{ position: "relative", display: "inline-block" }}>
     <i className="fa-solid fa-bag-shopping" style={{ fontSize: "20px" }}></i>
