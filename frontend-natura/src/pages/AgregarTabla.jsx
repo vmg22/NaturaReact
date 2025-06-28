@@ -108,13 +108,15 @@ const AgregarTabla = () => {
 
   return (
     <div>
-      <Link to={"/admin"}><p className=""><i className="fa-solid fa-arrow-left"></i>  Volver a Admin</p></Link>
+        <div className="divTituloTabla d-flex align-items-center justify-content-around ">
+        <Link to={"/admin"} className="volver"><p ><i className="fa-solid fa-arrow-left"></i>  Volver a Admin</p></Link>
+        <h2 className="text-center tituloMainAdmin">AGREGAR A LA TABLA: {tabla}</h2>
+        <div></div>
+        </div>
 
-        <h2 className="text-center">Agregar a la tabla {tabla}</h2>
 
-
-      <div className="d-flex justify-content-center">
-        <Form onSubmit={handleSubmit}>
+      <div className="d-flex justify-content-center bodyAgregar">
+        <Form onSubmit={handleSubmit} className="text-center formAgregar">
           {columnas
             .filter((col) => col.extra !== "auto_increment") // Primero filtra q no sea id autoincrement
             .map(
@@ -133,15 +135,18 @@ const AgregarTabla = () => {
                     name={col.nombre}
                     value={formData[col.nombre] || ""}
                     onChange={handleChange}
+                    className="rounded-input"
                     required
                   />
                 </Form.Group>
               )
             )}
-
-          <Button variant="primary" type="submit">
+          <div className="d-flex justify-content-center">
+          <Button variant="primary" type="submit" className="botonAcciones">
             Agregar a {tabla}
           </Button>
+          </div>
+          
         </Form>
       </div>
 
