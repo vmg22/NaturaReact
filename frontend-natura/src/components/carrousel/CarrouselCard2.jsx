@@ -1,6 +1,16 @@
 import React, { useState } from "react";
-import {Carousel, Card, Button, Row, Col, Container, Badge, Toast, ToastContainer} from "react-bootstrap";
-import useCarritoStore from "../../store/useCarritoStore"; 
+import {
+  Carousel,
+  Card,
+  Button,
+  Row,
+  Col,
+  Container,
+  Badge,
+  Toast,
+  ToastContainer,
+} from "react-bootstrap";
+import useCarritoStore from "../../store/useCarritoStore";
 import Banner_3_DESK from "../../assets/ARTICULOS-IMG/Banner_3_DESK.jpg";
 import PERFUME12 from "../../assets/ARTICULOS-IMG/PERFUME12.jpg";
 import CREMA1 from "../../assets/ARTICULOS-IMG/CREMA1.jpg";
@@ -126,7 +136,23 @@ const CardCarousel = () => {
               <Row className="justify-content-center">
                 {group.map((card, idx) => (
                   <Col md={3} sm={6} xs={12} key={idx}>
-                    <Card className="mb-4 shadow-sm border-0">
+                    <Card
+                      className="mb-4 border-0"
+                      style={{
+                        transition: "transform 0.2s ease, box-shadow 0.2s ease",
+                        boxShadow: "0 2px 6px rgba(0, 0, 0, 0.08)",
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = "translateY(-5px)";
+                        e.currentTarget.style.boxShadow =
+                          "0 8px 16px rgba(0, 0, 0, 0.52)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = "none";
+                        e.currentTarget.style.boxShadow =
+                          "0 2px 6px rgba(0,0,0,0.08)";
+                      }}
+                    >
                       <div style={{ padding: "1rem" }}>
                         <Card.Img
                           variant="top"
@@ -145,9 +171,7 @@ const CardCarousel = () => {
                           {card.title}
                         </Card.Title>
                         <div>
-                          <s
-                            style={{ color: "#999", fontSize: "0.9rem" }}
-                          >
+                          <s style={{ color: "#999", fontSize: "0.9rem" }}>
                             ${card.priceOld.toLocaleString()}
                           </s>
                         </div>
@@ -196,12 +220,10 @@ const CardCarousel = () => {
         </Carousel>
       </Container>
 
-     
       <ToastContainer
-  className="position-fixed top-50 start-50 translate-middle"
-  style={{ zIndex: 9999 }}
->
-
+        className="position-fixed top-50 start-50 translate-middle"
+        style={{ zIndex: 9999 }}
+      >
         <Toast
           show={showToast}
           onClose={() => setShowToast(false)}
