@@ -36,7 +36,10 @@ const getEspecifiedUsuarioId = (req, res) => {
 
 // Crear usuario
 const createUsuario = (req, res) => {
-  const { nombre, email, password, direccion, telefono, rol_id } = req.body;
+  const { nombre, email, password, direccion, telefono  } = req.body;
+
+  const rol_id = 2;
+
   const consulta =
     "INSERT INTO usuarios (nombre, email, password, direccion, telefono, rol_id) VALUES (?, ?, ?, ?, ?, ?);";
 
