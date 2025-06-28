@@ -3,7 +3,9 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Button , Modal, Form} from "react-bootstrap";
+import { Button , Modal, Form, Toast, ToastContainer} from "react-bootstrap";
+import ToastExito from "../components/toast/ToastExito";
+import ToastError from "../components/toast/ToastError";
 
 const VerTabla = () => {
   const { tabla } = useParams();
@@ -14,6 +16,8 @@ const VerTabla = () => {
   const [mostrarModal, setMostrarModal] = useState(false);
   const [idAEditar, setIdAEditar] = useState(null);
   const [datosEditar, setDatosEditar] = useState({});
+  const [toastVisible, setToastVisible] = useState(false);
+  const [toastError, setToastError] = useState(false);
 
    const getTabla = async () => {
       if (!tabla) return;
@@ -38,7 +42,7 @@ const VerTabla = () => {
   if (!tabla) return <div>⚠️ No se especificó la tabla.</div>;
   if (cargando) return <div>🔄 Cargando datos...</div>;
 
-const handleAgregar = () =>{
+  const handleAgregar = () =>{
     navigate(`/agregarTabla/${tabla}`);
   }
 
@@ -49,10 +53,10 @@ const handleAgregar = () =>{
     // console.log(id)
     if(respuestaAlert ){
       await axios.delete(`http://localhost:3001/${tabla}/${id}`)
-      alert("Eliminado correctamente")
+      setToastVisible(true)
       getTabla()
     }else{
-      alert("No se elimino el producto")
+      setToastError(true)
     }
     } catch (error) {
       console.error(error)
@@ -72,10 +76,49 @@ const handleAgregar = () =>{
 
   }
 
-  const handleGuardarCambios = () => {
-    // guardar los cambios del boton en el modal
-    console.log("Guardando cambios para el ID:", idAEditar);
+// guardar los cambios del boton en el modal
+  const handleGuardarCambios = async () => {  
+  //para que se oculte el modal una vez que se presiona el boton
     setMostrarModal(false);
+  //destructurando datosEditar para que no pase el id en la consulta
+  const { id, ...resto } = datosEditar;
+
+  // Usamos el método funcional y robusto para transformar los datos
+  const datosListos = Object.fromEntries(
+    Object.entries(resto).map(([clave, valor]) => {
+      if (clave.startsWith("fecha") && valor) {
+        const fecha = new Date(valor);
+        // Validamos que la fecha sea válida antes de formatear
+        if (!isNaN(fecha.getTime())) {
+          // convertir la fecha a formato MySQL xq bootstrap manda en otro formato
+          const valorFormateado = fecha.toISOString().slice(0, 19).replace("T", " ");
+          return [clave, valorFormateado];
+        }
+      }
+      // Para todos los demás casos, devolvemos el par [clave, valor] original
+      return [clave, valor];
+    })
+  );
+ 
+  try {
+    
+    await axios.put(`http://localhost:3001/${tabla}/${id}`, datosListos);
+    
+     //para que se oculte el modal una vez que se presiona el boton y si se haya actualizado
+    setMostrarModal(false);
+    setToastVisible(true)
+   
+
+  } catch (error) {
+    // en caso de error el modal se mantiene abierto
+    console.error("Error al actualizar:", error);
+    setToastError(true)
+
+  }
+
+    //llamo a gettabla para que llame de nuevo con un get a la base de datos
+    getTabla()
+
   };
 
   const handleCerrar = () => {
@@ -138,7 +181,7 @@ const handleAgregar = () =>{
         </tbody>
       </table>
 
-      {/* Modal */}
+      {/* Modal para boton de editar */}
       <Modal show={mostrarModal} onHide={handleCerrar}>
         <Modal.Header closeButton>
           <Modal.Title>Editar</Modal.Title>
@@ -177,6 +220,39 @@ const handleAgregar = () =>{
         </Form>
         </Modal.Body>
       </Modal>
+
+       {/* Toast de error */}
+          <ToastContainer position="top-end" className="p-3">
+            <Toast
+              show={toastError}
+              onClose={() => setToastError(false)}
+              bg="danger"
+              delay={1500}
+              autohide
+            >
+              <Toast.Header>
+                <strong className="me-auto">Error</strong>
+              </Toast.Header>
+              <Toast.Body className="text-white">No se pudieron guardar los cambios</Toast.Body>
+            </Toast>
+          </ToastContainer>
+
+      <ToastExito
+      visible={toastVisible}
+      onClose={() => setToastVisible(false)}
+      tipo="success"
+      titulo="Éxito"
+      mensaje="¡Cambios guardados con éxito!"
+    />
+
+    <ToastError
+      visible={toastError}
+      onClose={() => setToastError(false)}
+      tipo="danger"
+      titulo="Error"
+      mensaje="No se pudieron guardar los cambios"
+    />
+
     </div>
   );
 };
