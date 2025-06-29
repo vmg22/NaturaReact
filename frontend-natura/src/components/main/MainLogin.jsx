@@ -38,6 +38,8 @@ const MainLogin = () => {
         // Limpiar campos
         setUser("");
         setPass("");
+       // También en localStorage para persistencia
+        localStorage.setItem("usuarioLogueado", JSON.stringify(usuario));
 
         // Redirección por rol
         if (usuario.rol_id === 1) {
