@@ -212,4 +212,4 @@ const CarouselCard2 = () => {
   );
 };
 
-export default CardCarousel;
+export default CarouselCard2;
