@@ -63,7 +63,7 @@ const Categoria = () => {
      const agregarCarrito = (product) => {
     agregarAlCarrito({
       id: product.id,
-      nombre: product.title,
+      nombre: product.titulo,
       precio: product.precio_descuento,
       precioOld: product.precio_original,
       descuento: product.descuento,
