@@ -27,6 +27,34 @@ const getAllProductos = (req,res) =>{
 
 }
 
+
+//Obtener todos los productos junto con las imagenes 
+const getAllProductos2 = (req, res) => {
+   
+    const consulta = `
+      SELECT
+          p.*,
+          ANY_VALUE(i.url_imagen) AS url_imagen 
+      FROM
+          productos p
+      LEFT JOIN
+          imagenes_productos i ON p.id = i.producto_id
+      GROUP BY
+          p.id;
+    `;
+
+    conection.query(consulta, (err, datosResultado) => {
+        if (err) {
+           
+            console.error("Error en la consulta SQL:", err); 
+            return res.status(500).json({ error: err.message });
+        }
+        res.json({
+            datos: datosResultado,
+        });
+    });
+}
+
 //--LEER producto específico (GET por ID)--//
 const getEspecifiedProduct = (req,res)=>{
     const consulta = "SELECT * FROM productos WHERE id = ?;"
@@ -76,4 +104,4 @@ const deleteProduct = (req,res)=>{
 }
 
 
-module.exports = {getAllProductos, getEspecifiedProduct,createProduct, updateProduct, deleteProduct}
+module.exports = {getAllProductos,getAllProductos2, getEspecifiedProduct,createProduct, updateProduct, deleteProduct}
