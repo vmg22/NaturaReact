@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import {
   Carousel,
@@ -10,39 +9,34 @@ import {
   Badge,
   Toast,
   ToastContainer,
-  Spinner, // Importamos Spinner para el estado de carga
+  Spinner,
 } from "react-bootstrap";
 import useCarritoStore from "../../store/useCarritoStore";
 
 const CarouselCard2 = () => {
   const agregarAlCarrito = useCarritoStore((state) => state.agregarAlCarrito);
 
-  // 1. ESTADOS PARA MANEJAR LOS DATOS DE LA API
+  // 1. ESTADOS PARA MANEJAR LOS DATOS DE LA API (Sin cambios)
   const [productos, setProductos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [showToast, setShowToast] = useState(false);
 
-  // 2. useEffect PARA LLAMAR A LA API AL MONTAR EL COMPONENTE
+  // 2. useEffect PARA LLAMAR A LA API AL MONTAR EL COMPONENTE (Sin cambios)
   useEffect(() => {
     const fetchProductos = async () => {
       try {
-        const response = await fetch('http://localhost:3001/productos2');
+        const response = await fetch("http://localhost:3001/productos2");
         if (!response.ok) {
           throw new Error("Error al obtener los datos");
         }
         const data = await response.json();
 
-   
-        //  API devuelve campos como 'titulo', 'precio_original', etc.
-        //  espera 'title', 'priceOld', etc.
-        // Hacemos un "mapeo" para que coincidan.
         const productosAdaptados = data.datos.map((p) => ({
           id: p.id,
           title: p.titulo,
           brand: `Marca ID: ${p.marca_id}`,
-          // USA LA URL DE LA IMAGEN DE LA API O UNA DE REEMPLAZO SI NO EXISTE
-          img: p.url_imagen || `https://placehold.co/300x200?text=Sin+Imagen`, 
+          img: p.url_imagen || `https://placehold.co/300x200?text=Sin+Imagen`,
           priceOld: p.precio_original,
           priceNew: p.precio_descuento,
           priceNoTax: p.precio_sin_iva,
@@ -58,8 +52,9 @@ const CarouselCard2 = () => {
     };
 
     fetchProductos();
-  }, []); // El array vacío asegura que se ejecute solo una vez
+  }, []);
 
+  // Lógica de agrupación y agregar al carrito (Sin cambios)
   const groupSize = 3;
   const groupedCards = [];
   for (let i = 0; i < productos.length; i += groupSize) {
@@ -75,11 +70,10 @@ const CarouselCard2 = () => {
       descuento: producto.discount,
       cantidad: 1,
     });
-
     setShowToast(true);
   };
 
-  // RENDERIZADO CONDICIONAL PARA CARGA Y ERRORES
+  // RENDERIZADO CONDICIONAL PARA CARGA Y ERRORES (Sin cambios)
   if (loading) {
     return (
       <Container className="text-center my-5">
@@ -97,11 +91,15 @@ const CarouselCard2 = () => {
     );
   }
 
-  //  RENDERIZADO DEL COMPONENTE CON LOS DATOS DE LA API
+  // RENDERIZADO DEL COMPONENTE CON LOS DATOS DE LA API
   return (
     <>
       <Container className="my-5">
-        <Carousel indicators={false} interval={null}>
+        <Carousel
+          indicators={false} 
+          interval={2000} // Se mueve automáticamente cada 2 segundos
+          variant="dark" // Hace que las flechas sean oscuras y visibles
+        >
           {groupedCards.map((group, index) => (
             <Carousel.Item key={index}>
               <Row className="justify-content-center">
@@ -124,10 +122,11 @@ const CarouselCard2 = () => {
                           "0 2px 6px rgba(0,0,0,0.08)";
                       }}
                     >
+                      
                       <div style={{ padding: "1rem" }}>
                         <Card.Img
                           variant="top"
-                          src={card.img} // Ahora usa la URL del placeholder
+                          src={card.img}
                           style={{ objectFit: "contain", height: "250px" }}
                         />
                       </div>
@@ -135,15 +134,12 @@ const CarouselCard2 = () => {
                         <Card.Text
                           className="text-muted mb-1"
                           style={{ fontSize: "0.85rem" }}
-                        >
-                          
-                        </Card.Text>
+                        ></Card.Text>
                         <Card.Title style={{ fontSize: "1rem" }}>
                           {card.title}
                         </Card.Title>
                         <div>
                           <s style={{ color: "#999", fontSize: "0.9rem" }}>
-                            {/* Usamos toLocaleString para formatear el número */}
                             ${Number(card.priceOld).toLocaleString("es-AR")}
                           </s>
                         </div>
@@ -191,7 +187,8 @@ const CarouselCard2 = () => {
           ))}
         </Carousel>
       </Container>
-
+      
+      
       <ToastContainer
         className="position-fixed top-50 start-50 translate-middle"
         style={{ zIndex: 9999 }}
