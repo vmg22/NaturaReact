@@ -41,6 +41,8 @@ import RPielMixta from './pages/RPielMixta'
 import RTodoTipoPiel from './pages/RTodoTipoPiel'
 import VerTabla from "./pages/VerTabla"
 import AgregarTabla from './pages/AgregarTabla'
+import PrivateRoute from "./components/PrivateRoute";
+import NoAutorizado from "./pages/NoAutorizado";
 
 
 function App() {
@@ -53,12 +55,10 @@ function App() {
         <Route path='/404' element={<Error404/>}></Route>
         <Route path='/login' element={<Login/>}></Route>
         <Route path='/register' element={<Register/>}></Route>
-        <Route path='/carrito' element={<Carrito/>}></Route>
         <Route path='/categoria' element={<Categoria/>}></Route>
         <Route path='/categoria-hombre' element={<CategoriaHombre/>}></Route>
         <Route path='/categoria-mujer' element={<CategoriaMujer/>}></Route>
         <Route path='/categoria-infantil' element={<Infantil/>}></Route>
-        <Route path='/admin' element={<Admin/>}></Route>
         <Route path='/pago' element={<Pago/>}></Route>
         <Route path='/revista-natura' element={<RevistaNatura/>}></Route>
         <Route path='/sobre-natura' element={<SobreNatura/>}></Route>
@@ -93,13 +93,15 @@ function App() {
         {/* estas deberian ser privadas */}
         <Route path='/verTabla/:tabla' element={<VerTabla/>}></Route>
         <Route path='/agregarTabla/:tabla' element={<AgregarTabla/>}></Route>
-        
-
-
+      
     
-
-
+        <Route path="/admin" element={<PrivateRoute rolPermitido={1}><Admin /></PrivateRoute>}/>
+        <Route path="/carrito" element={<PrivateRoute rolPermitido={2}><Carrito /></PrivateRoute>}/>
+        <Route path="/perfil" element={<PrivateRoute ><h2>Perfil del usuario</h2></PrivateRoute>}/>
+        <Route path="/no-autorizado" element={<NoAutorizado />} />
+        
         <Route path='*' element={<Error404/>}></Route>
+        
       </Routes>
     </BrowserRouter>
     

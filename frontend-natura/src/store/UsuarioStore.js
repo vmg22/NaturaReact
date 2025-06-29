@@ -7,4 +7,5 @@ const UsuarioStore = create((set) => ({
   cerrarSesion: () => set({ usuario: null }),   // Limpia el usuario
 }));
 
+
 export default UsuarioStore;
