@@ -94,8 +94,10 @@ function App() {
 
 
         {/* estas deberian ser privadas */}
-        <Route path='/verTabla/:tabla' element={<VerTabla/>}></Route>
-        <Route path='/agregarTabla/:tabla' element={<AgregarTabla/>}></Route>
+        {/* <Route path='/verTabla/:tabla' element={<VerTabla/>}></Route> */}
+        <Route path='/verTabla/:tabla'  element={<PrivateRoute rolPermitido={1}><VerTabla /></PrivateRoute>} />
+        <Route path='/agregarTabla/:tabla'  element={<PrivateRoute rolPermitido={1}><AgregarTabla /></PrivateRoute>} />
+    
       
     
         <Route path="/admin" element={<PrivateRoute rolPermitido={1}><Admin /></PrivateRoute>}/>
