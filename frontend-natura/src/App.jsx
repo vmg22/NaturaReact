@@ -61,16 +61,16 @@ function App() {
         <Route path='/categoria-mujer' element={<CategoriaMujer/>}></Route>
         <Route path='/categoria-infantil' element={<Infantil/>}></Route>
         <Route path='/pago' element={<Pago/>}></Route>
-        <Route path='/revista-natura' element={<RevistaNatura/>}></Route>
-        <Route path='/sobre-natura' element={<SobreNatura/>}></Route>
-        <Route path='/sustentabilidad' element={<Sustentabilidad/>}></Route>
-        <Route path='/quiero-ser-consultor' element={<QuieroSerConsultor/>}></Route>
+        {/* <Route path='/revista-natura' element={<RevistaNatura/>}></Route> */}
+        {/* <Route path='/sobre-natura' element={<SobreNatura/>}></Route> */}
+        {/* <Route path='/sustentabilidad' element={<Sustentabilidad/>}></Route> */}
+        {/* <Route path='/quiero-ser-consultor' element={<QuieroSerConsultor/>}></Route> */}
         <Route path='/soy-consultor' element={<SoyConsultor/>}></Route>
-        <Route path='/por-revista' element={<PorRevista/>}></Route>
-        <Route path='/por-internet' element={<PorInternet/>}></Route>
-        <Route path='/info-productos' element={<InfoProductos/>}></Route>
-        <Route path='/ayuda' element={<Ayuda/>}></Route>
-        <Route path='/blog' element={<Blog/>}></Route>
+        {/* <Route path='/por-revista' element={<PorRevista/>}></Route>
+        <Route path='/por-internet' element={<PorInternet/>}></Route> */}
+        {/* <Route path='/info-productos' element={<InfoProductos/>}></Route> */}
+        {/* <Route path='/ayuda' element={<Ayuda/>}></Route> */}
+        {/* <Route path='/blog' element={<Blog/>}></Route> */}
         <Route path='/maquillaje' element={<Maquillaje/>}></Route>
         <Route path='/rostro' element={<Rostro/>}></Route>
         <Route path='/perfumeria' element={<Perfumeria/>}></Route>
