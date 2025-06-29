@@ -1,9 +1,120 @@
 .mi-tabla {
   border-collapse: collapse;
-  margin-top: 20px;
+
+  font-family: "Roboto", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: weight;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+
 }
 
 .mi-tabla th, .mi-tabla td {
   border: 1px solid black;
   padding: 8px;
 }
+
+.tituloMainAdmin{
+  color: white;
+  text-shadow: 3px 1px 1px #f97416c3;
+  font-family: "Roboto", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: weight;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+}
+
+.rounded-input {
+    border: 2px solid #f97416c3;
+    border-radius: 20px;
+    padding: 12px;
+    width: 300px;
+}
+
+.rounded-input:focus,
+.rounded-input:hover{
+  border: 2px solid #767575e0;
+}
+
+.formAgregar{
+  margin: 20px;
+  border-radius: 30px;
+  padding: 20px;
+  background-color: white;
+  font-family: "Roboto", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: weight;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+}
+
+.divTituloTabla{
+  background-color: black;
+  padding: 15px 0 15px 0;
+  font-family: "Roboto", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: weight;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+}
+
+.bodyAgregar{
+  background: #FDBB2D;
+background: linear-gradient(0deg, rgba(253, 187, 45, 1) 11%, rgba(255, 108, 1, 1) 100%);
+}
+
+.volver{
+  text-decoration: none; /* Quita el subrayado por defecto */
+  color: #FDBB2D; /* Opcional: Hace que el link herede el color del texto de su padre */
+}
+
+.volver:hover{
+  color: #fbcf70;
+}
+
+.botonAcciones{
+  background-color: rgba(255, 108, 1, 1);
+  color: white;
+  border: none;
+  border-radius: 10px;
+}
+
+.botonAcciones:hover{
+  background-color:rgba(253, 187, 45, 1);
+  color: black;
+}
+
+.modalEditar{
+  font-family: "Roboto", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: weight;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+  background-color: rgba(255, 108, 1, 1);
+  color: white;
+}
+
+.bodyModal{
+  font-family: "Roboto", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: weight;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+  background-color: white;
+  color: black;
+  text-align: center;
+}
+
+.rounded-input2{
+  border: 2px solid #f97416c3;
+ border-radius: 20px;
+     padding: 12px;
+
+}
+
+.rounded-input2:focus,
+.rounded-input2:hover{
+  border: 2px solid #767575e0;
+
+}
+

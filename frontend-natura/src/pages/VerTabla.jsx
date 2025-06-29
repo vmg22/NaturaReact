@@ -6,6 +6,7 @@ import axios from "axios";
 import { Button , Modal, Form, Toast, ToastContainer} from "react-bootstrap";
 import ToastExito from "../components/toast/ToastExito";
 import ToastError from "../components/toast/ToastError";
+import Header from "../components/Header";
 
 const VerTabla = () => {
   const { tabla } = useParams();
@@ -144,11 +145,11 @@ const mapTipoMySQLaHTML_alternativa = (tipo) => {
 
   return (
     <div>
-      <div className="d-flex justify-content-around align-items-center mt-2">
+      <div className="d-flex justify-content-around align-items-center mt-2 divTituloTabla">
         <div>
-        <Link to={"/admin"}><p className=""><i className="fa-solid fa-arrow-left"></i>  Volver a Admin</p></Link>
+        <Link to={"/admin"} className="volver"><p><i className="fa-solid fa-arrow-left"></i>  Volver a Admin</p></Link>
       </div>
-        <h2>Tabla: {tabla}</h2>
+        <h2 className="tituloMainAdmin ">TABLA: {tabla}</h2>
         <div className="d-flex justify-content-end">
         <Button
           variant="success"
@@ -162,11 +163,12 @@ const mapTipoMySQLaHTML_alternativa = (tipo) => {
         
       </div>
 
-      <table
+    <div className="d-flex justify-content-center mt-2">
+<table 
         border="1"
         cellPadding="10"
-        style={{ borderCollapse: "collapse", margin: "1rem auto", border:"1px solid black" }}
-        className="table-bordered"
+        style={{ borderCollapse: "collapse", border:"1px solid black" }}
+        className="table-bordered mi-tabla "
       >
         <thead style={{ backgroundColor: "#f0f0f0" }}>
           <tr>
@@ -196,13 +198,15 @@ const mapTipoMySQLaHTML_alternativa = (tipo) => {
           ))}
         </tbody>
       </table>
+    </div>
+      
 
       {/* Modal para boton de editar */}
-      <Modal show={mostrarModal} onHide={handleCerrar}>
-        <Modal.Header closeButton>
+      <Modal show={mostrarModal} onHide={handleCerrar} >
+        <Modal.Header closeButton className="modalEditar">
           <Modal.Title>Editar</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body className="bodyModal">
          <Form onSubmit={(e) => {
             e.preventDefault();
             handleGuardarCambios(); 
@@ -229,13 +233,14 @@ const mapTipoMySQLaHTML_alternativa = (tipo) => {
                         [col.nombre]: e.target.value,
                       });
                     }}
+                    className="rounded-input2"
                     required
                   />
                 </Form.Group>
               )
             )}
           <div className="d-flex justify-content-center">
-          <Button type="submit" variant="warning" >
+          <Button type="submit" variant="warning" className="botonAcciones" >
             Actualizar
           </Button>
           </div>

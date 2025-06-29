@@ -1,5 +1,6 @@
 const {conection} = require ("../config/db")
 
+
 //Obtener todos los productos
 const getAllProductos = (req,res) =>{
     // Primero obtenemos las columnas con SHOW COLUMNS
@@ -27,6 +28,57 @@ const getAllProductos = (req,res) =>{
 
 }
 
+
+//Obtener todos los productos junto con las imagenes 
+const getAllProductos2 = (req, res) => {
+   
+    const consulta = `
+      SELECT
+          p.*,
+          ANY_VALUE(i.url_imagen) AS url_imagen 
+      FROM
+          productos p
+      LEFT JOIN
+          imagenes_productos i ON p.id = i.producto_id
+      GROUP BY
+          p.id;
+    `;
+
+    conection.query(consulta, (err, datosResultado) => {
+        if (err) {
+           
+            console.error("Error en la consulta SQL:", err); 
+            return res.status(500).json({ error: err.message });
+        }
+        res.json({
+            datos: datosResultado,
+        });
+    });
+}
+
+// Obtener producto por nombre
+const getEspecifiedProductoNombre = (req, res) => {
+  const { busqueda } = req.params;
+
+  if (!busqueda) {
+    return res.status(400).json({ mensaje: "Término de búsqueda no proporcionado" });
+  }
+
+  const consulta = `SELECT * FROM productos WHERE titulo LIKE ?`;
+  const terminoDeBusqueda = `%${busqueda}%`;
+
+  conection.query(consulta, [terminoDeBusqueda], (err, results) => {
+    if (err) {
+      console.error("Error en la consulta de búsqueda:", err);
+      return res.status(500).json({ error: "Error interno del servidor" });
+    }
+    
+    // ¡IMPORTANTE! Devuelve directamente el array de resultados.
+    // Si no encuentra nada, será un array vacío [], lo cual está bien.
+    res.json(results);
+  });
+};
+
 //--LEER producto específico (GET por ID)--//
 const getEspecifiedProduct = (req,res)=>{
     const consulta = "SELECT * FROM productos WHERE id = ?;"
@@ -37,6 +89,10 @@ const getEspecifiedProduct = (req,res)=>{
         res.json(results[0]);
     })
 }
+
+
+
+
 
 //CREAR producto (POST)//
 const createProduct = (req,res)=>{
@@ -76,4 +132,4 @@ const deleteProduct = (req,res)=>{
 }
 
 
-module.exports = {getAllProductos, getEspecifiedProduct,createProduct, updateProduct, deleteProduct}
+module.exports = {getAllProductos,getAllProductos2, getEspecifiedProduct,createProduct, updateProduct, deleteProduct,getEspecifiedProductoNombre}
