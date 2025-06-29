@@ -1,4 +1,4 @@
-// src/pages/Carrito.jsx (o donde lo tengas)
+// src/pages/Carrito.jsx 
 
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
@@ -41,11 +41,7 @@ const Carrito = () => {
     }
   };
 
-  /**
-   * Esta función se ejecuta DESPUÉS de que el ModalFactura haya creado la orden exitosamente.
-   * Recibe el ID de la nueva orden como argumento.
-   * Su única responsabilidad es actualizar la UI.
-   */
+  
   const handleOrdenCreadaExitosamente = (idDeLaOrdenCreada) => {
     setOrdenId(idDeLaOrdenCreada); // Guarda el ID de la nueva orden
     setMostrarFactura(false);      // Cierra el modal de la factura

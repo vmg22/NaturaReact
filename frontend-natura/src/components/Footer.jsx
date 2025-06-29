@@ -43,19 +43,19 @@ const Footer = () => {
         <div className="footer-column">
           <h4>sobre natura</h4>
           <ul>
-            <li>bien estar bien</li>
-            <li>sustentabilidad</li>
+            <li><Link to="/bien estar bien">bien estar bien</Link></li>
+            <li><Link to="/sustentabilidad">sustentabilidad</Link></li>
           </ul>
         </div>
 
         <div className="footer-column">
           <h4>ayuda</h4>
           <ul>
-            <li>encontrá natura</li>
+            <li><Link to="/encontrá natura">encontrá natura</Link></li>
             <li><Link to="/ayuda">ayuda y contacto</Link></li>
-            <li>defensa de las y los consumidores, para reclamos ingrese aquí</li>
-            <li>defensa de las y los consumidores, ingrese aquí</li>
-            <li>alertas y retiro de productos</li>
+            <li><Link to="/defensa de las y los consumidores, para reclamos ingrese aquí">defensa de las y los consumidores, para reclamos ingrese aquí</Link></li>
+            <li><Link to="/defensa de las y los consumidores, ingrese aquí">defensa de las y los consumidores, ingrese aquí</Link></li>
+            <li><Link to="/alertas y retiro de productos">alertas y retiro de productos</Link></li>
           </ul>
           <button className="footer-button-footer">me arrepentí del pedido</button>
         </div>
@@ -63,9 +63,9 @@ const Footer = () => {
         <div className="footer-column">
           <h4>soporte</h4>
           <ul>
-            <li>Términos y condiciones</li>
-            <li>Políticas de privacidad</li>
-            <li>Política de cookies</li>
+            <li><Link to="/Términos y condiciones">Términos y condiciones</Link></li>
+            <li><Link to="/Políticas de privacidad">Políticas de privacidad</Link></li>
+            <li><Link to="/Política de cookies">Política de cookies</Link></li>
           </ul>
         </div>
       </div>
