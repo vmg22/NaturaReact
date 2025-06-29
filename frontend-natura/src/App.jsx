@@ -73,7 +73,7 @@ function App() {
         {/* <Route path='/r-piel-seca' element={<RPielSeca/>}></Route> */}
         {/* <Route path='/r-piel-mixta' element={<RPielMixta/>}></Route> */}
         {/* <Route path='/r-todo-tipo-piel' element={<RTodoTipoPiel/>}></Route> */} 
-        {/* <Route path='/productos/buscar/:termino' element={<PaginaBusqueda/>}></Route> */}
+        <Route path='/productos/buscar/:termino' element={<PaginaBusqueda/>}></Route>
 
 
         <Route path='/verTabla/:tabla'  element={<PrivateRoute rolPermitido={1}><VerTabla /></PrivateRoute>} />
