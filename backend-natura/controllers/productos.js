@@ -64,7 +64,17 @@ const getEspecifiedProductoNombre = (req, res) => {
     return res.status(400).json({ mensaje: "Término de búsqueda no proporcionado" });
   }
 
-  const consulta = `SELECT * FROM productos WHERE titulo LIKE ?`;
+  const consulta = `SELECT
+          p.*,
+          ANY_VALUE(i.url_imagen) AS url_imagen
+      FROM
+          productos p
+      LEFT JOIN
+          imagenes_productos i ON p.id = i.producto_id
+      WHERE
+          p.titulo LIKE ?
+      GROUP BY
+          p.id;`;
   const terminoDeBusqueda = `%${busqueda}%`;
 
   conection.query(consulta, [terminoDeBusqueda], (err, results) => {

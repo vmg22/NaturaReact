@@ -17,7 +17,7 @@ const Error404 = () => {
         <Link to={"/"}><p>Ir a home <i className="fa-solid fa-arrow-right"></i></p></Link>
       </div>
       <div>
-        <Link to={"/"}><p>Ver lanzamientos <i class="fa-solid fa-arrow-right"></i></p></Link>
+        <Link to={"/"}><p>Ver lanzamientos <i className="fa-solid fa-arrow-right"></i></p></Link>
       </div>
     </div>
     <Footer/>

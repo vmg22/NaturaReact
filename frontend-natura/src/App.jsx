@@ -43,6 +43,7 @@ import VerTabla from "./pages/VerTabla"
 import AgregarTabla from './pages/AgregarTabla'
 import PrivateRoute from "./components/PrivateRoute";
 import NoAutorizado from "./pages/NoAutorizado";
+import PaginaBusqueda from './pages/PaginaBusqueda'
 
 
 function App() {
@@ -88,6 +89,7 @@ function App() {
         <Route path='/r-piel-seca' element={<RPielSeca/>}></Route>
         <Route path='/r-piel-mixta' element={<RPielMixta/>}></Route>
         <Route path='/r-todo-tipo-piel' element={<RTodoTipoPiel/>}></Route>
+        <Route path='/productos/buscar/:termino' element={<PaginaBusqueda/>}></Route>
 
 
         {/* estas deberian ser privadas */}
