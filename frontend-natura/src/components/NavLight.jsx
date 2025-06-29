@@ -1,15 +1,23 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate} from "react-router-dom";
 import logoNegro from "../assets/logo-natura-negro.png";
 import "../styles/navLight.css";
 import Navbar from "react-bootstrap/Navbar";
 import useCarritoStore from "../store/useCarritoStore"; 
 import UsuarioStore from "../store/UsuarioStore"; 
+import axios from "axios"
 
 const NavLight = () => {
   const { carrito } = useCarritoStore();
   const cantidadTotal = carrito.reduce((acc, item) => acc + item.cantidad, 0);
+   // Estado para la ESTRUCTURA (se carga una sola vez)
+  const [columnas, setColumnas] = useState([]);
+  
+  // Estado para los DATOS (se actualizará con la búsqueda)
+  const [filas, setFilas] = useState([]);
 
+  // Estado para el input de búsqueda
+  const [terminoBusqueda, setTerminoBusqueda] = useState("");
   const usuario = UsuarioStore((state) => state.usuario);
   const cerrarSesion = UsuarioStore((state) => state.cerrarSesion);
   const navigate = useNavigate();
@@ -18,6 +26,29 @@ const NavLight = () => {
     cerrarSesion();
     navigate("/"); // Redireccionar a inicio al cerrar sesión
   };
+
+  const handleSubmit = async(e) =>{
+     e.preventDefault();
+    if (!terminoBusqueda.trim()) {
+      //  si la búsqueda está vacía no hacer nada.
+      return;
+    }
+    try {
+      // Llama al NUEVO endpoint de búsqueda
+      const respuesta = await axios.get(`http://localhost:3001/productos/buscar/${terminoBusqueda}`);
+      console.log(respuesta)
+      // La respuesta es DIRECTAMENTE el array de filas, no un objeto.
+      // ¡Solo actualizamos las filas!
+      setFilas(respuesta.data); 
+      
+    } catch (err) {
+      console.error("Error en la búsqueda:", err);
+      // Si la búsqueda no encuentra nada, el backend puede devolver 404 o un array vacío.
+      // Si devuelve array vacío, la tabla se mostrará vacía, lo cual es correcto.
+      setFilas([]); // Limpiamos las filas si hay error o no se encuentra nada
+    }
+
+  }
 
   return (
     <div style={{ paddingTop: "20px" }} className="divNavLightGeneral">
@@ -30,23 +61,28 @@ const NavLight = () => {
         </div>
 
         {/* Buscador */}
+        <form action="" onSubmit={handleSubmit}>
         <div className="d-flex justify-content-center align-items-center inputBusqueda">
+          
           <div>
             <input
               type="text"
               placeholder="¿qué buscás hoy?"
               className="inputBuscar"
+              onChange={(e)=>{setTerminoBusqueda(e.target.value)}}
             />
           </div>
           <button
             style={{ border: "none", backgroundColor: "transparent" }}
             className="btnBuscar"
+            type="submit"
           >
             <div className="btnSearch">
               <i className="fa-solid fa-magnifying-glass"></i>
             </div>
           </button>
         </div>
+        </form>
 
        
         <div className="iconosNavegacion">
