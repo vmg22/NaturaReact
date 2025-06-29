@@ -89,6 +89,7 @@ function App() {
         <Route path='/r-piel-mixta' element={<RPielMixta/>}></Route>
         <Route path='/r-todo-tipo-piel' element={<RTodoTipoPiel/>}></Route>
 
+
         {/* estas deberian ser privadas */}
         <Route path='/verTabla/:tabla' element={<VerTabla/>}></Route>
         <Route path='/agregarTabla/:tabla' element={<AgregarTabla/>}></Route>

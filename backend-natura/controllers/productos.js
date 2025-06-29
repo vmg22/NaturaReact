@@ -1,5 +1,6 @@
 const {conection} = require ("../config/db")
 
+
 //Obtener todos los productos
 const getAllProductos = (req,res) =>{
     // Primero obtenemos las columnas con SHOW COLUMNS
@@ -55,6 +56,29 @@ const getAllProductos2 = (req, res) => {
     });
 }
 
+// Obtener producto por nombre
+const getEspecifiedProductoNombre = (req, res) => {
+  const { busqueda } = req.params;
+
+  if (!busqueda) {
+    return res.status(400).json({ mensaje: "Término de búsqueda no proporcionado" });
+  }
+
+  const consulta = `SELECT * FROM productos WHERE titulo LIKE ?`;
+  const terminoDeBusqueda = `%${busqueda}%`;
+
+  conection.query(consulta, [terminoDeBusqueda], (err, results) => {
+    if (err) {
+      console.error("Error en la consulta de búsqueda:", err);
+      return res.status(500).json({ error: "Error interno del servidor" });
+    }
+    
+    // ¡IMPORTANTE! Devuelve directamente el array de resultados.
+    // Si no encuentra nada, será un array vacío [], lo cual está bien.
+    res.json(results);
+  });
+};
+
 //--LEER producto específico (GET por ID)--//
 const getEspecifiedProduct = (req,res)=>{
     const consulta = "SELECT * FROM productos WHERE id = ?;"
@@ -65,6 +89,10 @@ const getEspecifiedProduct = (req,res)=>{
         res.json(results[0]);
     })
 }
+
+
+
+
 
 //CREAR producto (POST)//
 const createProduct = (req,res)=>{
@@ -104,4 +132,4 @@ const deleteProduct = (req,res)=>{
 }
 
 
-module.exports = {getAllProductos,getAllProductos2, getEspecifiedProduct,createProduct, updateProduct, deleteProduct}
+module.exports = {getAllProductos,getAllProductos2, getEspecifiedProduct,createProduct, updateProduct, deleteProduct,getEspecifiedProductoNombre}
