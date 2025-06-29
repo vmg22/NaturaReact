@@ -58,6 +58,7 @@ function App() {
         <Route path='/register' element={<Register/>}></Route>
         <Route path='/categoria' element={<Categoria/>}></Route>
         <Route path='/categoria-hombre' element={<CategoriaHombre/>}></Route>
+        <Route path="/carrito" element={<Carrito />} />
         <Route path='/categoria-mujer' element={<CategoriaMujer/>}></Route>
         <Route path='/categoria-infantil' element={<Infantil/>}></Route>
         <Route path='/pago' element={<Pago/>}></Route>
@@ -98,7 +99,7 @@ function App() {
       
     
         <Route path="/admin" element={<PrivateRoute rolPermitido={1}><Admin /></PrivateRoute>}/>
-        <Route path="/carrito" element={<PrivateRoute rolPermitido={2}><Carrito /></PrivateRoute>}/>
+        
         <Route path="/perfil" element={<PrivateRoute ><h2>Perfil del usuario</h2></PrivateRoute>}/>
         <Route path="/no-autorizado" element={<NoAutorizado />} />
         
