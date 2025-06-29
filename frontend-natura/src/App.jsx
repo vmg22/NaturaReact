@@ -27,14 +27,7 @@ import Perfumeria from './pages/perfumeria'
 import CuidadosDiarios from './pages/CuidadosDiarios'
 import Cabello from './pages/Cabello'
 import Promociones from './pages/Promociones'
-import PerfumeriaMasculina from './pages/PerfumeriaMasculina'
-import PerfumeriaFemenina from './pages/PerfumeriaFemenina'
-import PerfumeriaUnisex from './pages/PerfumeriaUnisex'
-import PerfumeriaInfantil from './pages/PerfumeriaInfantil'
-import ProDescuentos from './pages/ProDescuentos'
-import ProKitsNatura from './pages/ProKitsNatura'
 import ProPrimeraCompra from './pages/ProPrimeraCompra'
-import ProLanzamientos from './pages/ProLanzamientos'
 import RPielOleosa from './pages/RPielOleosa'
 import RPielSeca from './pages/RPielSeca'
 import RPielMixta from './pages/RPielMixta'
@@ -78,14 +71,7 @@ function App() {
         <Route path='/cuidados-diarios' element={<CuidadosDiarios/>}></Route>
         <Route path='/cabello' element={<Cabello/>}></Route>
         <Route path='/promociones' element={<Promociones/>}></Route>
-        <Route path='/p-hombre' element={<PerfumeriaMasculina/>}></Route>
-        <Route path='/p-fem' element={<PerfumeriaFemenina/>}></Route>
-        <Route path='/p-unisex' element={<PerfumeriaUnisex/>}></Route>
-        <Route path='/p-infantil' element={<PerfumeriaInfantil/>}></Route>
-        <Route path='/pro-descuentos' element={<ProDescuentos/>}></Route>
-        <Route path='/pro-kits-natura' element={<ProKitsNatura/>}></Route>
         <Route path='/pro-primera-compra' element={<ProPrimeraCompra/>}></Route>
-        <Route path='/pro-lanzamientos' element={<ProLanzamientos/>}></Route>
         <Route path='/r-piel-oleosa' element={<RPielOleosa/>}></Route>
         <Route path='/r-piel-seca' element={<RPielSeca/>}></Route>
         {/* <Route path='/r-piel-mixta' element={<RPielMixta/>}></Route> */}
@@ -93,15 +79,9 @@ function App() {
         <Route path='/productos/buscar/:termino' element={<PaginaBusqueda/>}></Route>
 
 
-        {/* estas deberian ser privadas */}
-        {/* <Route path='/verTabla/:tabla' element={<VerTabla/>}></Route> */}
         <Route path='/verTabla/:tabla'  element={<PrivateRoute rolPermitido={1}><VerTabla /></PrivateRoute>} />
         <Route path='/agregarTabla/:tabla'  element={<PrivateRoute rolPermitido={1}><AgregarTabla /></PrivateRoute>} />
-    
-      
-    
         <Route path="/admin" element={<PrivateRoute rolPermitido={1}><Admin /></PrivateRoute>}/>
-        
         <Route path="/perfil" element={<PrivateRoute ><h2>Perfil del usuario</h2></PrivateRoute>}/>
         <Route path="/no-autorizado" element={<NoAutorizado />} />
         
