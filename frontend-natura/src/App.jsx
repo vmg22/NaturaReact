@@ -18,7 +18,7 @@ import QuieroSerConsultor from "./pages/QuieroSerConsultor"
 import SoyConsultor from "./pages/SoyConsultor"
 import PorInternet from "./pages/PorInternet"
 import PorRevista from "./pages/PorRevista"
-import Ayuda from "./pages/Ayuda"
+
 import InfoProductos from "./pages/InfoProductos"
 import Blog from "./pages/Blog"
 import Maquillaje from './pages/Maquillaje'
@@ -70,7 +70,7 @@ function App() {
         <Route path='/por-revista' element={<PorRevista/>}></Route>
         <Route path='/por-internet' element={<PorInternet/>}></Route>
         <Route path='/info-productos' element={<InfoProductos/>}></Route>
-        <Route path='/ayuda' element={<Ayuda/>}></Route>
+     
         <Route path='/blog' element={<Blog/>}></Route>
         <Route path='/maquillaje' element={<Maquillaje/>}></Route>
         <Route path='/rostro' element={<Rostro/>}></Route>
@@ -88,8 +88,8 @@ function App() {
         <Route path='/pro-lanzamientos' element={<ProLanzamientos/>}></Route>
         <Route path='/r-piel-oleosa' element={<RPielOleosa/>}></Route>
         <Route path='/r-piel-seca' element={<RPielSeca/>}></Route>
-        <Route path='/r-piel-mixta' element={<RPielMixta/>}></Route>
-        <Route path='/r-todo-tipo-piel' element={<RTodoTipoPiel/>}></Route>
+        {/* <Route path='/r-piel-mixta' element={<RPielMixta/>}></Route> */}
+        {/* <Route path='/r-todo-tipo-piel' element={<RTodoTipoPiel/>}></Route> */}
         <Route path='/productos/buscar/:termino' element={<PaginaBusqueda/>}></Route>
 
 
