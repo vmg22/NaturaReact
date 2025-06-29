@@ -14,11 +14,9 @@ import {
 } from "react-bootstrap";
 import useCarritoStore from "../../store/useCarritoStore";
 
-
-
 const CarouselCard2 = () => {
   const agregarAlCarrito = useCarritoStore((state) => state.agregarAlCarrito);
-  
+
   // 1. ESTADOS PARA MANEJAR LOS DATOS DE LA API
   const [productos, setProductos] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -31,15 +29,15 @@ const CarouselCard2 = () => {
       try {
         const response = await fetch('http://localhost:3001/productos2');
         if (!response.ok) {
-          throw new Error('Error al obtener los datos');
+          throw new Error("Error al obtener los datos");
         }
         const data = await response.json();
 
-        console.log('Datos recibidos de la API:', data.datos); 
+   
         //  API devuelve campos como 'titulo', 'precio_original', etc.
         //  espera 'title', 'priceOld', etc.
         // Hacemos un "mapeo" para que coincidan.
-        const productosAdaptados = data.datos.map(p => ({
+        const productosAdaptados = data.datos.map((p) => ({
           id: p.id,
           title: p.titulo,
           brand: `Marca ID: ${p.marca_id}`,
@@ -52,7 +50,6 @@ const CarouselCard2 = () => {
         }));
 
         setProductos(productosAdaptados);
-        
       } catch (err) {
         setError(err.message);
       } finally {
@@ -63,9 +60,6 @@ const CarouselCard2 = () => {
     fetchProductos();
   }, []); // El array vacío asegura que se ejecute solo una vez
 
-  
-
-
   const groupSize = 3;
   const groupedCards = [];
   for (let i = 0; i < productos.length; i += groupSize) {
@@ -75,7 +69,7 @@ const CarouselCard2 = () => {
   const agregarCarrito = (producto) => {
     agregarAlCarrito({
       id: producto.id,
-      nombre: producto.title, 
+      nombre: producto.title,
       precio: producto.priceNew,
       precioOld: producto.priceOld,
       descuento: producto.discount,
@@ -107,13 +101,12 @@ const CarouselCard2 = () => {
   return (
     <>
       <Container className="my-5">
-       
         <Carousel indicators={false} interval={null}>
           {groupedCards.map((group, index) => (
             <Carousel.Item key={index}>
               <Row className="justify-content-center">
-                {group.map((card) => ( 
-                  <Col md={3} sm={6} xs={12} key={card.id}> 
+                {group.map((card) => (
+                  <Col md={3} sm={6} xs={12} key={card.id}>
                     <Card
                       className="mb-4 border-0"
                       style={{
@@ -150,8 +143,8 @@ const CarouselCard2 = () => {
                         </Card.Title>
                         <div>
                           <s style={{ color: "#999", fontSize: "0.9rem" }}>
-                             {/* Usamos toLocaleString para formatear el número */}
-                            ${Number(card.priceOld).toLocaleString('es-AR')}
+                            {/* Usamos toLocaleString para formatear el número */}
+                            ${Number(card.priceOld).toLocaleString("es-AR")}
                           </s>
                         </div>
                         <div className="d-flex align-items-center">
@@ -162,7 +155,7 @@ const CarouselCard2 = () => {
                               marginRight: "0.5rem",
                             }}
                           >
-                            ${Number(card.priceNew).toLocaleString('es-AR')}
+                            ${Number(card.priceNew).toLocaleString("es-AR")}
                           </span>
                           <Badge bg="danger">-{card.discount}</Badge>
                         </div>
@@ -176,7 +169,7 @@ const CarouselCard2 = () => {
                           className="text-muted"
                           style={{ fontSize: "0.9rem" }}
                         >
-                          ${Number(card.priceNoTax).toLocaleString('es-AR')}
+                          ${Number(card.priceNoTax).toLocaleString("es-AR")}
                         </p>
                         <Button
                           variant="outline-danger"
@@ -219,4 +212,4 @@ const CarouselCard2 = () => {
   );
 };
 
-export default CarouselCard2;
+export default CardCarousel;

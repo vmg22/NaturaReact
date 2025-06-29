@@ -43,8 +43,7 @@ const AgregarTabla = () => {
   if (!tabla) return <div>⚠️ No se especificó la tabla.</div>;
   if (cargando) return <div>🔄 Cargando datos...</div>;
 
-  // 1. Definimos el mapa de tipos fuera de la función.
-  // Es más fácil de leer y modificar.
+
   const MAPEO_MYSQL_HTML = {
     // Clave: tipo de input HTML
     // Valor: array de prefijos de MySQL que corresponden a esa clave
@@ -55,23 +54,16 @@ const AgregarTabla = () => {
       "double"
     ],
     date: ["date"],
-    checkbox: ["tinyint(1)"], // Mantenemos este caso específico
     time: ["time"],
     "datetime-local": ["datetime", "timestamp"],
-    // 'text' es nuestro comodín, pero podemos ser explícitos también
-    text: ["varchar", "text", "char", "mediumtext", "longtext", "enum", "set"],
+    text: ["varchar", "text"],
   };
 
   const mapTipoMySQLaHTML_alternativa = (tipo) => {
-    // Misma guarda para nulos/undefined
+    //si es null o undefiend lo pone como tipo texto
     if (!tipo) return "text";
-
+    //pone todo en minusculo
     const tipoLower = tipo.toLowerCase();
-
-    // Caso especial para tinyint(1) porque startsWith no funcionaría igual
-    if (tipoLower === "tinyint(1)") {
-      return "checkbox";
-    }
 
     // Iteramos sobre nuestro mapa de configuración
     // Object.entries(MAPEO_MYSQL_HTML) -> [ ['number', ['int', 'decimal', ...]], ['date', ['date']], ... ]
@@ -116,13 +108,15 @@ const AgregarTabla = () => {
 
   return (
     <div>
-      <Link to={"/admin"}><p className=""><i className="fa-solid fa-arrow-left"></i>  Volver a Admin</p></Link>
+        <div className="divTituloTabla d-flex align-items-center justify-content-around ">
+        <Link to={"/admin"} className="volver"><p ><i className="fa-solid fa-arrow-left"></i>  Volver a Admin</p></Link>
+        <h2 className="text-center tituloMainAdmin">AGREGAR A LA TABLA: {tabla}</h2>
+        <div></div>
+        </div>
 
-        <h2 className="text-center">Agregar a la tabla {tabla}</h2>
 
-
-      <div className="d-flex justify-content-center">
-        <Form onSubmit={handleSubmit}>
+      <div className="d-flex justify-content-center bodyAgregar">
+        <Form onSubmit={handleSubmit} className="text-center formAgregar">
           {columnas
             .filter((col) => col.extra !== "auto_increment") // Primero filtra q no sea id autoincrement
             .map(
@@ -141,14 +135,18 @@ const AgregarTabla = () => {
                     name={col.nombre}
                     value={formData[col.nombre] || ""}
                     onChange={handleChange}
+                    className="rounded-input"
+                    required
                   />
                 </Form.Group>
               )
             )}
-
-          <Button variant="primary" type="submit">
+          <div className="d-flex justify-content-center">
+          <Button variant="primary" type="submit" className="botonAcciones">
             Agregar a {tabla}
           </Button>
+          </div>
+          
         </Form>
       </div>
 
