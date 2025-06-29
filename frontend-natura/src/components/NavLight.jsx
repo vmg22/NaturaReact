@@ -71,6 +71,17 @@ const NavLight = () => {
 
        
         <div className="iconosNavegacion">
+
+          {/* ----- INICIO DEL BLOQUE AÑADIDO PARA EL ADMIN ----- */}
+          {/* Se muestra solo si el usuario existe y su rol_id es 1 */}
+          {usuario && usuario.rol_id === 1 && (
+            <div>
+              <Link to="/admin" className="btnIconosNavegacion" title="Panel de Administrador">
+                <i className="fa-solid fa-user-shield"></i>
+              </Link>
+            </div>
+          )}
+          {/* ----- FIN DEL BLOQUE AÑADIDO PARA EL ADMIN ----- */}
          
           <div>
             {usuario ? (
