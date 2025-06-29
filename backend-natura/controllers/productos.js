@@ -100,7 +100,47 @@ const getEspecifiedProduct = (req,res)=>{
     })
 }
 
+//obtener categoria por nombre 
+const getProductoCategoriaNombre = (req,res) =>{
+  // 1. Obtenemos el nombre de la categoría desde el parámetro de la URL
+  const { nombre } = req.params;
 
+  // 2. Validamos que el nombre no venga vacío
+  if (!nombre) {
+    return res.status(400).json({ mensaje: "El nombre de la categoría es requerido." });
+  }
+
+  // 3. Creamos la consulta SQL que une las tres tablas
+  const consulta = `
+    SELECT
+        p.*,
+        ANY_VALUE(i.url_imagen) AS url_imagen,
+        c.nombre AS nombre_categoria 
+    FROM
+        productos p
+    JOIN 
+        categorias c ON p.categoria_id = c.id
+    LEFT JOIN
+        imagenes_productos i ON p.id = i.producto_id
+    WHERE
+        c.nombre = ?
+    GROUP BY
+        p.id;
+  `;
+
+  // 4. Ejecutamos la consulta pasando el nombre de la categoría como parámetro
+  conection.query(consulta, [nombre], (err, results) => {
+    // Manejo de errores de la base de datos
+    if (err) {
+      console.error("Error al obtener productos por categoría:", err);
+      return res.status(500).json({ error: "Error interno del servidor." });
+    }
+
+    // Si todo va bien, devolvemos los resultados en formato JSON
+    // Si no se encuentra nada, 'results' será un array vacío [], lo cual es correcto.
+    res.json(results);
+  });
+}
 
 
 
@@ -142,4 +182,4 @@ const deleteProduct = (req,res)=>{
 }
 
 
-module.exports = {getAllProductos,getAllProductos2, getEspecifiedProduct,createProduct, updateProduct, deleteProduct,getEspecifiedProductoNombre}
+module.exports = {getAllProductos,getAllProductos2,getEspecifiedProduct,getProductoCategoriaNombre,createProduct, updateProduct, deleteProduct,getEspecifiedProductoNombre}

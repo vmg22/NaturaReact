@@ -102,5 +102,5 @@ module.exports = {
   createCategoria,
   updateCategoria,
   deleteCategoria,
-  getEspecifiedCategorias,
+  getEspecifiedCategorias
 };
