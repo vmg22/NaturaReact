@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate} from "react-router-dom";
 import logoNegro from "../assets/logo-natura-negro.png";
 import "../styles/navLight.css";
@@ -153,7 +153,7 @@ const NavLight = () => {
                 </li>
 
                 <li className="has-megamenu">
-                  <Link to="/perfumeria">perfumeria</Link>
+                  <Link to="/categorias/perfumeria">perfumeria</Link>
                   
                   <div className="megamenu">
                     <div className="column">
@@ -179,7 +179,7 @@ const NavLight = () => {
                 </li>
 
                 <li className="has-megamenu">
-                  <Link to="/maquillaje">Maquillaje</Link>
+                  <Link to="/categorias/maquillaje">Maquillaje</Link>
                   <div className="megamenu">
                     <div className="column">
                       <strong>descubri tu tono</strong>
@@ -241,7 +241,7 @@ const NavLight = () => {
                   </div>
                 </li>
                 <li className="has-megamenu">
-                  <Link to="/cuidados-diarios">Cuidado Diario</Link>
+                  <Link to="/categorias/cuidados-diarios">Cuidado Diario</Link>
                   <div className="megamenu">
                     <div className="column">
                       <strong> jabon</strong>
@@ -301,7 +301,7 @@ const NavLight = () => {
                 </li>
 
                 <li className="has-megamenu">
-                  <Link to="/cabello">Cabello</Link>
+                  <Link to="/categorias/cabello">Cabello</Link>
                   <div className="megamenu">
                     <div className="column">
                       <strong>tipo de cabello</strong>
