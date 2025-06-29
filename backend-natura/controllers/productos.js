@@ -132,4 +132,4 @@ const deleteProduct = (req,res)=>{
 }
 
 
-module.exports = {getAllProductos,getAllProductos2, getEspecifiedProduct,createProduct, updateProduct, deleteProduct}
+module.exports = {getAllProductos,getAllProductos2, getEspecifiedProduct,createProduct, updateProduct, deleteProduct,getEspecifiedProductoNombre}
