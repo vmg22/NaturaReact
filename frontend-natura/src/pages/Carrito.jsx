@@ -111,7 +111,7 @@ const Carrito = () => {
             )}
           </div>
 
-          {/* Resumen */}
+          {/* Resumen de compra*/}
           {carrito.length > 0 && (
             <div className="col-md-4">
               <section className="p-4 rounded shadow-sm" style={{ background: "#f9f9f9" }}>
