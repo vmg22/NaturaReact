@@ -38,12 +38,14 @@ const getEspecifiedOrdenId = (req, res) => {
 
 // Crear una nueva orden
 const createOrden = (req, res) => {
-    const { id_usuario, total, estado } = req.body;
-    const consulta = "INSERT INTO ordenes (id_usuario, total, estado) VALUES (?, ?, ?);";
-    conection.query(consulta, [id_usuario, total, estado], (err, result) => {
-        if (err) return res.status(500).json({ error: err.message });
-        res.status(201).json({ id: result.insertId });
-    });
+  const { id_usuario, total, estado } = req.body;
+  const fecha = new Date(); // Genera la fecha actual
+
+  const consulta = "INSERT INTO ordenes (usuario_id, fecha, total, estado) VALUES (?, ?, ?, ?)";
+  conection.query(consulta, [id_usuario, fecha, total, estado], (err, result) => {
+    if (err) return res.status(500).json({ error: err.message });
+    res.status(201).json({ id: result.insertId });
+  });
 };
 
 // Actualizar una orden
