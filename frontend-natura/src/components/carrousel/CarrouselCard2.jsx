@@ -1,4 +1,3 @@
-// src/components/CardCarousel.js
 
 import React, { useState, useEffect } from "react";
 import {
@@ -17,7 +16,7 @@ import useCarritoStore from "../../store/useCarritoStore";
 
 
 
-const CardCarousel = () => {
+const CarouselCard2 = () => {
   const agregarAlCarrito = useCarritoStore((state) => state.agregarAlCarrito);
   
   // 1. ESTADOS PARA MANEJAR LOS DATOS DE LA API
@@ -30,21 +29,22 @@ const CardCarousel = () => {
   useEffect(() => {
     const fetchProductos = async () => {
       try {
-        const response = await fetch('http://localhost:3001/productos');
+        const response = await fetch('http://localhost:3001/productos2');
         if (!response.ok) {
           throw new Error('Error al obtener los datos');
         }
         const data = await response.json();
 
-   
+        console.log('Datos recibidos de la API:', data.datos); 
         //  API devuelve campos como 'titulo', 'precio_original', etc.
         //  espera 'title', 'priceOld', etc.
         // Hacemos un "mapeo" para que coincidan.
         const productosAdaptados = data.datos.map(p => ({
           id: p.id,
           title: p.titulo,
-          brand: `Marca ID: ${p.marca_id}`, // Placeholder, ver nota abajo
-          img: `https://placehold.co/300x200?text=${p.titulo}`, // Placeholder para la imagen
+          brand: `Marca ID: ${p.marca_id}`,
+          // USA LA URL DE LA IMAGEN DE LA API O UNA DE REEMPLAZO SI NO EXISTE
+          img: p.url_imagen || `https://placehold.co/300x200?text=Sin+Imagen`, 
           priceOld: p.precio_original,
           priceNew: p.precio_descuento,
           priceNoTax: p.precio_sin_iva,
@@ -66,7 +66,7 @@ const CardCarousel = () => {
   
 
 
-  const groupSize = 4;
+  const groupSize = 3;
   const groupedCards = [];
   for (let i = 0; i < productos.length; i += groupSize) {
     groupedCards.push(productos.slice(i, i + groupSize));
@@ -143,7 +143,7 @@ const CardCarousel = () => {
                           className="text-muted mb-1"
                           style={{ fontSize: "0.85rem" }}
                         >
-                          {card.brand} {/* Mostrará "Marca ID: 1", etc. */}
+                          
                         </Card.Text>
                         <Card.Title style={{ fontSize: "1rem" }}>
                           {card.title}
@@ -164,7 +164,7 @@ const CardCarousel = () => {
                           >
                             ${Number(card.priceNew).toLocaleString('es-AR')}
                           </span>
-                          <Badge bg="danger">{card.discount}</Badge>
+                          <Badge bg="danger">-{card.discount}</Badge>
                         </div>
                         <p
                           className="text-muted mb-1"
@@ -219,4 +219,4 @@ const CardCarousel = () => {
   );
 };
 
-export default CardCarousel;
+export default CarouselCard2;
