@@ -1,4 +1,4 @@
-// src/pages/Carrito.jsx 
+// src/pages/Carrito.jsx
 
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
@@ -11,42 +11,17 @@ import UsuarioStore from "../store/UsuarioStore";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import ModalNoLogueado from "../components/factura/ModalNoLogueado";
-import ModalFactura from "../components/factura/ModalFactura";
-import TicketCompra from "../components/factura/TicketCompra";
 
 const Carrito = () => {
-  const { carrito, quitarDelCarrito, incrementarCantidad, disminuirCantidad, vaciarCarrito } = useCarritoStore();
+  const { carrito, quitarDelCarrito, incrementarCantidad, disminuirCantidad } = useCarritoStore();
   const { usuario } = UsuarioStore();
 
   const [showToast, setShowToast] = useState(false);
   const [mostrarNoLogueado, setMostrarNoLogueado] = useState(false);
-  const [mostrarFactura, setMostrarFactura] = useState(false);
-  const [mostrarTicket, setMostrarTicket] = useState(false);
-  const [ordenId, setOrdenId] = useState(null);
 
   const handleQuitar = (id) => {
     quitarDelCarrito(id);
     setShowToast(true);
-  };
-
-  const finalizarCompra = () => {
-    if (carrito.length === 0) {
-      alert("Tu carrito está vacío.");
-      return;
-    }
-    if (!usuario) {
-      setMostrarNoLogueado(true);
-    } else {
-      setMostrarFactura(true);
-    }
-  };
-
-  
-  const handleOrdenCreadaExitosamente = (idDeLaOrdenCreada) => {
-    setOrdenId(idDeLaOrdenCreada); // Guarda el ID de la nueva orden
-    setMostrarFactura(false);      // Cierra el modal de la factura
-    setMostrarTicket(true);        // Muestra el componente del Ticket de Compra
-    vaciarCarrito();               // Limpia el carrito de compras
   };
 
   return (
@@ -111,7 +86,7 @@ const Carrito = () => {
             )}
           </div>
 
-          {/* Resumen de compra*/}
+          {/* Resumen de compra */}
           {carrito.length > 0 && (
             <div className="col-md-4">
               <section className="p-4 rounded shadow-sm" style={{ background: "#f9f9f9" }}>
@@ -131,7 +106,17 @@ const Carrito = () => {
                   <span>${carrito.reduce((acc, item) => acc + item.precio * item.cantidad, 0).toLocaleString()}</span>
                 </div>
                 <div className="mt-4">
-                  <Button variant="warning" className="w-100 mb-2 fw-bold text-white" onClick={finalizarCompra}>
+                  <Button
+                    variant="warning"
+                    className="w-100 mb-2 fw-bold text-white"
+                    as={Link}
+                    to={usuario ? "/pago" : "#"}
+                    onClick={() => {
+                      if (!usuario) {
+                        setMostrarNoLogueado(true);
+                      }
+                    }}
+                  >
                     Finalizar compra
                   </Button>
                   <Button variant="outline-success" className="w-100 fw-bold" as={Link} to="/">
@@ -151,24 +136,6 @@ const Carrito = () => {
       </ToastContainer>
 
       <ModalNoLogueado mostrar={mostrarNoLogueado} onCerrar={() => setMostrarNoLogueado(false)} />
-      
-      {/* El modal de la factura ahora recibe la función correcta en la prop 'onConfirmar' */}
-      <ModalFactura
-        mostrar={mostrarFactura}
-        onCerrar={() => setMostrarFactura(false)}
-        onConfirmar={handleOrdenCreadaExitosamente}
-        carrito={carrito}
-        usuario={usuario}
-      />
-
-      {/* Este componente solo se muestra cuando ya tenemos un ID de orden */}
-      <TicketCompra
-        mostrar={mostrarTicket}
-        onCerrar={() => setMostrarTicket(false)}
-        idOrden={ordenId}
-        usuario={usuario}
-      />
-
       <Footer />
     </>
   );

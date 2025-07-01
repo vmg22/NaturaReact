@@ -1,17 +1,10 @@
 import React, { useState } from "react";
-
 import { Modal, Button, Table, Alert, Spinner } from "react-bootstrap";
 import axios from "axios";
 
-const ModalFactura = ({ mostrar, onCerrar, onConfirmar, carrito, usuario }) => {
+const ModalFactura = ({ mostrar, onCerrar, onConfirmar, productos = [], total, usuario }) => {
   const [estaCargando, setEstaCargando] = useState(false);
-  //  Añadimos un estado para el mensaje de error
   const [mensajeError, setMensajeError] = useState(null);
-
-  const total = carrito.reduce(
-    (acc, item) => acc + item.precio * item.cantidad,
-    0
-  );
 
   const handleConfirmar = async () => {
     setMensajeError(null);
@@ -20,8 +13,9 @@ const ModalFactura = ({ mostrar, onCerrar, onConfirmar, carrito, usuario }) => {
     try {
       const orden = {
         id_usuario: usuario?.id || null,
-        total: total,
+        total,
         estado: "confirmada",
+        carrito: productos, // Ahora se llama productos en Pago, pero lo pasamos como carrito
       };
 
       const response = await axios.post("http://localhost:3001/ordenes", orden);
@@ -29,14 +23,11 @@ const ModalFactura = ({ mostrar, onCerrar, onConfirmar, carrito, usuario }) => {
       if (response.data && response.data.id) {
         onConfirmar(response.data.id);
       } else {
-        setMensajeError(
-          "La respuesta del servidor no fue la esperada. No se pudo crear la orden."
-        );
+        setMensajeError("La respuesta del servidor no fue la esperada. No se pudo crear la orden.");
       }
     } catch (error) {
       console.error("Error al confirmar la orden:", error);
-
-      setMensajeError("");
+      setMensajeError("Error al registrar la orden. Intente más tarde.");
     } finally {
       setEstaCargando(false);
     }
@@ -54,12 +45,12 @@ const ModalFactura = ({ mostrar, onCerrar, onConfirmar, carrito, usuario }) => {
       <Modal.Header closeButton={!estaCargando}>
         <Modal.Title>🧾 Detalle de su compra</Modal.Title>
       </Modal.Header>
-      <Modal.Body>
-        {mensajeError && <Alert variant="white">{mensajeError}</Alert>}
 
-        <p>
-          <strong>Cliente:</strong> {usuario?.nombre || "Invitado"}
-        </p>
+      <Modal.Body>
+        {mensajeError && <Alert variant="danger">{mensajeError}</Alert>}
+
+        <p><strong>Cliente:</strong> {usuario?.nombre || "Invitado"}</p>
+
         <Table striped bordered size="sm">
           <thead>
             <tr>
@@ -70,7 +61,7 @@ const ModalFactura = ({ mostrar, onCerrar, onConfirmar, carrito, usuario }) => {
             </tr>
           </thead>
           <tbody>
-            {carrito.map((item) => (
+            {productos.map((item) => (
               <tr key={item.id}>
                 <td>{item.nombre}</td>
                 <td>{item.cantidad}</td>
@@ -80,19 +71,17 @@ const ModalFactura = ({ mostrar, onCerrar, onConfirmar, carrito, usuario }) => {
             ))}
           </tbody>
         </Table>
+
         <h5 className="text-end fw-bold">
           Total a pagar: ${total.toLocaleString()}
         </h5>
       </Modal.Body>
+
       <Modal.Footer>
         <Button variant="secondary" onClick={onCerrar} disabled={estaCargando}>
           Cancelar
         </Button>
-        <Button
-          variant="success"
-          onClick={handleConfirmar}
-          disabled={estaCargando}
-        >
+        <Button variant="success" onClick={handleConfirmar} disabled={estaCargando}>
           {estaCargando ? (
             <>
               <Spinner
