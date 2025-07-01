@@ -11,7 +11,7 @@ const MainLogin = () => {
   const [pass, setPass] = useState("");
   const navigate = useNavigate();
 
-  const iniciarSesion = UsuarioStore((state) => state.iniciarSesion); //  usar acción de Zustand
+  const iniciarSesion = UsuarioStore((state) => state.iniciarSesion); //  usa la acción de Zustand
 
   const togglePassword = () => setShowPassword(!showPassword);
 
@@ -31,14 +31,14 @@ const MainLogin = () => {
 
       if (data.success) {
         const usuario = data.usuario;
-        iniciarSesion(usuario); //  Guardar en Zustand
+        iniciarSesion(usuario); //  Guarda en el Zustand
 
         alert(`¡Bienvenido, ${usuario.nombre}!`);
 
         // Limpiar campos
         setUser("");
         setPass("");
-       // También en localStorage para persistencia
+       // También en el localStorage para persistencia
         localStorage.setItem("usuarioLogueado", JSON.stringify(usuario));
 
         // Redirección por rol

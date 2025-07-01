@@ -1,66 +1,63 @@
-import { useParams } from "react-router-dom";
-import { useEffect,useState } from "react";
-import axios from "axios";
+import React, { useState, useEffect } from 'react';
+import { useParams, Link } from 'react-router-dom'; // useParams para leer la URL
+import axios from 'axios';
 import useCarritoStore from "../store/useCarritoStore";
-import Header from '../components/Header'
-import Footer from "../components/Footer"
-import { Spinner,Card , Badge, Button,
-  ToastContainer, Toast,} from "react-bootstrap";
-import CategoriaGeneral from "../components/CategoriaGeneral";
-import CarrouselMaquillaje from "../components/carrousel/CarrouselMaquillaje";
-import CarrouselPerfumeria from "../components/carrousel/CarrouselPerfumeria";
-import CarrouselRostro from "../components/carrousel/CarrouselRostro";
-import CarrouselCabello from "../components/carrousel/CarrouselCabello";
-import CarrouselCuidadosDiarios from "../components/carrousel/CarrouselCuidadosDiarios";
+import {  Alert, Spinner, Card ,Button,Badge,
+  Toast,
+  ToastContainer} from 'react-bootstrap';
+import Header from '../components/Header';
 
-const Categoria = () => {
+const PaginaBusqueda = () => {
+    
+  // 1. Leer el término de búsqueda desde el parámetro de la URL (:termino)
+  const { termino } = useParams();
 
-   // se lee el parametro /categorias/... se le cambia el nombre a categoryname para q no quede redundante
-  const { nombre: categoryName } = useParams();
   const agregarAlCarrito = useCarritoStore((state) => state.agregarAlCarrito);
-  const [products, setProducts] = useState([]);
+
+  // 2. Estados propios de esta página
+  const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [showToast, setShowToast] = useState(false);
 
+  // 3. useEffect que se ejecuta cuando el componente carga O cuando el término de búsqueda cambia
   useEffect(() => {
-    if (!categoryName) return;
-
-    const fetchProducts = async () => {
+    const fetchSearchResults = async () => {
       setLoading(true);
+      setError(null);
       try {
-        // Llamamos a nuestra nueva y limpia ruta del backend
-        const response = await axios.get(`http://localhost:3001/productos/categoria/${categoryName}`);
-        setProducts(response.data);
+        // Llama al endpoint de búsqueda con el término de la URL
+        const response = await axios.get(`http://localhost:3001/productos/buscar/${termino}`);
+        setResults(response.data); // La respuesta es directamente el array de datos
       } catch (err) {
-        setError("No se pudieron cargar los productos de esta categoría.");
+        console.error("Error al buscar productos:", err);
+        setError("Ocurrió un error al realizar la búsqueda.");
+        setResults([]); // Limpiar resultados si hay error
       } finally {
         setLoading(false);
       }
     };
 
-    fetchProducts();
-  }, [categoryName]); // Se vuelve a ejecutar si el usuario navega a otra categoría
+    fetchSearchResults();
+  }, [termino]); // La dependencia es 'termino', así que se re-ejecuta si la búsqueda cambia
 
-   // declaro en null para poder asignarle el valor
-  let carruselEspecifico = null;
-
-  //depende el nombre de la categoria mostrara el carrousel
-  if (categoryName.toLowerCase() === 'maquillaje') {
-    carruselEspecifico = <CarrouselMaquillaje />;
-  } else if (categoryName.toLowerCase() === 'perfumeria') {
-    carruselEspecifico = <CarrouselPerfumeria />;
-  }else if (categoryName.toLowerCase() === 'rostro') {
-    carruselEspecifico = <CarrouselRostro />;
-  }else if (categoryName.toLowerCase() === 'cabello') {
-    carruselEspecifico = <CarrouselCabello />;
-  }else if (categoryName.toLowerCase() === 'cuidados-diarios') {
-    carruselEspecifico = <CarrouselCuidadosDiarios />;
-  }else{
-    carruselEspecifico = null;
+  // 4. Lógica de renderizado
+  if (loading) {
+    return (
+      <div className="text-center mt-5">
+        <Spinner animation="border" role="status">
+          <span className="visually-hidden">Buscando...</span>
+        </Spinner>
+        <p>Buscando productos...</p>
+      </div>
+    );
   }
-//zustand
-     const agregarCarrito = (product) => {
+
+  if (error) {
+    return <Alert variant="danger">{error}</Alert>;
+  }
+
+   const agregarCarrito = (product) => {
     agregarAlCarrito({
       id: product.id,
       nombre: product.titulo,
@@ -73,20 +70,20 @@ const Categoria = () => {
     setShowToast(true);
   };
 
-  if (loading) return <div className="text-center"><Spinner animation="border" /></div>;
-  if (error) return <Alert variant="danger">{error}</Alert>;
   return (
-    <div>
-      <Header/>
-      {/* aca llama al carrousel segun la categoria */}
-      {carruselEspecifico}
-      <CategoriaGeneral categoria={categoryName}/>
-      <div className="row mt-3">
-        {products.length > 0 ? (
-          products.map(product => (
-            <div className="col-lg-3 col-md-4 mb-4" key={product.id}>
+    
+   <div className=" mt-4"> {/* Añadimos un contenedor principal para el espaciado */}
+  <Header />
+  <h3 className="mb-4">Resultados de búsqueda para: "{termino}"</h3>
 
-              <Card
+  {results.length > 0 ? (
+    // 1. Contenedor principal para el grid de productos
+    <div className="row">
+      {results.map((product) => (
+        // 2. Cada producto es una columna en el grid para un layout responsivo
+        //    La 'key' va en el elemento más externo del map.
+        <div className="col-xl-3 col-lg-4 col-md-6 mb-4" key={product.id}>
+          <Card
             className="h-100 border-0" // h-100 para que todas las cards en una fila tengan la misma altura
             style={{
               transition: "transform 0.2s ease, box-shadow 0.2s ease",
@@ -116,6 +113,7 @@ const Categoria = () => {
                 className="text-muted mb-1"
                 style={{ fontSize: "0.85rem" }}
               >
+                {/* Podrías poner aquí la marca o categoría */}
               </Card.Text>
               {/* flex-grow-1 empuja el contenido siguiente hacia abajo */}
               <Card.Title style={{ fontSize: "1rem", flexGrow: 1 }}>
@@ -167,16 +165,16 @@ const Categoria = () => {
               </Button>
             </Card.Body>
           </Card>
-            </div>
-          ))
-        ) : (
-          <p>No hay productos en esta categoría.</p>
-        )}
-      </div>
-      <Footer/>
+        </div>
+      ))}
+    </div>
+  ) : (
+    <Alert variant="info" className="mt-3">
+      No se encontraron productos que coincidan con su búsqueda.
+    </Alert>
+  )}
 
-
-      <ToastContainer
+   <ToastContainer
         className="position-fixed top-50 start-50 translate-middle"
         style={{ zIndex: 9999 }}
       >
@@ -192,8 +190,11 @@ const Categoria = () => {
           </Toast.Body>
         </Toast>
       </ToastContainer>
-    </div>
-  )
-}
+</div>
 
-export default Categoria
+
+  );
+};
+
+
+export default PaginaBusqueda
