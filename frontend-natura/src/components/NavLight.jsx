@@ -18,6 +18,7 @@ const NavLight = () => {
 
   const handleLogout = () => {
     cerrarSesion();
+    localStorage.removeItem("usuarioLogueado");
     navigate("/"); // Redireccionar a inicio al cerrar sesión
   };
 
