@@ -63,7 +63,7 @@ const Pago = () => {
       "https://upload.wikimedia.org/wikipedia/commons/8/89/Credit_card_default.png",
   };
 
-  // Agrega esta función dentro del componente Pago
+  // Validación de vencimiento de tarjeta
   const vencimientoValido = () => {
     const [mes, anio] = datosTarjeta.vencimiento.split("/");
     if (!mes || !anio || mes.length !== 2 || anio.length !== 2) return false;
