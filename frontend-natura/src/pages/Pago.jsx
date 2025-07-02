@@ -63,6 +63,19 @@ const Pago = () => {
       "https://upload.wikimedia.org/wikipedia/commons/8/89/Credit_card_default.png",
   };
 
+  // Agrega esta función dentro del componente Pago
+  const vencimientoValido = () => {
+    const [mes, anio] = datosTarjeta.vencimiento.split("/");
+    if (!mes || !anio || mes.length !== 2 || anio.length !== 2) return false;
+    const mesNum = parseInt(mes, 10);
+    const anioNum = parseInt("20" + anio, 10);
+    if (isNaN(mesNum) || isNaN(anioNum) || mesNum < 1 || mesNum > 12) return false;
+    const hoy = new Date();
+    const mesActual = hoy.getMonth() + 1;
+    const anioActual = hoy.getFullYear();
+    return anioNum > anioActual || (anioNum === anioActual && mesNum >= mesActual);
+  };
+
   return (
     <>
       <Header />
@@ -238,9 +251,14 @@ const Pago = () => {
               if (
                 !metodoPago ||
                 !dni ||
-                (metodoPago === "credito" && !cuotas)
+                (metodoPago === "credito" && !cuotas) ||
+                ((metodoPago === "debito" || metodoPago === "credito") && !vencimientoValido())
               ) {
-                alert("Por favor completá todos los campos.");
+                alert(
+                  (metodoPago === "debito" || metodoPago === "credito") && !vencimientoValido()
+                    ? "La fecha de vencimiento de la tarjeta no puede ser anterior al mes actual."
+                    : "Por favor completá todos los campos."
+                );
                 return;
               }
               setMostrarFactura(true);
