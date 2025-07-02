@@ -164,7 +164,7 @@ const mapTipoMySQLaHTML_alternativa = (tipo) => {
       </div>
 
     <div className="d-flex justify-content-center mt-2">
-<table 
+    <table 
         border="1"
         cellPadding="10"
         style={{ borderCollapse: "collapse", border:"1px solid black" }}
@@ -182,7 +182,14 @@ const mapTipoMySQLaHTML_alternativa = (tipo) => {
           {filas.map((fila, i) => (
             <tr key={i}>
               {columnas.map((col, j) => (
-                <td key={j}>{fila[col.nombre]}</td>
+                <td 
+                key={j}
+                style={
+                col.nombre === "url_imagen"
+                  ? { maxWidth: "300px", wordWrap: "break-word", whiteSpace: "normal", overflowWrap: "break-word" }
+                  : {}
+              }
+                >{fila[col.nombre]}</td>
               ))}
               <div className="d-flex justify-content-center m-2">
               <Button variant="warning" style={{ marginRight: "10px" }} onClick={()=>{handleEditar(fila.id)}}>
