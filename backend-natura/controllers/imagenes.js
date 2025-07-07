@@ -4,7 +4,7 @@ const { conection } = require("../config/db");
 const getAllImagenes = (req, res) => {
   // Primero obtenemos las columnas con SHOW COLUMNS
   const columnasQuery = "SHOW COLUMNS FROM imagenes_productos;";
-  const consulta = "SELECT * FROM imagenes_productos;";
+  const consulta = "SELECT * FROM imagenes_productos where estado=1 ;";
   conection.query(columnasQuery, (err, columnasResultado) => {
     if (err) return res.status(500).json({ error: err.message });
 
@@ -38,9 +38,10 @@ const getEspecifiedImagenId = (req, res) => {
 
 // Crear una nueva imagen
 const createImagen = (req, res) => {
+   const estado = 1;
   const {producto_id, url_imagen} = req.body;
-  const consulta = "INSERT INTO imagenes_productos (producto_id, url_imagen) VALUES (?, ?);";
-  conection.query(consulta, [producto_id, url_imagen], (err, result) => {
+  const consulta = "INSERT INTO imagenes_productos (producto_id, url_imagen , estado) VALUES (?, ?, ?);";
+  conection.query(consulta, [producto_id, url_imagen , estado], (err, result) => {
     if (err) return res.status(500).json({ error: err.message });
     res.status(201).json({ id: result.insertId, mensaje: "Imagen creada" });
   });

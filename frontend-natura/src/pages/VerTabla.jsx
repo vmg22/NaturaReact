@@ -45,24 +45,24 @@ const mapTipoMySQLaHTML_alternativa = (tipo) => {
 };
 
    const getTabla = async () => {
-      if (!tabla) return;
+  if (!tabla) return;
 
-      try {
-        const respuesta = await axios.get(`http://localhost:3001/${tabla}`);
+  try {
+    const respuesta = await axios.get(`http://localhost:3001/${tabla}`);
 
-        // La API debe devolver { columnas: [], datos: [] }
-        setColumnas(respuesta.data.columnas);
-        setFilas(respuesta.data.datos);
-      } catch (error) {
-        console.error("Error al obtener la tabla:", error);
-      } finally {
-        setCargando(false);
-      }
-    };
+    setColumnas(respuesta.data.columnas.filter((col) => col.nombre !== "estado"));
+    setFilas(respuesta.data.datos);
+  } catch (error) {
+    console.error("Error al obtener la tabla:", error);
+  } finally {
+    setCargando(false);
+  }
+};
 
-      useEffect(() => {
-        getTabla();
-      }, [tabla]);
+useEffect(() => {
+  getTabla();
+}, [tabla]);
+
 
   if (!tabla) return <div>⚠️ No se especificó la tabla.</div>;
   if (cargando) return <div>🔄 Cargando datos...</div>;
