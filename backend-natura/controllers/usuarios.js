@@ -7,18 +7,24 @@ const getAllUsuarios = (req, res) => {
   conection.query(columnasQuery, (err, columnasResultado) => {
     if (err) return res.status(500).json({ error: err.message });
 
-    const columnas = columnasResultado.map((col) => ({
-      nombre: col.Field,
-      tipo: col.Type,
-      extra: col.Extra,
-    }));
+    // Filtra la columna rol_id
+    const columnas = columnasResultado
+      .filter((col) => col.Field !== "rol_id")
+      .map((col) => ({
+        nombre: col.Field,
+        tipo: col.Type,
+        extra: col.Extra,
+      }));
 
     conection.query(consulta, (err2, datosResultado) => {
       if (err2) return res.status(500).json({ error: err2.message });
 
+      // Filtra el campo rol_id de cada usuario
+      const datosSinRol = datosResultado.map(({ rol_id, ...rest }) => rest);
+
       res.json({
         columnas,
-        datos: datosResultado,
+        datos: datosSinRol,
       });
     });
   });

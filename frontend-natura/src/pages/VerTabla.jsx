@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Navigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -19,6 +19,11 @@ const VerTabla = () => {
   const [datosEditar, setDatosEditar] = useState({});
   const [toastVisible, setToastVisible] = useState(false);
   const [toastError, setToastError] = useState(false);
+
+  const tablasRestringidas = ["roles", "detalle_orden"];
+  if (tablasRestringidas.includes(tabla)) {
+    return <Navigate to="/admin" replace />;
+  }
 
   const MAPEO_MYSQL_HTML = {
   number: ["int", "decimal", "float", "double"],
@@ -143,6 +148,8 @@ const mapTipoMySQLaHTML_alternativa = (tipo) => {
     setMostrarModal(false);
   };
 
+  const columnasFiltradas = columnas.filter(col => col.nombre !== "rol_id" && col.nombre !== "rol");
+
   return (
     <div>
       <div className="d-flex justify-content-around align-items-center mt-2 divTituloTabla">
@@ -172,16 +179,16 @@ const mapTipoMySQLaHTML_alternativa = (tipo) => {
       >
         <thead style={{ backgroundColor: "#f0f0f0" }}>
           <tr>
-            {columnas.map((col, i) => (
+            {columnasFiltradas.map((col, i) => (
               <th key={i} className="text-center">{col.nombre}</th>
             ))}
-            <th className="text-center">accion</th>
+            <th className="text-center">acción</th>
           </tr>
         </thead>
         <tbody>
           {filas.map((fila, i) => (
             <tr key={i}>
-              {columnas.map((col, j) => (
+              {columnasFiltradas.map((col, j) => (
                 <td 
                 key={j}
                 style={
@@ -218,7 +225,7 @@ const mapTipoMySQLaHTML_alternativa = (tipo) => {
             e.preventDefault();
             handleGuardarCambios(); 
           }}> 
-          {columnas
+          {columnasFiltradas
             .filter((col) => col.extra !== "auto_increment") // Primero filtra q no sea id autoincrement para no mostrarlo
             .map(
               (

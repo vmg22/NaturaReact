@@ -4,7 +4,7 @@ const { conection } = require("../config/db");
 const getAllOrdenes = (req, res) => {
     // Primero obtenemos las columnas con SHOW COLUMNS
   const columnasQuery = "SHOW COLUMNS FROM ordenes;";
-  const consulta = "SELECT * FROM ordenes;";
+  const consulta = "SELECT * FROM ordenes where estado =1 ;";
   conection.query(columnasQuery, (err, columnasResultado) => {
     if (err) return res.status(500).json({ error: err.message });
 
@@ -38,11 +38,13 @@ const getEspecifiedOrdenId = (req, res) => {
 
 // Crear una nueva orden
 const createOrden = (req, res) => {
-  const { id_usuario, total, estado } = req.body;
+  const { usuario_id, total,estado_orden } = req.body;
   const fecha = new Date(); // Genera la fecha actual
+   // ← definilo acá
+  const estado = 1;
 
-  const consulta = "INSERT INTO ordenes (usuario_id, fecha, total, estado) VALUES (?, ?, ?, ?)";
-  conection.query(consulta, [id_usuario, fecha, total, estado], (err, result) => {
+  const consulta = "INSERT INTO ordenes (usuario_id, fecha, total, estado_orden, estado) VALUES (?, ?, ?, ?, ?)";
+  conection.query(consulta, [usuario_id, fecha, total, estado_orden, estado], (err, result) => {
     if (err) return res.status(500).json({ error: err.message });
     res.status(201).json({ id: result.insertId });
   });
@@ -51,9 +53,9 @@ const createOrden = (req, res) => {
 // Actualizar una orden
 const updateOrden = (req, res) => {
     const { id } = req.params;
-    const { estado, total } = req.body;
-    const consulta = "UPDATE ordenes SET estado=?, total=? WHERE id=?;";
-    conection.query(consulta, [estado, total, id], (err) => {
+    const { estado_orden, total,estado } = req.body;
+    const consulta = "UPDATE ordenes SET estado_orden=?, total=?, estado=? WHERE id=?;";
+    conection.query(consulta, [estado_orden, total, estado, id], (err) => {
         if (err) return res.status(500).json({ error: err.message });
         res.json({ mensaje: "Orden actualizada" });
     });
@@ -62,11 +64,13 @@ const updateOrden = (req, res) => {
 // Eliminar una orden
 const deleteOrden = (req, res) => {
     const { id } = req.params;
-    const consulta = "DELETE FROM ordenes WHERE id=?;";
-    conection.query(consulta, [id], (err) => {
+    const estado = 0; // Cambiamos el estado a 0 en lugar de eliminar
+    const consulta = "UPDATE ordenes SET estado = ? WHERE id = ?";
+    conection.query(consulta, [estado,id], (err) => {
         if (err) return res.status(500).json({ error: err.message });
         res.json({ mensaje: "Orden eliminada" });
     });
 };
+
 
 module.exports = {getAllOrdenes,getEspecifiedOrdenId,createOrden,updateOrden,deleteOrden};

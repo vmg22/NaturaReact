@@ -5,7 +5,7 @@ const getAllCategorias = (req, res) => {
   // Primero obtenemos las columnas con SHOW COLUMNS
 
   const columnasQuery = "SHOW COLUMNS FROM categorias;";
-  const consulta = "SELECT * FROM categorias;";
+  const consulta = "SELECT * FROM categorias where estado=1;";
 
   conection.query(columnasQuery, (err, columnasResultado) => {
     if (err) return res.status(500).json({ error: err.message });
@@ -31,6 +31,7 @@ const getAllCategorias = (req, res) => {
 // Obtener categoria especifica por nombre
 const getEspecifiedCategorias = (req, res) => {
   const categoria = req.params.categoria;
+  
   const consulta = "SELECT * FROM categorias WHERE nombre = ?;";
 
   conection.query(consulta, [categoria], (err, results) => {
@@ -42,8 +43,9 @@ const getEspecifiedCategorias = (req, res) => {
 //CREAR categorias (POST)//
 const createCategoria = (req, res) => {
   const columnasQuery = "SHOW COLUMNS FROM categorias;";
+  const estado = 1;
   const consulta =
-    "INSERT INTO categorias (nombre, descripcion, pregunta) VALUES (?, ?, ?);";
+    "INSERT INTO categorias (nombre, descripcion, pregunta,estado) VALUES (?, ?, ?, ?);";
   const { nombre, descripcion, pregunta } = req.body;
 
   conection.query(columnasQuery, (err, columnasResultado) => {
@@ -57,7 +59,7 @@ const createCategoria = (req, res) => {
 
     conection.query(
       consulta,
-      [nombre, descripcion, pregunta],
+      [nombre, descripcion, pregunta,estado],
       (err2, datosResultado) => {
         if (err2) return res.status(500).json({ error: err2.message });
 
@@ -74,12 +76,12 @@ const createCategoria = (req, res) => {
 //-ACTUALIZAR categorias (PUT)//
 const updateCategoria = (req, res) => {
   const { id } = req.params;
-  const { nombre, descripcion, pregunta } = req.body;
+  const { nombre, descripcion, pregunta ,estado } = req.body;
 
   const consulta =
-    "UPDATE categorias SET nombre = ?, descripcion = ?, pregunta = ? WHERE id = ?;";
+    "UPDATE categorias SET nombre = ?, descripcion = ?, pregunta = ? ,estado=? WHERE id = ? ;";
 
-  conection.query(consulta, [nombre, descripcion, pregunta, id], (err) => {
+  conection.query(consulta, [nombre, descripcion, pregunta, estado, id ], (err) => {
     if (err) return res.status(500).json({ error: err.message });
     res.json({ mensaje: "Categoria actualizada correctamente" });
   });
@@ -89,13 +91,16 @@ const updateCategoria = (req, res) => {
 
 const deleteCategoria = (req, res) => {
   const { id } = req.params;
-  const consulta = "DELETE FROM categorias WHERE id = ?;";
+  const estado = 0; // Desactivamos la categoría en lugar de eliminarla
+  const consulta = "UPDATE categorias SET estado = ? WHERE id = ?";
 
-  conection.query(consulta, [id], (err) => {
+  conection.query(consulta, [estado, id], (err) => {
     if (err) return res.status(500).json({ error: err.message });
-    res.json({ mensaje: "Categoria eliminada correctamente" });
+    res.json({ mensaje: "Categoría desactivada correctamente" });
   });
 };
+
+
 
 module.exports = {
   getAllCategorias,

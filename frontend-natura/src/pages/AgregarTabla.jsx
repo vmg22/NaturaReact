@@ -81,7 +81,7 @@ const AgregarTabla = () => {
   const handleSubmit = async(e) =>{
     e.preventDefault()
     try {
-        let response = await axios.post(`http://localhost:3001/${tabla}`, formData);
+        let response = await axios.post(`http://localhost:3001/${tabla}`, {...formData,estado:1,} );
         setToastVisible(true)
     // console.log("El valor de tabla es:", tabla);
         setTimeout(() => {
@@ -118,7 +118,7 @@ const AgregarTabla = () => {
       <div className="d-flex justify-content-center bodyAgregar">
         <Form onSubmit={handleSubmit} className="text-center formAgregar">
           {columnas
-            .filter((col) => col.extra !== "auto_increment") // Primero filtra q no sea id autoincrement
+            .filter((col) => col.extra !== "auto_increment" && col.nombre !== "estado")
             .map(
               (
                 col // si noe s autoincrement empieza el mapeo de las columnas
