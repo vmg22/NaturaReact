@@ -77,10 +77,10 @@ const PaginaBusqueda = () => {
   <h3 className="mb-4">Resultados de búsqueda para: "{termino}"</h3>
 
   {results.length > 0 ? (
-    // 1. Contenedor principal para el grid de productos
+    //  Contenedor principal para el grid de productos
     <div className="row">
       {results.map((product) => (
-        // 2. Cada producto es una columna en el grid para un layout responsivo
+        //  Cada producto es una columna en el grid para un layout responsivo
         //    La 'key' va en el elemento más externo del map.
         <div className="col-xl-3 col-lg-4 col-md-6 mb-4" key={product.id}>
           <Card
@@ -101,19 +101,18 @@ const PaginaBusqueda = () => {
             <div style={{ padding: "1rem" }}>
               <Card.Img
                 variant="top"
-                // 3. Añadimos un fallback por si la imagen no existe
+                //  Añadimos un fallback por si la imagen no existe
                 src={product.url_imagen || "https://via.placeholder.com/250?text=Sin+Imagen"}
                 alt={product.titulo}
                 style={{ objectFit: "contain", height: "250px" }}
               />
             </div>
-            {/* 4. Usamos flexbox para alinear el botón siempre al final */}
+            {/*  Usamos flexbox para alinear el botón siempre al final */}
             <Card.Body className="pt-0 d-flex flex-column">
               <Card.Text
                 className="text-muted mb-1"
                 style={{ fontSize: "0.85rem" }}
               >
-                {/* Podrías poner aquí la marca o categoría */}
               </Card.Text>
               {/* flex-grow-1 empuja el contenido siguiente hacia abajo */}
               <Card.Title style={{ fontSize: "1rem", flexGrow: 1 }}>
