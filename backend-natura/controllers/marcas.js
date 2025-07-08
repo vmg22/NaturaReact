@@ -4,7 +4,7 @@ const {conection} = require ("../config/db")
 const getAllMarcas = (req,res) =>{
     // Primero obtenemos las columnas con SHOW COLUMNS
   const columnasQuery = "SHOW COLUMNS FROM marcas;";
-  const consulta = "SELECT * FROM marcas;";
+  const consulta = "SELECT * FROM marcas where estado=1;";
   conection.query(columnasQuery, (err, columnasResultado) => {
     if (err) return res.status(500).json({ error: err.message });
 
@@ -41,9 +41,10 @@ const getEspecifiedMarca = (req,res) =>{
 //CREAR marca (POST)//
 const createMarca = (req,res)=>{
     const { nombre } = req.body;
-    const consulta = "INSERT INTO marcas (nombre) VALUES (?);"
+    const estado = 1;
+    const consulta = "INSERT INTO marcas (nombre,estado) VALUES (?,?);"
 
-    conection.query(consulta,[nombre],(err,results)=>{
+    conection.query(consulta,[nombre,estado],(err,results)=>{
         if (err) return res.status(500).json({ error: err.message });
     res.status(201).json({ mensaje: 'Marca creada', id: results.insertId });
     })
@@ -54,11 +55,11 @@ const createMarca = (req,res)=>{
 //-ACTUALIZAR marcas (PUT)//
     const updateMarcas = (req,res) =>{
         const {id} = req.params;
-        const { nombre } = req.body;
-        const consulta = "UPDATE marcas SET nombre = ? WHERE id = ?;"
+        const { nombre , estado } = req.body;
+        const consulta = "UPDATE marcas SET nombre = ? ,estado=? WHERE id = ?;"
         
 
-        conection.query(consulta,[nombre,id],(err, results)=>{
+        conection.query(consulta,[nombre,estado,id],(err, results)=>{
             if (err) return res.status(500).json({ error: err.message });
             res.json({ mensaje: 'Marca actualizada' });
         })
@@ -66,9 +67,10 @@ const createMarca = (req,res)=>{
 
 const deleteMarca = (req,res)=>{
     const { id } = req.params;
-    const consulta = "DELETE FROM marcas WHERE id = ?;"
+    const estado = 0; // Desactivamos la marca en lugar de eliminarla
+    const consulta = "UPDATE marcas SET estado = ? WHERE id = ?;"
 
-    conection.query(consulta,[id],(err)=>{
+    conection.query(consulta,[estado,id],(err)=>{
         if (err) return res.status(500).json({ error: err.message });
         res.json({ mensaje: 'Marca eliminada' });
     })

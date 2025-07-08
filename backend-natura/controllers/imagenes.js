@@ -4,7 +4,11 @@ const { conection } = require("../config/db");
 const getAllImagenes = (req, res) => {
   // Primero obtenemos las columnas con SHOW COLUMNS
   const columnasQuery = "SHOW COLUMNS FROM imagenes_productos;";
-  const consulta = "SELECT * FROM imagenes_productos where estado=1 ;";
+  const consulta = `SELECT ip.*, p.id
+FROM imagenes_productos ip
+JOIN productos p ON p.id = ip.producto_id
+JOIN categorias c ON p.categoria_id = c.id
+WHERE p.estado = 1 AND c.estado != 0 ;`
   conection.query(columnasQuery, (err, columnasResultado) => {
     if (err) return res.status(500).json({ error: err.message });
 
@@ -38,10 +42,11 @@ const getEspecifiedImagenId = (req, res) => {
 
 // Crear una nueva imagen
 const createImagen = (req, res) => {
-   const estado = 1;
+  
   const {producto_id, url_imagen} = req.body;
+  const estado = 1; // Asignamos un estado por defecto
   const consulta = "INSERT INTO imagenes_productos (producto_id, url_imagen , estado) VALUES (?, ?, ?);";
-  conection.query(consulta, [producto_id, url_imagen , estado], (err, result) => {
+  conection.query(consulta, [producto_id, url_imagen ,estado ], (err, result) => {
     if (err) return res.status(500).json({ error: err.message });
     res.status(201).json({ id: result.insertId, mensaje: "Imagen creada" });
   });
@@ -50,9 +55,9 @@ const createImagen = (req, res) => {
 // Actualizar imagen
 const updateImagen = (req, res) => {
   const { id } = req.params;
-  const { url_imagen } = req.body;
-  const consulta = "UPDATE imagenes_productos SET url_imagen = ? WHERE id = ?;";
-  conection.query(consulta, [url_imagen, id], (err) => {
+  const { url_imagen ,estado } = req.body;
+  const consulta = "UPDATE imagenes_productos SET url_imagen = ?,estado=? WHERE id = ?;";
+  conection.query(consulta, [url_imagen, estado, id], (err) => {
     if (err) return res.status(500).json({ error: err.message });
     res.json({ mensaje: "Imagen actualizada" });
   });
@@ -61,8 +66,9 @@ const updateImagen = (req, res) => {
 // Eliminar imagen
 const deleteImagen = (req, res) => {
   const { id } = req.params;
-  const consulta = "DELETE FROM imagenes_productos WHERE id = ?;";
-  conection.query(consulta, [id], (err) => {
+  const estado = 0; // Desactivamos la imagen en lugar de eliminarla
+  const consulta = "UPDATE imagenes_productos SET estado = ? WHERE id = ?;";
+  conection.query(consulta, [estado,id], (err) => {
     if (err) return res.status(500).json({ error: err.message });
     res.json({ mensaje: "Imagen eliminada" });
   });

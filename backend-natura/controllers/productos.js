@@ -5,7 +5,7 @@ const {conection} = require ("../config/db")
 const getAllProductos = (req,res) =>{
     // Primero obtenemos las columnas con SHOW COLUMNS
   const columnasQuery = "SHOW COLUMNS FROM productos;";
-  const consulta = "SELECT * FROM productos;";
+  const consulta = "SELECT p.* FROM productos p join categorias c on p.categoria_id =  c.id where p.estado =1 and c.estado !=0 ;";
   conection.query(columnasQuery, (err, columnasResultado) => {
     if (err) return res.status(500).json({ error: err.message });
 
@@ -40,6 +40,7 @@ const getAllProductos2 = (req, res) => {
           productos p
       LEFT JOIN
           imagenes_productos i ON p.id = i.producto_id
+          where p.estado=1
       GROUP BY
           p.id;
     `;
@@ -72,7 +73,7 @@ const getEspecifiedProductoNombre = (req, res) => {
       LEFT JOIN
           imagenes_productos i ON p.id = i.producto_id
       WHERE
-          p.titulo LIKE ?
+          p.titulo LIKE ? and p.estado=1
       GROUP BY
           p.id;`;
   const terminoDeBusqueda = `%${busqueda}%`;
@@ -123,7 +124,7 @@ const getProductoCategoriaNombre = (req,res) =>{
     LEFT JOIN
         imagenes_productos i ON p.id = i.producto_id
     WHERE
-        c.nombre = ?
+        c.nombre = ? AND p.estado=1
     GROUP BY
         p.id;
   `;
@@ -146,10 +147,11 @@ const getProductoCategoriaNombre = (req,res) =>{
 
 //CREAR producto (POST)//
 const createProduct = (req,res)=>{
-    const consulta = "INSERT INTO productos (titulo, marca_id, categoria_id, precio_original, precio_descuento, precio_sin_iva, descuento, stock, descripcion) VALUES (?, ?, ?, ?, ?,?,?,?,?);"
-    const { titulo, marca_id, categoria_id, precio_original, precio_descuento, precio_sin_iva, descuento, stock, descripcion } = req.body;
+    const consulta = "INSERT INTO productos (titulo, marca_id, categoria_id, precio_original, precio_descuento, precio_sin_iva, descuento, stock, descripcion, estado) VALUES (?, ?, ?, ?, ?,?,?,?,?,?);"
+    const { titulo, marca_id, categoria_id, precio_original, precio_descuento, precio_sin_iva, descuento, stock, descripcion  } = req.body;
+    const estado = 1; // Estado activo por defecto
 
-    conection.query(consulta,[titulo, marca_id, categoria_id, precio_original, precio_descuento, precio_sin_iva, descuento, stock, descripcion],(err,results)=>{
+    conection.query(consulta,[titulo, marca_id, categoria_id, precio_original, precio_descuento, precio_sin_iva, descuento, stock, descripcion ,estado],(err,results)=>{
         if (err) return res.status(500).json({ error: err.message });
         res.status(201).json({ mensaje: 'Producto creado correctamente', id: results.insertId })
     })
@@ -158,12 +160,12 @@ const createProduct = (req,res)=>{
 //-ACTUALIZAR producto (PUT)//
     const updateProduct = (req,res) =>{
         const {id} = req.params;
-        const { titulo, marca_id, categoria_id, precio_original, precio_descuento, precio_sin_iva, descuento, stock, descripcion } = req.body;
+        const { titulo, marca_id, categoria_id, precio_original, precio_descuento, precio_sin_iva, descuento, stock, descripcion , estado} = req.body;
 
-        const consulta = "UPDATE productos SET titulo = ?, marca_id = ?, categoria_id = ?, precio_original = ?, precio_descuento = ?, precio_sin_iva = ?, descuento = ?, stock = ?, descripcion = ? WHERE id = ?;"
+        const consulta = "UPDATE productos SET titulo = ?, marca_id = ?, categoria_id = ?, precio_original = ?, precio_descuento = ?, precio_sin_iva = ?, descuento = ?, stock = ?, descripcion = ?  ,estado=? WHERE id = ?;"
         
 
-        conection.query(consulta,[titulo, marca_id, categoria_id, precio_original, precio_descuento, precio_sin_iva, descuento, stock, descripcion,id],(err)=>{
+        conection.query(consulta,[titulo, marca_id, categoria_id, precio_original, precio_descuento, precio_sin_iva, descuento, stock, descripcion, estado, id],(err)=>{
             if (err) return res.status(500).json({ error: err.message });
             res.json({ mensaje: 'Producto actualizado correctamente' });
         })
@@ -173,9 +175,10 @@ const createProduct = (req,res)=>{
 
 const deleteProduct = (req,res)=>{
     const { id } = req.params;
-    const consulta = "DELETE FROM productos WHERE id = ?;"
+    const estado = 0; // Desactivamos el producto en lugar de eliminarlo
+    const consulta = "UPDATE productos SET estado = ? WHERE id = ?;"
 
-    conection.query(consulta,[id],(err)=>{
+    conection.query(consulta,[estado,id],(err)=>{
         if (err) return res.status(500).json({ error: err.message });
         res.json({ mensaje: 'Producto eliminado correctamente' });
     })
