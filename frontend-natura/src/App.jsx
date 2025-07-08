@@ -4,10 +4,10 @@ import Home from "./pages/Home"
 import Login from "./pages/Login"
 import Register from "./pages/Register"
 import Carrito from "./pages/Carrito"
-// import CategoriaHombre from "./pages/CategoriaHombre"
+import CategoriaHombre from "./pages/CategoriaHombre"
 // import CategoriaMujer from "./pages/CategoriaMujer"
 import Categoria from "./pages/Categoria"
-// import Infantil from "./pages/Infantil"
+import Infantil from "./pages/Infantil"
 import Admin from "./pages/Admin"
 import Pago from "./pages/Pago"
 import Error404 from "./pages/Error404"
@@ -24,9 +24,9 @@ import Blog from "./pages/Blog"
 import Maquillaje from './pages/Maquillaje'
 import Rostro from './pages/Rostro'
 import Perfumeria from './pages/perfumeria'
-// import CuidadosDiarios from './pages/CuidadosDiarios'
-// import Cabello from './pages/Cabello'
-// import Promociones from './pages/Promociones'
+import CuidadosDiarios from './pages/CuidadosDiarios'
+import Cabello from './pages/Cabello'
+import Promociones from './pages/Promociones'
 import VerTabla from "./pages/VerTabla"
 import AgregarTabla from './pages/AgregarTabla'
 import PrivateRoute from "./components/PrivateRoute";
@@ -47,10 +47,10 @@ function App() {
         <Route path='/categoria' element={<Categoria/>}></Route>
         {/* <Route path='/categoria-hombre' element={<CategoriaHombre/>}></Route> */}
         <Route path='/categorias/:nombre' element={<Categoria/>}></Route>
-        {/* <Route path='/categoria-hombre' element={<CategoriaHombre/>}></Route> */}
+        <Route path='/categoria-hombre' element={<CategoriaHombre/>}></Route>
         <Route path="/carrito" element={<Carrito />} />
-        {/* <Route path='/categoria-mujer' element={<CategoriaMujer/>}></Route>
-        <Route path='/categoria-infantil' element={<Infantil/>}></Route> */}
+        {/* <Route path='/categoria-mujer' element={<CategoriaMujer/>}></Route> */}
+        <Route path='/categoria-infantil' element={<Infantil/>}></Route>
         <Route path='/pago' element={<Pago/>}></Route>
         {/* {/* <Route path='/revista-natura' element={<RevistaNatura/>}></Route> */} 
         {/* <Route path='/sobre-natura' element={<SobreNatura/>}></Route> */}
@@ -66,8 +66,8 @@ function App() {
         <Route path='/rostro' element={<Rostro/>}></Route>
         <Route path='/perfumeria' element={<Perfumeria/>}></Route>
         {/* <Route path='/cuidados-diarios' element={<CuidadosDiarios/>}></Route> */}
-        {/* <Route path='/cabello' element={<Cabello/>}></Route> */}
-        {/* <Route path='/promociones' element={<Promociones/>}></Route> */}
+        <Route path='/cabello' element={<Cabello/>}></Route>
+        <Route path='/promociones' element={<Promociones/>}></Route>
         {/* {/* <Route path='/pro-primera-compra' element={<ProPrimeraCompra/>}></Route> */} 
         {/* {/* <Route path='/r-piel-oleosa' element={<RPielOleosa/>}></Route> */}
         {/* <Route path='/r-piel-seca' element={<RPielSeca/>}></Route> */}

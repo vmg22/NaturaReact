@@ -3,22 +3,28 @@ const { conection } = require("../config/db");
 // Obtener todos los usuarios
 const getAllUsuarios = (req, res) => {
   const columnasQuery = "SHOW COLUMNS FROM usuarios;";
-  const consulta = "SELECT * FROM usuarios;";
+  const consulta = "SELECT * FROM usuarios where estado=1;";
   conection.query(columnasQuery, (err, columnasResultado) => {
     if (err) return res.status(500).json({ error: err.message });
 
-    const columnas = columnasResultado.map((col) => ({
-      nombre: col.Field,
-      tipo: col.Type,
-      extra: col.Extra,
-    }));
+    // Filtra la columna rol_id
+    const columnas = columnasResultado
+      .filter((col) => col.Field !== "rol_id")
+      .map((col) => ({
+        nombre: col.Field,
+        tipo: col.Type,
+        extra: col.Extra,
+      }));
 
     conection.query(consulta, (err2, datosResultado) => {
       if (err2) return res.status(500).json({ error: err2.message });
 
+      // Filtra el campo rol_id de cada usuario
+      const datosSinRol = datosResultado.map(({ rol_id, ...rest }) => rest);
+
       res.json({
         columnas,
-        datos: datosResultado,
+        datos: datosSinRol,
       });
     });
   });
@@ -37,15 +43,15 @@ const getEspecifiedUsuarioId = (req, res) => {
 // Crear usuario
 const createUsuario = (req, res) => {
   const { nombre, email, password, direccion, telefono  } = req.body;
-
+  const estado = 1; // Estado activo por defecto
   const rol_id = 2;
 
   const consulta =
-    "INSERT INTO usuarios (nombre, email, password, direccion, telefono, rol_id) VALUES (?, ?, ?, ?, ?, ?);";
+    "INSERT INTO usuarios (nombre, email, password, direccion, telefono, rol_id ,estado) VALUES (?, ?, ?, ?, ?, ?,?);";
 
   conection.query(
     consulta,
-    [nombre, email, password, direccion, telefono, rol_id],
+    [nombre, email, password, direccion, telefono, rol_id, estado],
     (err, results) => {
       if (err) return res.status(500).json({ error: err.message });
       res.status(201).json({ id: results.insertId, mensaje: "Usuario creado" });
@@ -56,11 +62,11 @@ const createUsuario = (req, res) => {
 // Actualizar usuario
 const updateUsuario = (req, res) => {
   const { id } = req.params;
-  const { nombre, email, password, direccion, telefono, rol_id, fecha_registro } = req.body;
+  const { nombre, email, password, direccion, telefono, fecha_registro , estado} = req.body;
+  const rol_id = 2;
+  const consulta = "UPDATE usuarios SET nombre=?, email=?, password=?, direccion=?, telefono=?, rol_id=?, fecha_registro=?,estado=? WHERE id=?;";
 
-  const consulta = "UPDATE usuarios SET nombre=?, email=?, password=?, direccion=?, telefono=?, rol_id=?, fecha_registro=? WHERE id=?;";
-
-  conection.query(consulta, [nombre, email, password, direccion, telefono, rol_id, fecha_registro, id], (err) => {
+  conection.query(consulta, [nombre, email, password, direccion, telefono, rol_id, fecha_registro,estado, id], (err) => {
     if (err) return res.status(500).json({ error: err.message });
     res.json({ mensaje: 'Usuario actualizado' });
   });
@@ -69,8 +75,9 @@ const updateUsuario = (req, res) => {
 // Eliminar usuario
 const deleteUsuario = (req, res) => {
   const { id } = req.params;
-  const consulta = "DELETE FROM usuarios WHERE id=?;";
-  conection.query(consulta, [id], (err) => {
+  const estado = 0; // Desactivamos el usuario en lugar de eliminarlo
+  const consulta = "UPDATE usuarios SET estado = ? WHERE id = ?;";
+  conection.query(consulta, [estado,id], (err) => {
     if (err) return res.status(500).json({ error: err.message });
     res.json({ mensaje: "Usuario eliminado" });
   });
@@ -88,7 +95,8 @@ const getEspecifiedUsuarioEmail = (req, res) => {
     SELECT u.id, u.nombre, u.email, u.password, r.id AS rol_id, r.nombre AS rol
     FROM usuarios u
     JOIN roles r ON u.rol_id = r.id
-    WHERE u.email = ?
+   
+    WHERE u.email = ? and u.estado = 1
   `;
 
   conection.query(sql, [email], (err, results) => {

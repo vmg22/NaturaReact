@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import UsuarioStore from '../../store/UsuarioStore'; // 
 
+
 const MainLogin = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [user, setUser] = useState("");
@@ -22,7 +23,7 @@ const MainLogin = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:3001/login', {
+      const response = await axios.post('http://localhost:3001/api/usuarios/login', {
         email: user,
         password: pass
       });
@@ -31,17 +32,17 @@ const MainLogin = () => {
 
       if (data.success) {
         const usuario = data.usuario;
-        iniciarSesion(usuario); //  Guarda en el Zustand
-
+        iniciarSesion(usuario);
         alert(`¡Bienvenido, ${usuario.nombre}!`);
 
-        // Limpiar campos
+        // limpiar campos siempre
         setUser("");
         setPass("");
-       // También en el localStorage para persistencia
+
+        // guardar en localStorage
         localStorage.setItem("usuarioLogueado", JSON.stringify(usuario));
 
-        // Redirección por rol
+        // redirigir
         if (usuario.rol_id === 1) {
           navigate("/Admin");
         } else if (usuario.rol_id === 2) {
@@ -52,11 +53,15 @@ const MainLogin = () => {
 
       } else {
         alert(data.message || "Usuario o contraseña incorrectos");
+        setUser(""); // limpiar aunque haya fallo
+        setPass("");
       }
 
     } catch (error) {
       console.error("Error en login:", error);
       alert("Error al conectar con el servidor");
+      setUser(""); // limpiar en error también
+      setPass("");
     }
   };
 

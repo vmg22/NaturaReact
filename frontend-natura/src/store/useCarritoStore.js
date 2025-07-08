@@ -1,4 +1,4 @@
-// store/useCarritoStore.js
+// src/store/useCarritoStore.js
 import { create } from 'zustand';
 
 const useCarritoStore = create((set, get) => ({
@@ -44,6 +44,11 @@ const useCarritoStore = create((set, get) => ({
           : item
       ),
     });
+  },
+
+  // ✅ Agrega esta función
+  vaciarCarrito: () => {
+    set({ carrito: [] });
   },
 }));
 

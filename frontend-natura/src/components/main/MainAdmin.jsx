@@ -13,7 +13,11 @@ const MainAdmin = () => {
     const mostrarTablas = async () => {
       try {
         const respuesta = await axios.get("http://localhost:3001/tablas");
-        setTables(respuesta.data);
+        // Filtra las tablas "roles" y "detalle_ordenes"
+        const tablasFiltradas = respuesta.data.filter(
+          tabla => tabla !== "roles" && tabla !== "detalle_orden"
+        );
+        setTables(tablasFiltradas);
       } catch (error) {
         console.error("Error al obtener las tablas:", error);
       }

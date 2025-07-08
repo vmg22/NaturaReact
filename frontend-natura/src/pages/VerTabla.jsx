@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Navigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -19,6 +19,11 @@ const VerTabla = () => {
   const [datosEditar, setDatosEditar] = useState({});
   const [toastVisible, setToastVisible] = useState(false);
   const [toastError, setToastError] = useState(false);
+
+  const tablasRestringidas = ["roles", "detalle_orden"];
+  if (tablasRestringidas.includes(tabla)) {
+    return <Navigate to="/admin" replace />;
+  }
 
   const MAPEO_MYSQL_HTML = {
   number: ["int", "decimal", "float", "double"],
@@ -40,24 +45,24 @@ const mapTipoMySQLaHTML_alternativa = (tipo) => {
 };
 
    const getTabla = async () => {
-      if (!tabla) return;
+  if (!tabla) return;
 
-      try {
-        const respuesta = await axios.get(`http://localhost:3001/${tabla}`);
+  try {
+    const respuesta = await axios.get(`http://localhost:3001/${tabla}`);
 
-        // La API debe devolver { columnas: [], datos: [] }
-        setColumnas(respuesta.data.columnas);
-        setFilas(respuesta.data.datos);
-      } catch (error) {
-        console.error("Error al obtener la tabla:", error);
-      } finally {
-        setCargando(false);
-      }
-    };
+    setColumnas(respuesta.data.columnas.filter((col) => col.nombre !== "estado"));
+    setFilas(respuesta.data.datos);
+  } catch (error) {
+    console.error("Error al obtener la tabla:", error);
+  } finally {
+    setCargando(false);
+  }
+};
 
-      useEffect(() => {
-        getTabla();
-      }, [tabla]);
+useEffect(() => {
+  getTabla();
+}, [tabla]);
+
 
   if (!tabla) return <div>⚠️ No se especificó la tabla.</div>;
   if (cargando) return <div>🔄 Cargando datos...</div>;
@@ -143,6 +148,8 @@ const mapTipoMySQLaHTML_alternativa = (tipo) => {
     setMostrarModal(false);
   };
 
+  const columnasFiltradas = columnas.filter(col => col.nombre !== "rol_id" && col.nombre !== "rol");
+
   return (
     <div>
       <div className="d-flex justify-content-around align-items-center mt-2 divTituloTabla">
@@ -164,7 +171,7 @@ const mapTipoMySQLaHTML_alternativa = (tipo) => {
       </div>
 
     <div className="d-flex justify-content-center mt-2">
-<table 
+    <table 
         border="1"
         cellPadding="10"
         style={{ borderCollapse: "collapse", border:"1px solid black" }}
@@ -172,17 +179,24 @@ const mapTipoMySQLaHTML_alternativa = (tipo) => {
       >
         <thead style={{ backgroundColor: "#f0f0f0" }}>
           <tr>
-            {columnas.map((col, i) => (
+            {columnasFiltradas.map((col, i) => (
               <th key={i} className="text-center">{col.nombre}</th>
             ))}
-            <th className="text-center">accion</th>
+            <th className="text-center">acción</th>
           </tr>
         </thead>
         <tbody>
           {filas.map((fila, i) => (
             <tr key={i}>
-              {columnas.map((col, j) => (
-                <td key={j}>{fila[col.nombre]}</td>
+              {columnasFiltradas.map((col, j) => (
+                <td 
+                key={j}
+                style={
+                col.nombre === "url_imagen"
+                  ? { maxWidth: "300px", wordWrap: "break-word", whiteSpace: "normal", overflowWrap: "break-word" }
+                  : {}
+              }
+                >{fila[col.nombre]}</td>
               ))}
               <div className="d-flex justify-content-center m-2">
               <Button variant="warning" style={{ marginRight: "10px" }} onClick={()=>{handleEditar(fila.id)}}>
@@ -211,7 +225,7 @@ const mapTipoMySQLaHTML_alternativa = (tipo) => {
             e.preventDefault();
             handleGuardarCambios(); 
           }}> 
-          {columnas
+          {columnasFiltradas
             .filter((col) => col.extra !== "auto_increment") // Primero filtra q no sea id autoincrement para no mostrarlo
             .map(
               (

@@ -1,11 +1,19 @@
 import { create } from 'zustand';
 
+const usuarioGuardado = JSON.parse(localStorage.getItem("usuarioLogueado"));
+
 const UsuarioStore = create((set) => ({
-  usuario: null, // Aquí guardamos el usuario logueado
+  usuario: usuarioGuardado || null, // cargado desde localStorage al iniciar
 
-  iniciarSesion: (usuario) => set({ usuario }), // Guarda el usuario
-  cerrarSesion: () => set({ usuario: null }),   // Limpia el usuario
+  iniciarSesion: (usuario) => {
+    set({ usuario });
+    localStorage.setItem("usuarioLogueado", JSON.stringify(usuario));
+  },
+
+  cerrarSesion: () => {
+    set({ usuario: null });
+    localStorage.removeItem("usuarioLogueado");
+  },
 }));
-
 
 export default UsuarioStore;
