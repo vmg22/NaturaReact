@@ -1,20 +1,15 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
+import UsuarioStore from "../store/UsuarioStore"; // ajustá la ruta si está en otra carpeta
 
 const PrivateRoute = ({ children, rolPermitido }) => {
-  let usuario = null;
-  try {
-    usuario = JSON.parse(localStorage.getItem("usuarioLogueado"));
-  } catch {
-    usuario = null;
-  }
+  const { usuario } = UsuarioStore();
 
-  // Validar que usuario exista, sea objeto, tenga rol_id numérico y válido
+  // Validar que usuario exista y tenga rol_id numérico válido
   if (
     !usuario ||
     typeof usuario !== "object" ||
     Array.isArray(usuario) ||
-    usuario === null ||
     typeof usuario.rol_id === "undefined" ||
     usuario.rol_id === null ||
     isNaN(Number(usuario.rol_id))
@@ -22,6 +17,7 @@ const PrivateRoute = ({ children, rolPermitido }) => {
     return <Navigate to="/login" />;
   }
 
+  // Si se pasa un rolPermitido (1 = admin, 2 = cliente), validarlo
   if (rolPermitido && Number(usuario.rol_id) !== Number(rolPermitido)) {
     return <Navigate to="/no-autorizado" />;
   }
@@ -30,3 +26,4 @@ const PrivateRoute = ({ children, rolPermitido }) => {
 };
 
 export default PrivateRoute;
+
