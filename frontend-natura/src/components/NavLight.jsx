@@ -23,13 +23,13 @@ const NavLight = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!terminoBusqueda.trim()) {
-      return; // No hacer nada si la búsqueda está vacía
+      return; // No hace nada si la búsqueda está vacía
     }
 
     // navegar a la URL de resultados
     navigate(`/productos/buscar/${terminoBusqueda}`);
 
-    //limpiar el input después de la búsqueda
+    //limpia el input después de la búsqueda
     setTerminoBusqueda("");
   };
 
